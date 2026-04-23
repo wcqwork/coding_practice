@@ -1,0 +1,205 @@
+<div class="langbar_contaienr_template">
+<!-- 风格类名 -->
+[#assign templateStyle_40658 = templateStyle_40658!"block_langbar_40658" /]
+
+<div id="hf_lead_${pageNodeSettingId}_langbar_40658" class="backstage-blocksEditor-wrap wra ${templateStyle_40658} lang-box" data-block-uuid="langbar_component" data-gjs-type="developer-node-component" data-block-type="phoenix_element_dynamicComponents" data-default-setting={}>
+  [@api method="post" url="/phoenix2/composite/graphql"
+    query='{
+      siteLanCodeList{
+			currentSiteLanCode
+        	siteLanCodes {
+				lanCode
+				lanCodeName
+				lanCodeIndexUrl
+        	}
+        	allLanCodes {
+         		lanCode
+          		lanCodeName
+        	}
+		}
+	}']
+  	[#if data?? && data.siteLanCodeList?? && data.siteLanCodeList.siteLanCodes??]
+		[#assign siteLanCodes = data.siteLanCodeList.siteLanCodes /]
+	[/#if]
+  	[#if componentSetting?? && componentSetting != ""]
+        [#assign componentSettingJSON=componentSetting?eval /]
+    [/#if]
+
+
+	[#if componentSettingJSON?? && componentSettingJSON.prodDynamicSetting??]
+		[#if componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.languageCheckList]
+			[#assign languageCheckList = componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.languageCheckList /]
+		[/#if]
+		[#if componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.checkKeyList]
+			[#assign checkKeyList = componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.checkKeyList /]
+		[/#if]
+		[#if componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.checkKeyList]
+			[#assign firstValidObject = componentSettingJSON.prodDynamicSetting[0].blockSetting.languageSetting.firstValidObject /]
+		[/#if]
+
+		[#-- 两个图标类名--]
+		[#if componentSettingJSON.prodDynamicSetting[2].blockSetting.buttonIconClass]
+			[#assign icon_class = componentSettingJSON.prodDynamicSetting[2].blockSetting.buttonIconClass /]
+		[#else]
+			[#assign icon_class = 'iconfont_phoenix icon-yuyanlan-shi' /]
+		[/#if]
+
+		[#if componentSettingJSON.prodDynamicSetting[2].blockSetting.dropDown_buttonIconClass]
+			[#assign dropDown_icon_class = componentSettingJSON.prodDynamicSetting[2].blockSetting.dropDown_buttonIconClass /]
+		[/#if]
+    [/#if]
+
+  [#assign currentSiteLanCode = data.siteLanCodeList.currentSiteLanCode /]
+  <!-- 当前网站语言 -->
+  [#assign currentSiteLanguage = firstValidObject /]
+  <!-- 显示数据源 -->
+  [#assign currentNumberClass = '']
+  [#assign currentNumber = 0]
+  [#if languageCheckList?? && languageCheckList?size gt 0 && checkKeyList?? && checkKeyList?size gt 0]
+  	[#list languageCheckList as language]
+  		[#if checkKeyList?seq_contains(language.lanCode)]
+  			[#assign currentNumber = currentNumber + 1]  
+      		[#if currentSiteLanCode?? && currentSiteLanCode == language.lanCode]
+  				[#assign currentSiteLanguage = language]
+  			[/#if]
+  		[/#if]
+  	[/#list]
+  [#else]
+  	[#list data.siteLanCodeList.siteLanCodes as language]
+  		[#assign currentNumber = currentNumber + 1]
+    
+   		[#if currentSiteLanCode?? && currentSiteLanCode == language.lanCode]
+  			[#assign currentSiteLanguage = language]
+  		[/#if]
+  	[/#list]
+  [/#if]
+  [#if currentNumber > 16]
+  	[#assign currentNumberClass = 'double-column']
+  [#else]
+  	[#assign currentNumberClass = 'single-column']
+  [/#if]
+  <!-- 显示数据源 -->
+	
+	[#if languageCheckList?? && languageCheckList?size gt 0 && checkKeyList?? && checkKeyList?size gt 0]
+		[#-- class
+		defaultContainer 默认文字
+		defaultContainer_hover 默认文字悬浮
+		langDropDownText 下拉文字
+		langDropDownText_hover 下拉文字悬浮
+		langIcon 图标
+		langIcon_hover 悬浮
+		lang_borderStyles 边框
+		lang_borderStyles_hover 边框悬浮
+		lang_prodBgColor 背景
+		lang_prodBgColor_hover 边框悬浮
+		languageSpaceRow 上下左右内间距
+		languageMarginSpaceColumn 语言栏行间距
+		languageMarginSpaceRow 语言栏行间距右间距
+		--]
+			<div class="lang-content lang-dropdown-container lang-dropdown-content languageSpaceRow lang_borderStyles lang_prodBgColor">
+			  <div class="box-menu-container">
+
+				<span class="langIcon lanbarSwitch icon ${icon_class!'iconfont_phoenix icon-yuyanlan-shi'} lang-flat languageIconSpace"></span>
+				[#if currentSiteLanguage??]
+					<span class="languageNational lanbarSwitch langImg lang-sprites-slide sprites sprites-${currentSiteLanguage.lanCode!'0'} languageNationalSpace"></span>
+				[/#if]
+		
+				<span class="paragraph1 lanbarSwitch languageName languageNameSpace defaultContainer">
+					[#if currentSiteLanguage??]
+						${currentSiteLanguage.lanCodeName}
+					[/#if]
+				</span>
+				<span class="langIcon lanbarSwitch icon  ${dropDown_icon_class!'iconfont_phoenix icon-angle-down'} lang-dropdown" style="margin-left:4px;"></span>
+			
+				<div class="lang-menu-box ${currentNumberClass}">
+					<div class="lang-menu-list">
+						<ul class="lang-menu">
+							<li class="lang-item-back langNa">
+								<i class="icon icon iconfont_phoenix icon-jiantouzuo-5 lead_icon"> </i>
+								<span>[@s.m "VUAfKpAsSQpZ_PHOENIX2_language_back" /]</span>
+							</li>
+							[#list languageCheckList as language]
+								[#if checkKeyList?seq_contains(language.lanCode)]
+									[#if currentSiteLanCode?? && currentSiteLanCode == language.lanCode]
+										[#assign currentSiteLanActive = "lang-item-active"]
+									[#else]
+										[#assign currentSiteLanActive = ""]
+									[/#if]
+									[#assign targetObject = {} /]
+									[#list siteLanCodes as obj]
+										[#if obj.lanCode == language.lanCode]
+											[#assign targetObject = obj /]
+										[/#if]
+									[/#list]
+									[#assign lan_code_index_url = targetObject.lanCodeIndexUrl!language.lanCodeIndexUrl /]
+									<li class="lang-item langTile langDropDownText langNa ${currentSiteLanActive}"> 
+										<a class="langImgBox" href="${lan_code_index_url!''}">
+											<span class="langImg lang-sprites-slide sprites sprites-${language.lanCode!''} languageNationalSpace hidden"></span>
+											<span title="${language.lanCodeName!''}">${language.lanCodeName!''}</span>
+											<i class="icon iconfont_phoenix icon-gou-2 avtive-svg"></i>
+										</a>
+									</li>
+								[/#if]
+							[/#list]
+						</ul>
+					</div>
+					<div class="lang-menu-list-more">more language</div>
+				</div>
+			  </div>
+			</div>
+	[#else]
+		[#--默认数据情况--]
+		<div class="defaultData lang-content lang-dropdown-container lang-dropdown-content languageSpaceRow lang_borderStyles lang_prodBgColor">
+			<div class="box-menu-container">
+
+				<span class="langIcon lanbarSwitch lanbarSwitch icon ${icon_class!'iconfont_phoenix icon-yuyanlan-shi'} lang-flat languageIconSpace"></span>
+
+				<span class="languageNational lanbarSwitch langImg lang-sprites-slide sprites sprites-${currentSiteLanguage.lanCode!'0'} languageNationalSpace"></span>
+				<span class="paragraph1 lanbarSwitch languageName languageNameSpace defaultContainer" style="line-height: 19px;">
+					${currentSiteLanguage.lanCodeName!''}
+				</span>
+				<span class="langIcon icon lanbarSwitch  ${dropDown_icon_class!'iconfont_phoenix icon-angle-down'} lang-dropdown" style="margin-left:4px;"></span>
+
+				<div class="lang-menu-box ${currentNumberClass}">
+					<div class="lang-menu-list">
+						<ul class="lang-menu lang-default-menu">
+							<li class="lang-item-back langNa">
+								<i class="icon icon iconfont_phoenix icon-jiantouzuo-5 lead_icon"> </i>
+								<span>[@s.m "VUAfKpAsSQpZ_PHOENIX2_language_back" /]</span>
+							</li>
+							[#list data.siteLanCodeList.siteLanCodes as language]
+								[#if currentSiteLanCode?? && currentSiteLanCode == language.lanCode]
+									[#assign currentSiteLanActive = "lang-item-active"]
+								[#else]
+									[#assign currentSiteLanActive = ""]
+								[/#if]
+								[#assign targetObject = {} /]
+									[#list siteLanCodes as obj]
+										[#if obj.lanCode == language.lanCode]
+											[#assign targetObject = obj /]
+										[/#if]
+									[/#list]
+								[#assign lan_code_index_url = targetObject.lanCodeIndexUrl!language.lanCodeIndexUrl /]
+								<li class="lang-item langTile langDropDownText langNa ${currentSiteLanActive}"> 
+									<a class="langImgBox" href="${lan_code_index_url!''}">
+										<span class="langImg lang-sprites-slide sprites sprites-${language.lanCode!''} languageNationalSpace hidden"></span>
+										<span  title="${language.lanCodeName!''}">${language.lanCodeName!''}</span>
+										<i class="icon iconfont_phoenix icon-gou-2 avtive-svg"></i>
+									</a>
+								</li>
+							[/#list]
+						</ul>	
+					</div>
+					<div class="lang-menu-list-more">more language</div>
+				</div>
+			</div>
+		</div>
+	[/#if]
+    <script> 
+      $(function(){
+        window._block_namespaces_['langbar_40658'].langbarInit({'relationId':'${relationId}','relationType':'${relationType}','pageId':'${pageId}','pageNodeId':'${pageNodeId!""}', 'appId': '${appId!}', 'appIsDev': '${appIsDev!"0"}','appVersion':'${appVersion}'});
+      });
+    </script>
+[/@api]
+</div>
+</div>

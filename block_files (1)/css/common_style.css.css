@@ -1,0 +1,12 @@
+.headerContainer.headerFixedHover {
+    top: -120px;
+    transform: translateY(120px);
+}
+.headerContainer.headerFixedHover:not(.openMenuActive) {
+    transition: all 0.5s;
+}
+@media(min-width: 768px){
+    .headerContainer .nav-main-feature {
+        display: none
+    }
+}

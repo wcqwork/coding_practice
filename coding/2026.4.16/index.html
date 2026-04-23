@@ -1,0 +1,230 @@
+2026-04-16 13:59:34 project ERROR com.kakarote.core.exception.ExceptionHandlerAdvice - 默认异常需要处理 
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false'); nested exception is com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (PushbackInputStream); line: 1, column: 11]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:252)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:228)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:205)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:158)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:131)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:167)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:134)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:523)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at io.undertow.servlet.handlers.ServletHandler.handleRequest(ServletHandler.java:74)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:129)
+	at com.kakarote.core.config.BodyReaderFilter.doFilter(BodyReaderFilter.java:45)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:132)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:269)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$100(ServletInitialHandler.java:78)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:133)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:130)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:249)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$000(ServletInitialHandler.java:78)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:99)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:376)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (PushbackInputStream); line: 1, column: 11]
+	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:1840)
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:722)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidToken(UTF8StreamJsonParser.java:3556)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._handleUnexpectedValue(UTF8StreamJsonParser.java:2651)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._nextTokenNotInObject(UTF8StreamJsonParser.java:856)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.nextToken(UTF8StreamJsonParser.java:753)
+	at com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:4340)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4189)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3258)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:240)
+	... 68 common frames omitted
+2026-04-16 13:59:35 project ERROR com.kakarote.core.exception.ExceptionHandlerAdvice - 默认异常需要处理 
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false'); nested exception is com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (PushbackInputStream); line: 1, column: 11]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:252)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:228)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:205)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:158)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:131)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:167)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:134)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:523)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at io.undertow.servlet.handlers.ServletHandler.handleRequest(ServletHandler.java:74)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:129)
+	at com.kakarote.core.config.BodyReaderFilter.doFilter(BodyReaderFilter.java:45)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:132)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:269)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$100(ServletInitialHandler.java:78)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:133)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:130)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:249)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$000(ServletInitialHandler.java:78)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:99)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:376)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'projectId': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (PushbackInputStream); line: 1, column: 11]
+	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:1840)
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:722)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidToken(UTF8StreamJsonParser.java:3556)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._handleUnexpectedValue(UTF8StreamJsonParser.java:2651)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._nextTokenNotInObject(UTF8StreamJsonParser.java:856)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.nextToken(UTF8StreamJsonParser.java:753)
+	at com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:4340)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4189)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3258)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:240)
+	... 68 common frames omitted
+2026-04-16 13:59:40 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 13:59:40 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 13:59:50 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 13:59:50 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 13:59:50 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:00:00 project ERROR com.kakarote.project.job.ProjectContractJob - synProjectContractType start ========= 2026-04-16 14:00:00.0001 
+2026-04-16 14:00:00 project ERROR com.kakarote.project.service.AsyncProjectService - ---------ip:10.10.10.56--------- 
+2026-04-16 14:00:00 project ERROR com.kakarote.project.job.ProjectContractJob - synProjectContractType end ========= 2026-04-16 14:00:00.0004 
+2026-04-16 14:00:00 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:00 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:00:00 project ERROR com.kakarote.project.job.ProjectStartingJob - ProjectStartingJob start ========= 2026-04-16 14:00:00.0005 
+2026-04-16 14:00:00 project ERROR com.kakarote.project.job.ProjectStartingJob - ProjectStartingJob end ========= 2026-04-16 14:00:00.0007 
+2026-04-16 14:00:10 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:10 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:00:20 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:20 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:00:20 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:00:30 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:30 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:00:40 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:40 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:00:49 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:00:50 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:00:50 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:00 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:00 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:10 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:10 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:19 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:01:20 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:20 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:30 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:30 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:40 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:40 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:01:48 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:01:50 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:01:50 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:00 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:00 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:10 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:10 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:18 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:02:20 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:20 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:30 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:30 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:40 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:40 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:02:47 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:02:50 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:02:50 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:03:00 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:03:00 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:03:10 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:03:10 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+2026-04-16 14:03:17 project INFO  com.alibaba.nacos.client.config.impl.ClientWorker - get changedGroupKeys:[] 
+2026-04-16 14:03:20 project WARN  com.kakarote.project.job.ProjectExportJob - 导出SEO工具任务执行准备... 
+2026-04-16 14:03:20 project INFO  com.kakarote.project.utils.EnvironmentUtils - 判定正式环境开始,检查文件:/root/.dootask/java/run_job_20251226.txt是否存在 
+projectId

@@ -1,0 +1,228 @@
+[#assign pageNodeSettingId = "${nodeId}"]
+[#assign nav_pull_down_style = "1"]
+
+[#assign specialLanCode = ["3", "45", "42", "32", "29"] ]
+[#if __current_site_lanCode__?? && specialLanCode?seq_contains(__current_site_lanCode__)]
+    [#assign isAlaBolanguage = 'alaboyulanguage' ]
+[/#if]
+<section id="hf_lead_${pageNodeSettingId}_40658" head-component-type = "1" data-block-nodeid="${nodeId}" class="lea-flexible-area header-container block-container LA29184 block-editor-lead-container block_40658 block-header-suspension-show ${isAlaBolanguage}" 
+data-bulletinbackground="#3C5369" data-bulletin-hover-background="#3C5369"  data-navbackground="#FFFFFF" data-navhoverbackground="#FFFFFF" data-layoutdesign="layout-design-center">
+    <div class="bulletin" data-block-uuid="bulletinMoudle">
+		<div id="hf_lead_${pageNodeSettingId}_text1" class="lead-text">
+            <p style="text-align: center;color: #ffffff" class="paragraph1">This bar serves to notify visitors of important updates</p>
+		</div>
+	</div>
+    <div class="header_content">
+        [@web_backend]
+        <template class="collect-style-template" style="display:none;" data-test='333'>
+            #hf_lead_${pageNodeSettingId}_39984_headerSearch {
+                --search-icon-color: #000000;
+            }
+
+            #hf_lead_${pageNodeSettingId}_langbar_39964 {
+                --langbar-text-color:rgba(0, 0, 0, 1);
+                --langbar-dropdown-text-color:rgba(0, 0, 0, 1);
+                --langbar-icon-color:rgba(0, 0, 0, 1);
+                --langbar-bg-color:rgba(0, 0, 0, 0);
+            }
+
+            #hf_lead_${pageNodeSettingId}_40054_navMenu {
+                --nav-depth0-color: #000000;
+                --nav-depth0-color: #000000;
+                --nav-depth1-color: #000000;
+                --nav-depth2-color: #000000;
+                --nav-depth3-color: #000000;
+                --nav-depth4-color: #000000;
+                --nav-iphone-color: #000000;
+                margin: 0px 20px 0px 20px;
+             }
+
+             .headerFixedHover #hf_lead_${pageNodeSettingId}_40054_navMenu {
+                --nav-depth0-color: #000000;
+                --nav-depth0-color: #000000;
+                --nav-depth1-color: #000000;
+                --nav-depth2-color: #000000;
+                --nav-depth3-color: #000000;
+                --nav-depth4-color: #000000;
+                --nav-iphone-color: #000000;
+             }
+
+             .headerFixedHover #hf_lead_${pageNodeSettingId}_langbar_39964 {
+                --langbar-text-color:rgba(0, 0, 0, 1);
+                --langbar-dropdown-text-color:rgba(0, 0, 0, 1);
+                --langbar-icon-color:rgba(0, 0, 0, 1);
+                --langbar-bg-color:rgba(0, 0, 0, 0);
+                border-color: transparent;
+                border-style: none;
+            }
+
+            .headerFixedHover #hf_lead_${pageNodeSettingId}_39984_headerSearch {
+                --search-icon-color: #000000;
+            }
+
+            .headerFixedHover #hf_lead_${pageNodeSettingId}_40658_shareButton {
+                --share-icon-color: #000000;
+            }
+
+            #hf_lead_${pageNodeSettingId}_header_row,
+            #hf_lead_${pageNodeSettingId}_header_right_row {
+                width: 100%;
+                min-height: auto;
+                max-width: 100%;
+                padding: 0;
+            }
+
+            #hf_lead_${pageNodeSettingId}_header_col_logo {
+                max-width: 16%;
+                flex: 1 1 16%;
+                padding: 0;
+                align-items: normal;
+                justify-content: center;
+            }
+
+            #hf_lead_${pageNodeSettingId}_header_col_nav {
+                max-width: 74%;
+                flex: 1 1 74%;
+                padding: 0;
+                align-items: normal;
+                justify-content: center;
+            }
+
+            #hf_lead_${pageNodeSettingId}_header_col_right {
+                max-width: 10%;
+                flex: 1 1 10%;
+                padding: 0;
+                align-items: normal;
+                justify-content: center;
+            }
+
+            #hf_lead_${pageNodeSettingId}_header_col_search,
+            #hf_lead_${pageNodeSettingId}_header_col_share,
+            #hf_lead_${pageNodeSettingId}_header_col_langbar {
+                padding: 0;
+            }
+
+            @media (max-width: 1024px) {
+                #hf_lead_${pageNodeSettingId}_header_row,
+                #hf_lead_${pageNodeSettingId}_header_right_row {
+                    max-width: 100%;
+                }
+
+                #hf_lead_${pageNodeSettingId}_header_col_logo {
+                    max-width: 22%;
+                    flex: 1 1 22%;
+                }
+
+                #hf_lead_${pageNodeSettingId}_header_col_nav {
+                    max-width: 64%;
+                    flex: 1 1 64%;
+                }
+
+                #hf_lead_${pageNodeSettingId}_header_col_right {
+                    max-width: 14%;
+                    flex: 1 1 14%;
+                }
+
+                #hf_lead_${pageNodeSettingId}_header_col_search,
+                #hf_lead_${pageNodeSettingId}_header_col_share,
+                #hf_lead_${pageNodeSettingId}_header_col_langbar {
+                    max-width: 33.3%;
+                    flex: 1 1 33.3%;
+                }
+            }
+        </template>
+        [/@web_backend]
+        <div class="navContent">
+          <div id="hf_lead_${pageNodeSettingId}_header_row" class="row-container" data-gjs-type="rowContainer" data-currentstyle="1">
+            <div id="hf_lead_${pageNodeSettingId}_header_col_logo" class="column-container" data-gjs-type="column" data-currentstyle="1">
+              <div class="left_container lead_logo_component">
+                  [#assign logo_img_40074="//a3.leadongcdn.com/cloud/lqBpqKnqlkSRokmlomqojm/yetouyilogo.png"]
+                  [#assign logo_img_hover_40074="//a3.leadongcdn.com/cloud/lqBpqKnqlkSRokmlomqojm/yetouyilogo.png"]
+
+                  [@develop_include appId="38654" styleId="-1" type="页头logo"  fileName="view_default.html"][/@develop_include]
+              </div>
+            </div>
+            <div id="hf_lead_${pageNodeSettingId}_header_col_nav" class="column-container" data-gjs-type="column" data-currentstyle="1">
+              <div class="center_container">
+                  <div class="lead_nav_component" data-appId="39974" data-public-element-dynamic="nav-39974" >
+                      [@develop_include appId="39974" styleId="-1" merge="0"  navPullDownStyle="1" type="页头导航模板" fileName="view_default.html"][/@develop_include]
+                  </div>
+              </div>
+            </div>
+            <div id="hf_lead_${pageNodeSettingId}_header_col_right" class="column-container" data-gjs-type="column" data-currentstyle="1">
+              <div id="hf_lead_${pageNodeSettingId}_header_right_row" class="right_container row-container" data-gjs-type="rowContainer" data-currentstyle="1">
+                  <div id="hf_lead_${pageNodeSettingId}_header_col_search" class="column-container" data-gjs-type="column" data-currentstyle="1">
+                    <div class="lead_headerSearch_component" data-appId="39984" data-public-element-dynamic="search-39984" data-gjs-type="leaddraggable">
+                      [@develop_include appId="39984" styleId="-1" merge="0" type="页头搜索模板" fileName="view_default.html"][/@develop_include]
+                    </div>
+                  </div>
+                  <div id="hf_lead_${pageNodeSettingId}_header_col_share" class="column-container" data-gjs-type="column" data-currentstyle="1">
+                    <!-- 分享 -->
+                    <!-- <div data-appId="40658" data-public-element-dynamic="share-40658" > -->
+                    [@develop_include appId="40658" styleId="-1" fileName="share.html"][/@develop_include]
+                    <!-- </div> -->
+                  </div>
+                  <div id="hf_lead_${pageNodeSettingId}_header_col_langbar" class="column-container" data-gjs-type="column" data-currentstyle="1">
+                    <div class="lead_langbar_component" data-appId="39964" data-public-element-dynamic="langbar-39964" data-gjs-type="leaddraggable">
+                      [@develop_include appId="39964" styleId="-1"  merge="0" type="页头语言栏模板" fileName="view_default.html"][/@develop_include]
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="clone_container">
+		<div class="clone_nav">
+
+		</div>
+	</div>
+
+    	<!-- 蒙版元素 -->
+	<div class="overlay_40658"></div>
+  <!-- 手机端占位 -->
+  <div class="phone_show">
+    <!-- 左边占位 -->
+    <div class="phone_left_nav">
+      <!-- 导航 -->
+    </div>
+    <!-- 中间占位 -->
+    <div class="phone_center_logo">
+      <!-- logo -->
+    </div>
+    <!-- 右边占位 -->
+    <div class="phone_right_search_language">
+      <!-- 搜索 -->
+       <div class="phone_right_search">
+        <!-- 搜索 -->
+       </div>
+       <div class="phone_right_language"> 
+        <!-- 语言栏 -->
+       </div>
+    </div>
+  </div>
+    <script> 
+      $(function(){
+        window._block_namespaces_['header_40658'].Init({'relationId':'${relationId}','nodeId':'${nodeId!""}','relationType':'${relationType}','pageId':'${pageId}','pageNodeId':'${pageNodeId!""}', 'appId': '${appId!}', 'appIsDev': '${appIsDev!"0"}','appVersion':'${appVersion}'});
+        window._block_namespaces_['header_40658'].shareInit({
+          'relationId':'${relationId}',
+          'relationType':'${relationType}',
+          'pageId':'${pageId}',
+          'nodeId':'shareButton_component_${nodeId!""}', 
+          'appId': '${appId!}', 
+          'appIsDev': '${appIsDev!"0"}',
+          'appVersion':'${appVersion}'
+        });
+        window._block_namespaces_['header_40658'].searchInit({
+          'relationId':'${relationId}',
+          'relationType':'${relationType}',
+          'pageId':'${pageId}',
+          'nodeId':'headerSearch_component_${nodeId!""}', 
+          'appId': '${appId!}', 
+          'appIsDev': '${appIsDev!"0"}',
+          'appVersion':'${appVersion}'
+        });
+      });
+    </script>
+</section>

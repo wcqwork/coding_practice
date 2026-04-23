@@ -1,0 +1,59 @@
+<div class="nav_menu_container">
+  <!-- 风格类名 -->
+[#assign templateStyle_40658= templateStyle_40658!"nav_40658" /]
+
+[#if navPullDownStyle?? && navPullDownStyle == '2'] 
+    [#assign style_class_40658 = "nav_style2" /]
+[#else]
+    [#assign style_class_40658 = "nav_style1" /]
+[/#if]
+
+          <input hidden name="navPullDownStyle" value="${navPullDownStyle!''}" />
+  <div id="hf_lead_${pageNodeSettingId}_40658_navMenu" class="backstage-blocksEditor-wrap wra ${templateStyle_40658} ${style_class_40658} isUseNewNavName" data-block-uuid="navMenu_component" data-gjs-type="developer-node-component" data-block-type="phoenix_element_dynamicComponents" data-default-setting={"componentSetting":{},"customUrlList":[],"navbarNodeStr":[]}>
+    [@api method="post" url="/phoenix2/composite/graphql" navbarNodeStr="${navbarNodeStr!''}" extraParamJson="${extraParamJson!''}"
+      query='{
+        searchNavbarList(navbarDto: {navbarNodeStr:$navbarNodeStr,extraParamJson:$extraParamJson}) 
+        {
+          scheme
+          domainRecord
+          urlDetail
+        }
+    }']
+      [#assign navAlign="row" /]
+      [#if componentSetting?? && componentSetting != ""]
+          [#assign componentSettingJSON=componentSetting?eval /]
+      [/#if]
+      [#if componentSettingJSON?? && componentSettingJSON.prodDynamicSetting??]
+          [#assign navAlign = componentSettingJSON.prodDynamicSetting[0].blockSetting.navAlign /]
+      [/#if]
+
+      
+      [#if data?? && data.searchNavbarList?? && data.searchNavbarList.urlDetail??]
+        [#assign urlDetailJSON=data.searchNavbarList.urlDetail?eval /]
+          <div class="nav-Container navAlign_row">
+            [#if navPullDownStyle?? && navPullDownStyle == '2'] 
+                [@develop_include appId="40658" styleId="-1" fileName="pull_down_style2.html"][/@develop_include]
+            [#else]
+                [@develop_include appId="40658" styleId="-1" fileName="pull_down_style1.html"][/@develop_include]
+            [/#if]
+            <input  hidden value="nav" class="nav"/>
+          </div>
+      [#else]
+        [@web_backend]
+          <div class="nav_empty">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.9999 1.90039C1.8401 1.90039 0.899902 2.84059 0.899902 4.00039V14.0004C0.899902 15.1602 1.8401 16.1004 2.9999 16.1004H14.9999C16.1597 16.1004 17.0999 15.1602 17.0999 14.0004V4.00039C17.0999 2.84059 16.1597 1.90039 14.9999 1.90039H2.9999ZM3 3H15C15.5523 3 16 3.44772 16 4V14C16 14.5523 15.5523 15 15 15H3C2.44772 15 2 14.5523 2 14V4C2 3.44772 2.44772 3 3 3Z" fill="black" style="fill-opacity:1;"/>
+                  <path d="M9.6001 8.3V6.32422H8.4001V8.3H6.42529V9.5H8.4001V11.4766H9.6001V9.5H11.5747V8.3H9.6001Z" fill="black" style="fill-opacity:1;"/>
+              </svg>
+              <span>请点击此处添加导航</span>
+          </div>
+        [/@web_backend]
+      [/#if]
+      <script> 
+        $(function(){
+          window._block_namespaces_['nav_40658'].navInit({'relationId':'${relationId}','relationType':'${relationType}','pageId':'${pageId}','pageNodeId':'${pageNodeId!""}', 'appId': '${appId!}', 'appIsDev': '${appIsDev!"0"}','appVersion':'${appVersion}', 'navPullDownStyle': '${navPullDownStyle}'});
+        });
+      </script>
+    [/@api]
+  </div>
+</div>

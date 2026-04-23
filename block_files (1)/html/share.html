@@ -1,0 +1,45 @@
+<div class="block_share_40658 lead_share_component" data-gjs-type="leaddraggable">
+	<div id="hf_lead_${pageNodeSettingId}_40658_shareButton" class="backstage-blocksEditor-wrap wra share_40658"
+		data-block-uuid="shareButton_component" data-gjs-ismorestatus="1" data-gjs-type="developer-node-component"
+		data-block-type="phoenix_element_dynamicComponents" data-default-setting={}>
+		[#if componentSetting?? && componentSetting != ""]
+		    [#assign componentSettingJSON=componentSetting?eval /]
+		[/#if]
+
+		[#if componentSettingJSON?? && componentSettingJSON.prodDynamicSetting??]
+            [#assign icon_class = "iconfont_phoenix icon-share-fill" /]
+            [#if componentSettingJSON.prodDynamicSetting[0].blockSetting.shareIconClass?? && componentSettingJSON.prodDynamicSetting[0].blockSetting.shareIconClass != '']
+                [#assign icon_class = componentSettingJSON.prodDynamicSetting[0].blockSetting.shareIconClass]
+            [/#if]
+		[/#if]
+
+
+		<div class="share_button">
+			<i class="icon ${icon_class!'iconfont_phoenix icon-share-fill'}"></i>
+		</div>
+	</div>
+    <div id="hf_lead_${pageNodeSettingId}_40658_shareContaienr1">
+        <div class="share_container share_container_40658 share-hide" data-header-shareButton>
+            <div class="share-container-inner">
+                <div class="share_container_flex">
+                    <img src="//a0.leadongcdn.com/cloud/llBpjKiilpSRqkrjqolpjq/social_header.png" class="share_logo" title="social media" />
+                    [@develop_include appId="40064" styleId="-1" type="页头分享模板" fileName="view_default.html"][/@develop_include]
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+    $(function(){
+        window._block_namespaces_['header_40658'].shareInit({
+          'relationId':'${relationId}',
+          'relationType':'${relationType}',
+          'pageId':'${pageId}',
+          'nodeId':'shareButton_component_${nodeId!""}', 
+          'appId': '${appId!}', 
+          'appIsDev': '${appIsDev!"0"}',
+          'appVersion':'${appVersion}'
+        });
+    });
+</script> -->
