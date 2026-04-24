@@ -10,7 +10,6 @@
 .nav_40658 {
     z-index: 6;
     --nav-space: 40px;
-    --nav-bridge-height: 0px;
     /* 导航配置变量 */
     --nav-level0-marginRight: 20px;
     --nav-level0-fontSize: 16px;
@@ -429,7 +428,6 @@ body.overflowHidden_nav {
     .nav_40658 .navAlign_row .lea-menu-item {
         padding-left: 1px;
     }
-
 }
 
 /* ==================== 移动端公共样式 (max-width: 768px) ==================== */
@@ -604,20 +602,6 @@ body.overflowHidden_nav {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     left: 0;
-}
-
-/* 悬浮下拉桥接：透明伪元素向上填充导航项与下拉面板间的间距 */
-@media (min-width: 769px) {
-    .clone_nav::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 100%;
-        height: var(--nav-bridge-height, 0px);
-        background: transparent;
-        pointer-events: auto;
-    }
 }
 
 .headerContainer .clone_nav .nav_box_item {

@@ -39,8 +39,6 @@
         "throttle": throttle,
         "cloneElement": cloneElement,
         "navInit": navInit,
-        // 桥接
-        "updateBridgeHeight": updateBridgeHeight,
     });
   
     function navInit(nodeObj) {
@@ -270,22 +268,6 @@
                 }, remaining);
             }
         };
-    }
-
-    // ==================== 桥接辅助 ====================
-
-    /**
-     * 动态计算导航项到下拉面板的间距，设置为 CSS 变量 --nav-bridge-height
-     * @param {jQuery} $selector - 导航组件根元素
-     * @param {jQuery} $clone_nav - 克隆导航容器
-     */
-    function updateBridgeHeight($selector, $clone_nav) {
-        var $navItem = $selector.find('.lea-navMenu-depth0 > .menu-item.hasDepth5').first();
-        if (!$navItem.length || !$clone_nav.length) return;
-        var navItemBottom = $navItem[0].getBoundingClientRect().bottom;
-        var cloneNavTop = $clone_nav[0].getBoundingClientRect().top;
-        var gap = Math.max(0, cloneNavTop - navItemBottom);
-        setCSSVar($clone_nav, 'nav-bridge-height', gap + 'px');
     }
   
   })(window, jQuery);
