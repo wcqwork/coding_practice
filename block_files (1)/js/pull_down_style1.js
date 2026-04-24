@@ -458,28 +458,32 @@
         adjustCloneNavWidth($blockEl);
 
         // 导航高度监听
-        handleFixedHover($blockEl, $clone_nav);
+        handleFixedHover($blockEl, $clone_nav, $selector);
+
+        // 定位 clone_nav 到导航栏正下方
+        navCommon.positionCloneNav($selector, $clone_nav);
+        $(window).resize(navCommon.debounce(function() {
+            navCommon.positionCloneNav($selector, $clone_nav);
+        }, 200));
 
     }
 
     /**
      * 处理悬浮状态下五级下拉
      */
-    function handleFixedHover($blockEl, $clone_nav) {
+    function handleFixedHover($blockEl, $clone_nav, $selector) {
         const $headerContent = $blockEl.find('.header_content');
 
         const $overlaySuspensionBlock = $blockEl.find('.overlay_suspension_block')
-        // 创建一个 ResizeObserver 实例并传入回调函数
         const resizeObserver = new ResizeObserver(function(entries) {
             for (let entry of entries) {
                 const newHeight = entry.target.getBoundingClientRect().height;
                 $overlaySuspensionBlock.css('height', newHeight+'px')
                 $overlaySuspensionBlock.css('line-height', newHeight+'px')
-                // $clone_nav.css('margin-top', newHeight+'px')
+                navCommon.positionCloneNav($selector, $clone_nav);
             }
         });
 
-        // 开始监听
         resizeObserver.observe($headerContent[0]);
     }
 

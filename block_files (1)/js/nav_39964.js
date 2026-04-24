@@ -34,6 +34,7 @@
         "calculateOffset": calculateOffset,
         "isElementVisible": isElementVisible,
         "getViewportWidth": getViewportWidth,
+        "positionCloneNav": positionCloneNav,
         // 工具函数
         "debounce": debounce,
         "throttle": throttle,
@@ -215,6 +216,19 @@
      */
     function getViewportWidth() {
         return window.innerWidth || document.documentElement.clientWidth;
+    }
+
+    /**
+     * 将 clone_nav 定位到导航栏正下方
+     * @param {jQuery} $selector - 导航组件 (.nav_40658)
+     * @param {jQuery} $clone_nav - 克隆导航容器
+     */
+    function positionCloneNav($selector, $clone_nav) {
+        if (!$selector.length || !$clone_nav.length) return;
+        var navBottom = $selector[0].getBoundingClientRect().bottom;
+        var offsetParent = $clone_nav[0].offsetParent || document.documentElement;
+        var parentTop = offsetParent.getBoundingClientRect().top;
+        setCSSVar($clone_nav, 'clone-nav-top', (navBottom - parentTop) + 'px');
     }
   
     // ==================== 事件处理 ====================

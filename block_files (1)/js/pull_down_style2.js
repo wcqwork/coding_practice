@@ -544,7 +544,6 @@
         $clone_nav.addClass('nav_style2')
         $clone_nav.attr('id', $('.nav_40658').attr('id'))
 
-
         // 处理各级导航
         processDepth2Navigation($selector, $clone_nav);
         processDepth3Navigation($selector, $clone_nav);
@@ -559,6 +558,12 @@
 
         // 宽度调整
         adjustNavigationWidth($blockEl);
+
+        // 定位 clone_nav 到导航栏正下方
+        navCommon.positionCloneNav($selector, $clone_nav);
+        $(window).resize(navCommon.debounce(function() {
+            navCommon.positionCloneNav($selector, $clone_nav);
+        }, 200));
     }
 
     /**
