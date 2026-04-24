@@ -91,8 +91,11 @@
         this.navdepth5Fun($selector);
 
         // 使用防抖优化resize事件
+        var $blockEl = $selector.parents(CONFIG.SELECTORS.blockContainer);
+        var $clone_nav = $blockEl.find(CONFIG.SELECTORS.cloneNav);
         var resizeHandler = navCommon.debounce(function() {
             _thatBlock.navPosition($selector);
+            navCommon.updateBridgeHeight($selector, $clone_nav);
         }, 200);
         
         $(window).resize(resizeHandler);
@@ -460,6 +463,8 @@
         // 导航高度监听
         handleFixedHover($blockEl, $clone_nav);
 
+        // 计算桥接高度
+        navCommon.updateBridgeHeight($selector, $clone_nav);
     }
 
     /**
@@ -545,10 +550,13 @@
             // 处理隐藏逻辑（带延迟）
             function scheduleHide() {
                 hideTimer = setTimeout(function() {
-                    // 检查鼠标是否仍在导航项或下拉菜单上
                     if(!$that.is(':hover') && !_$target.is(':hover')) {
-                        window.MotionHelpers.slideUp(_$target[0], 240);
-                        $that.removeClass(CONFIG.CLASSES.hoverActive);
+                        if($clone_nav.is(':hover')) {
+                            scheduleHide();
+                        } else {
+                            window.MotionHelpers.slideUp(_$target[0], 240);
+                            $that.removeClass(CONFIG.CLASSES.hoverActive);
+                        }
                     }
                 }, CONSTANTS.HOVER_DELAY);
             }
