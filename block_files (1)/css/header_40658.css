@@ -1,8 +1,3 @@
-.block_40658.block-editor-lead-container .column-container,
-.block_40658.block-editor-lead-container .row-container {
-  position: static;
-}
-
 [data-gjs-type="wrapper"] .block_40658.block-editor-lead-container .column-container,
 [data-gjs-type="wrapper"] .block_40658.block-editor-lead-container .row-container {
   position: relative;
