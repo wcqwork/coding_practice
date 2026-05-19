@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // 从 URL 参数获取 domain 并设置
+      (function() {
+           try {
+               var urlParams = new URLSearchParams(location.search);
+               var domain = urlParams.get('domain');
+               if (domain) {
+                   document.domain = domain;
+               }
+           } catch (e) {
+               console.warn('Failed to set document.domain:', e);
+           }
+       })();
+
+       // 设置新版编辑器需要的参数
+       (function() {
+           var cdnDomain = '';
+           try {
+               cdnDomain = window.parent.localStorage.getItem('cdnDomainFont') || '';
+           } catch (e) {
+               console.warn('[TiptapEditorMount] Failed to read cdnDomainFont from window.parent.localStorage', e);
+           }
+           // 如果有 cdnDomainRecord，保存到 localStorage
+           if (cdnDomain) {
+               try {
+                   localStorage.setItem('cdnDomainFont', cdnDomain);
+               } catch (e) {
+                   console.warn('[TiptapEditorMount] Failed to save cdnDomainFont to localStorage', e);
+               }
+           }
+       })();
+   </script>
+    <!-- jQuery：区块 JS 脚本（BlockType）执行时依赖 jQuery/$；defer 避免阻塞 HTML 解析 -->
+    <script defer src="./js/jquery-1.11.0.concat.js"></script>
+    <script defer src="./js/innerPhoenix.js"></script>
+    <script type="module" crossorigin src="./assets/index-Bdyh9w7C.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/chunks/vendor-CkvF7f2b.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunks/tiptap-BhuSWbSv.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunks/element-plus-fGN20Xif.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunks/index-6kdb7Fk5.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunks/vue-router-DI9KpWZ9.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunks/index-BfgvDAIb.js">
+    <link rel="stylesheet" crossorigin href="./assets/vendor-B-DuyMAA.css">
+    <link rel="stylesheet" crossorigin href="./assets/tiptap-W-FUpGJI.css">
+    <link rel="stylesheet" crossorigin href="./assets/element-plus-BYucPFwj.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DxCS7VEM.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-CVC71hza.css">
+  </head>
+  <body class="frontend-body-canvas">
+    <div id="app"></div>
+  </body>
+</html>

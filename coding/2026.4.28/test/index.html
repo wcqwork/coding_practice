@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tiptap Editor</title>
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+        #tiptap-editor-container { width: 100%; height: 100%; }
+    </style>
+    <script>
+        // 从 URL 参数获取 domain 并设置
+        (function() {
+            var urlParams = new URLSearchParams(location.search);
+            var domain = urlParams.get('domain');
+            if (domain) {
+                document.domain = domain;
+            }
+        })();
+
+        // 全局函数：从父页面获取4.0编辑器请求参数（显式挂载到 window）
+        window.getTextEditorBlockParam = function() {
+            try {
+                var blockParamEl = window.parent.document.getElementById('tiptap_editor_block_param');
+                if (blockParamEl) {
+                    return {
+                        pageId: blockParamEl.getAttribute('data-page-id') || '',
+                        relationId: blockParamEl.getAttribute('data-relation-id') || '',
+                        relationType: blockParamEl.getAttribute('data-relation-type') || '',
+                        phoenix2Authorization: blockParamEl.getAttribute('data-phoenix2-authorization') || '',
+                        backendDomain: blockParamEl.getAttribute('data-backend-domain-record') || '',
+                        cdnDomain: blockParamEl.getAttribute('data-cdn-domain-record') || '',
+                        newEditorAuth: blockParamEl.getAttribute('data-new-editor-auth') || '',
+                        backendServerHost: blockParamEl.getAttribute('data-backend-server-host') || ''
+                    };
+                }
+            } catch (e) {
+                console.warn('TiptapEditor: Failed to get textEditorBlockParam from parent', e);
+            }
+            return null;
+        };
+
+        // 设置新版编辑器需要的参数
+        (function() {
+            // 调用getTextEditorBlockParam获取参数
+            var textEditorBlockParam = window.getTextEditorBlockParam();
+            var cdnDomain = (textEditorBlockParam && textEditorBlockParam.cdnDomain) || '';
+            // 如果有 cdnDomainRecord，保存到 localStorage
+            if (cdnDomain) {
+                try {
+                    localStorage.setItem('cdnDomainFont', cdnDomain);
+                } catch (e) {
+                    console.warn('[TiptapEditorMount] Failed to save cdnDomainFont to localStorage', e);
+                }
+            }
+        })();
+    </script>
+    <script defer src="./js/blockCountManager.js"></script>
+    <!-- 性能优化：预取 tiptap 编辑器 iframe 页面，让浏览器在空闲时提前下载 -->
+    <script type="module" crossorigin src="//10.10.10.56:3000/src/main.js"></script>
+</head>
+<body class="frontend-body-canvas">
+    <div id="tiptap-editor-container"></div>
+    <script>
+        (function() {
+            debugger;
+            var isMounted = false;
+            var pendingContent = null;
+            var richTextEditorType = '1';
+            var exportName = '';
+
+            function unwrapContent(html) {
+                if (!html) return '';
+                
+                try {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    
+                    // 严格模式：仅查找标准容器 .contentEditRichText_editorContainer
+                    var container = doc.querySelector('.contentEditRichText_editorContainer');
+                    
+                    if (container) {
+                        return container.innerHTML;
+                    }
+
+                    // 如果不匹配标准结构，但在"无旧数据"的前提下收到非空内容，记录警告
+                    if (html.trim().length > 0) {
+                        console.warn('TiptapEditor: Content structure mismatch. Expected .contentEditRichText_editorContainer');
+                    }
+                    return html;
+                } catch (e) {
+                    console.error('TiptapEditor: Error unwrapping content:', e);
+                    return html;
+                }
+            }
+
+            // 父 -> 子 & 子 -> 父 的统一同步函数
+            function syncContent(html) {
+                // 强制包裹格式: <div class="contentEditRichText_editorContainer">...</div>
+                var finalHtml = '<div class="contentEditRichText_editorContainer">' + (html || '') + '</div>';
+
+                window.parent.postMessage({
+                    type: 'UPDATE_CONTENT',
+                    content: finalHtml
+                }, '*');
+                
+                // 同步区块数量到父页面（调用 blockCountManager.js 提供的方法）
+                // 使用 setTimeout 异步延迟，确保 DOM 已更新，active 类已切换到当前页签
+                setTimeout(function() {
+                    if (typeof syncBlockCount === 'function') {
+                        syncBlockCount();
+                    }
+                }, 0);
+            }
+
+            function tryMount() {
+                if (window.TiptapEditorMount && pendingContent !== null && !isMounted) {
+
+                    // 解析并清理初始内容，剥离外层包裹
+                    var rawContent = unwrapContent(pendingContent);
+
+                    window.TiptapEditorMount({
+                        containerId: '#tiptap-editor-container',
+                        defaultTiptapContent: rawContent,
+                        richTextEditorType: richTextEditorType,
+                        exportName: exportName,
+                        onChange: syncContent,
+                        textEditorBlockParam: window.getTextEditorBlockParam()
+                    });
+
+                    // 加载完成后默认触发一次 onChange 事件
+                    syncContent(rawContent);
+
+                    isMounted = true;
+                }
+            }
+
+            // 监听来自父页面的消息
+            window.addEventListener('message', function(event) {
+                var data = event.data;
+                if (!data) return;
+
+                // 初始化内容（首次挂载）
+                if (data.type === 'INIT_CONTENT') {
+                    pendingContent = data.content;
+                    richTextEditorType = data.richTextEditorType;
+                    exportName = data.exportName;
+                    tryMount();
+                }
+                // 父页面主动要求更新编辑器内容（简单 UPDATE_CONTENT 能力）
+                else if (data.type === 'UPDATE_CONTENT') {
+                    pendingContent = data.content || '';
+                    var raw = unwrapContent(pendingContent);
+
+                    // 优先使用全局的 TiptapEditorUpdate（由业务脚本导出）
+                    if (typeof window.TiptapEditorUpdate === 'function') {
+                        try {
+                            window.TiptapEditorUpdate(raw);
+                            // 更新后，同步给父页面（刷新隐藏域）
+                            syncContent(raw);
+                        } catch (e) {
+                            console.error('TiptapEditorUpdate error:', e);
+                        }
+                    }
+                    // 兜底：如果编辑器已挂载但没有 TiptapEditorUpdate，则重新挂载一次
+                    else if (isMounted && window.TiptapEditorMount) {
+                        var containerEl = document.getElementById('tiptap-editor-container');
+                        if (containerEl) {
+                            containerEl.innerHTML = '';
+                        }
+
+                        window.TiptapEditorMount({
+                            containerId: '#tiptap-editor-container',
+                            defaultTiptapContent: raw,
+                            richTextEditorType: richTextEditorType,
+                            exportName: exportName,
+                            onChange: syncContent,
+                            textEditorBlockParam: window.getTextEditorBlockParam()
+                        });
+
+                        // 主动同步一次内容到父页面
+                        syncContent(raw);
+                    } else {
+                        // 尚未挂载，则按 INIT_CONTENT 逻辑处理
+                        tryMount();
+                    }
+                }
+                // 父页面要求模拟粘贴内容 (PASTE_CONTENT)
+                else if (data.type === 'PASTE_CONTENT') {
+                    // 使用 unwrapContent 获取纯净内容，也可以直接用 data.content
+                    // 这里的关键是调用编辑器的 pasteHTML 方法 (假设业务脚本导出了 TiptapEditorPaste)
+                    var contentToPaste = unwrapContent(data.content || '');
+                    
+                    if (typeof window.TiptapEditorPaste === 'function') {
+                         try {
+                            window.TiptapEditorPaste(contentToPaste);
+                            // 粘贴后通常会触发 onChange，但为了保险可以手动同步一次（视 TiptapEditorPaste 实现而定）
+                         } catch (e) {
+                            console.error('TiptapEditorPaste error:', e);
+                         }
+                    } else {
+                        console.warn('TiptapEditor: PASTE_CONTENT received but TiptapEditorPaste is not defined.');
+                        // 降级处理：尝试直接 UPDATE
+                        if (typeof window.TiptapEditorUpdate === 'function') {
+                            window.TiptapEditorUpdate(contentToPaste);
+                        }
+                    }
+                }
+            });
+
+            // Notify parent when the iframe window loses focus (i.e., user clicks/tabs out of the editor).
+            // Parent can then reuse the same summaryProcess logic as UEditor blur.
+            window.addEventListener('blur', function() {
+                try {
+                    window.parent.postMessage({ type: 'EDITOR_BLUR' }, '*');
+                } catch (e) {
+                    // ignore
+                    console.log(e);
+                }
+            });
+
+            var maxRetry = 100;
+            var retryCount = 0;
+            var initTimer = setInterval(function() {
+                if (window.TiptapEditorMount) {
+                    clearInterval(initTimer);
+                    // 通知父页面编辑器代码已就绪，可以发送内容了
+                    window.parent.postMessage({ type: 'EDITOR_READY' }, '*');
+                    tryMount();
+                } else {
+                    retryCount++;
+                    if (retryCount > maxRetry) {
+                        clearInterval(initTimer);
+                        console.error('TiptapEditorMount timeout');
+                    }
+                }
+            }, 100);
+            // 暴露给编辑器内部调用的方法：获取最新的导出文件名
+            // 优化：增加异常捕获与兜底逻辑，优先实时获取父页面最新值
+            window.getTipTapExportName = function() {
+                try {
+                    if (window.parent && window.parent.document) {
+                        var pDoc = window.parent.document;
+                        // 1. 尝试获取产品名称
+                        var prodNameEl = pDoc.querySelector('input[name="product.prodName"]');
+                        if (prodNameEl && prodNameEl.value) return prodNameEl.value;
+                        
+                        // 2. 尝试获取文章标题
+                        var articleNameEl = pDoc.querySelector("#articleTitle");
+                        if (articleNameEl && articleNameEl.value) return articleNameEl.value;
+                    }
+                } catch (e) {
+                    // 跨域或访问受限时，仅打印警告，不中断流程
+                    console.warn('TiptapEditor: getTipTapExportName access parent failed', e);
+                }
+                // 3. 兜底：使用初始化/更新时传入的 exportName 变量
+                return exportName || '';
+            };
+        })();
+    </script>
+</body>
+</html>
