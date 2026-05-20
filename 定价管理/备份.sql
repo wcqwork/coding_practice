@@ -22,3 +22,19 @@ ORDER BY r.RELATION_ID DESC;
 SELECT FUNC_ID, FUNC_NAME, CATE_ID, GROUP_ID, FUNC_STATUS, OPERATE_TYPE
 FROM phoenix_func_price
 WHERE OPERATE_TYPE = '78';
+
+-- 关闭 COM_ID=4919 的"展示询盘来源"权限（USE_STATUS 改为 '1' 即停用）
+UPDATE phoenix_func_relation
+SET USE_STATUS = '1', UPDATE_TIME = NOW(), UPDATER_NAME = 'test', UPDATER_NO = 'test'
+WHERE COM_ID = 4919 AND FUNC_ID = 2064;
+
+-- 验证
+SELECT COM_ID, FUNC_ID, USE_STATUS, UPDATE_TIME
+FROM phoenix_func_relation
+WHERE COM_ID = 4919 AND FUNC_ID = 2064;
+-- 预期：USE_STATUS = '1'
+
+-- 下单记录
+select * from phoenix_syn_order_queue order by ADD_TIME desc;
+
+-- http://localhost:8080/phoenix_xxl_job_executor_dm_war_exploded/test/handle
