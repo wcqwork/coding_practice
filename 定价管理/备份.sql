@@ -37,16 +37,28 @@ WHERE COM_ID = 4919 AND FUNC_ID = 2064;
 -- 下单记录
 select * from phoenix_syn_order_queue order by ADD_TIME desc;
 
-
+--功能开通关系表phoenix_func_relation
 -- 组织级-订单开通记录 ORGANIZATION_ID下。组织级：COM_ID = -1, SITE_SETTING_ID = -1, ORGANIZATION_ID > 0 — 绑定到整个组织
 select * from phoenix_func_relation where ORGANIZATION_ID = '521424';
 
 -- 站点级-订单开通记录：COM_ID > 0, SITE_SETTING_ID > 0, ORGANIZATION_ID = -1 — 绑定到具体站点语种
 select * from phoenix_func_relation where SITE_SETTING_ID = 876525;
 
--- 功能表以及功能价格表
+-- 功能定价表
 select * from phoenix_func_price where FUNC_ID = 2064;
+
+-- 域名查询站点信息
+SELECT d.DOMAIN_RECORD, d.COM_ID, d.LAN_CODE, d.SITE_SETTING_ID,
+       s.ORGANIZATION_ID
+FROM phoenix_site_domain d
+         JOIN phoenix_site s ON d.COM_ID = s.COM_ID
+WHERE d.DOMAIN_RECORD LIKE '%test3.imwork.net%';
 
 
 --dm刷下单，访问这个 本地启动项目：phoenix_xxl_job
 -- http://localhost:8080/phoenix_xxl_job_executor_dm_war_exploded/test/handle
+
+--PK 和 FK 是数据库建模中的标准缩写：
+--PK = Primary Key（主键） — 该表的唯一标识字段，每条记录的值都不重复。例如 phoenix_func_price 的 FUNC_ID PK 表示 FUNC_ID 是这张表的主键。
+--FK = Foreign Key（外键） — 引用了另一张表的主键，用来表示表之间的关联关系。例如 phoenix_func_relation 的 FUNC_ID FK 表示这个字段关联到 phoenix_func_price.FUNC_ID。
+--在这份 ER 图文档中，没有标 PK/FK 的字段就是普通业务字段。
