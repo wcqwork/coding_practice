@@ -37,4 +37,16 @@ WHERE COM_ID = 4919 AND FUNC_ID = 2064;
 -- 下单记录
 select * from phoenix_syn_order_queue order by ADD_TIME desc;
 
+
+-- 组织级-订单开通记录 ORGANIZATION_ID下。组织级：COM_ID = -1, SITE_SETTING_ID = -1, ORGANIZATION_ID > 0 — 绑定到整个组织
+select * from phoenix_func_relation where ORGANIZATION_ID = '521424';
+
+-- 站点级-订单开通记录：COM_ID > 0, SITE_SETTING_ID > 0, ORGANIZATION_ID = -1 — 绑定到具体站点语种
+select * from phoenix_func_relation where SITE_SETTING_ID = 876525;
+
+-- 功能表以及功能价格表
+select * from phoenix_func_price where FUNC_ID = 2064;
+
+
+--dm刷下单，访问这个 本地启动项目：phoenix_xxl_job
 -- http://localhost:8080/phoenix_xxl_job_executor_dm_war_exploded/test/handle

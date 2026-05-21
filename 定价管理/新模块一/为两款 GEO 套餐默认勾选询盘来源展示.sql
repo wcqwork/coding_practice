@@ -15,7 +15,8 @@ WHERE OPERATE_TYPE = '78' AND CATE_ID = '5';
 -- 1.2 查找两款 GEO 套餐，确认 PLAN_ID
 SELECT PLAN_ID, PLAN_NAME
 FROM phoenix_service_plan
-WHERE PLAN_NAME IN ('营销型网站GEO运营服务-进阶版', '外贸企业GEO × SEO服务双擎版');
+WHERE PLAN_NAME LIKE '%GEO%运营%'
+   OR PLAN_NAME LIKE '%GEO%SEO%';
 -- ⚠️ 记下返回的两个 PLAN_ID（本地为 1534 等，线上可能不同）
 
 -- ==================== 第二步：查看当前 supportFunc ====================
