@@ -54,6 +54,23 @@ FROM phoenix_site_domain d
          JOIN phoenix_site s ON d.COM_ID = s.COM_ID
 WHERE d.DOMAIN_RECORD LIKE '%test3.imwork.net%';
 
+-- 站点开通的所有功能
+SELECT ss.SITE_SETTING_ID, ss.LAN_CODE,
+       fr.FUNC_ID, fp.FUNC_NAME, fr.USE_STATUS, fr.EXPIRE_TIME
+FROM phoenix_site_setting ss
+         JOIN phoenix_func_relation fr ON fr.SITE_SETTING_ID = ss.SITE_SETTING_ID
+         JOIN phoenix_func_price fp ON fr.FUNC_ID = fp.FUNC_ID
+WHERE ss.COM_ID = 4919;
+
+
+-- 站点是否开通询盘来源权限
+SELECT ss.SITE_SETTING_ID, ss.LAN_CODE,
+       fr.FUNC_ID, fp.FUNC_NAME, fr.USE_STATUS, fr.EXPIRE_TIME
+FROM phoenix_site_setting ss
+         JOIN phoenix_func_relation fr ON fr.SITE_SETTING_ID = ss.SITE_SETTING_ID
+         JOIN phoenix_func_price fp ON fr.FUNC_ID = fp.FUNC_ID
+WHERE ss.COM_ID = 308136 and fp.OPERATE_TYPE = '78';
+
 
 --dm刷下单，访问这个 本地启动项目：phoenix_xxl_job
 -- http://localhost:8080/phoenix_xxl_job_executor_dm_war_exploded/test/handle
