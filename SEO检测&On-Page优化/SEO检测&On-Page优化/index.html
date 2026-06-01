@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>增长引擎 - GEO运营工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- 使用说明入口 -->
+  <div class="dev-logic-bar" id="devLogicBar" aria-label="功能逻辑说明"></div>
+
+  <div class="app-body">
+  <!-- ① 左侧一级导航 -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">GE</div>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+  </aside>
+
+  <!-- ② 右侧主区域 -->
+  <div class="main-area">
+
+    <!-- 顶部栏 -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="site-switcher" id="siteSwitcher">
+          <img class="site-favicon" src="" alt="" onerror="this.style.display='none'"/>
+          <div class="site-info">
+            <span class="site-name" id="siteNameLabel">锐华五金</span>
+            <span class="site-domain" id="siteDomainLabel">www.leadong.com</span>
+          </div>
+          <svg class="caret" viewBox="0 0 10 6"><path d="M0 0l5 6 5-6z" fill="#999"/></svg>
+          <div class="site-dropdown" id="siteDropdown">
+            <div class="site-dropdown-list" id="siteDropdownList"></div>
+            <div class="site-dropdown-divider"></div>
+            <button class="site-dropdown-add" id="topAddSiteBtn">+ 添加新网站</button>
+          </div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date-wrap" id="topbarDateWrap"></div>
+      </div>
+    </header>
+
+    <!-- 二级导航（搜索/设置时显示） -->
+    <nav class="secondary-nav" id="secondaryNav" style="display:none"></nav>
+
+    <!-- 三级 Tab（关键词管理内 我的关键词/关键词分组） -->
+    <div class="page-tabs-bar" id="pageTabsBar" style="display:none">
+      <div class="page-tabs" id="pageTabs"></div>
+    </div>
+
+    <!-- 内容区 -->
+    <main class="content" id="content"></main>
+  </div>
+  </div>
+</div>
+
+<!-- 功能逻辑说明：右侧抽屉 -->
+<div class="logic-drawer-overlay" id="logicDrawerOverlay" style="display:none" aria-hidden="true">
+  <div class="logic-drawer-backdrop" id="logicDrawerBackdrop"></div>
+  <aside class="logic-drawer-panel" id="logicDrawerPanel" role="dialog" aria-labelledby="logicDrawerTitle">
+    <div class="logic-drawer-resize" id="logicDrawerResize" role="separator" aria-orientation="vertical" title="拖拽调整宽度"></div>
+    <div class="logic-drawer-shell">
+      <nav class="logic-drawer-side" id="logicDrawerSide" aria-label="功能逻辑说明目录">
+        <div class="logic-drawer-side-title">功能逻辑说明</div>
+        <div class="logic-drawer-tree" id="logicDrawerTree" role="tree"></div>
+      </nav>
+      <div class="logic-drawer-maincol">
+        <div class="logic-drawer-header">
+          <span class="logic-drawer-title" id="logicDrawerTitle">功能逻辑说明</span>
+          <button type="button" class="modal-close" id="logicDrawerClose" aria-label="关闭">×</button>
+        </div>
+        <div class="logic-drawer-body" id="logicDrawerBody"></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- 全局遮罩弹窗 -->
+<div class="modal-overlay" id="modalOverlay" style="display:none">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<!-- 关键词详情抽屉 -->
+<div class="drawer-overlay" id="drawerOverlay" style="display:none">
+  <div class="drawer" id="drawer"></div>
+</div>
+
+<!-- 关键词行操作菜单（挂到 body，避免被表格区域裁剪） -->
+<div id="kwOpsPortal" class="kw-ops-portal-root" aria-hidden="true"></div>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="tech-seo.js"></script>
+<script src="onpage-scoring.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
