@@ -24,9 +24,11 @@ const LEADONG_SAAS_SITES_DEMO = [
 /* ── 模拟数据 ── */
 const DB = {
   sites: [
-    { id: 1, name: '领动官网',  domain: 'www.leadong.com',    kws: 291, comps: 2, added: '2025-01-01', hasGSC: true },
-    { id: 2, name: '锐华五金',  domain: 'www.rhhardware.com', kws: 84,  comps: 1, added: '2025-03-15', hasGSC: false, gscAuthorized: false },
-    { id: 3, name: '领动 toys', domain: 'www.leadongtoys.com',kws: 56,  comps: 0, added: '2025-06-10', hasGSC: false },
+    { id: 1, name: '领动官网',  domain: 'www.leadong.com',    kws: 291, comps: 2, added: '2025-01-01', hasGSC: true, onPageSitemapDetected: true },
+    { id: 2, name: '锐华五金',  domain: 'www.rhhardware.com', kws: 84,  comps: 1, added: '2025-03-15', hasGSC: false, gscAuthorized: false, onPageSitemapDetected: false },
+    { id: 3, name: '领动 toys', domain: 'www.leadongtoys.com',kws: 56,  comps: 0, added: '2025-06-10', hasGSC: true, gscAuthorized: true, gscAccountBlocked: true, onPageSitemapDetected: true },
+    { id: 4, name: '演示无GSC', domain: 'no-gsc-demo.example.com', kws: 0, comps: 0, added: '2025-08-01', hasGSC: false, gscAuthorized: false, onPageSitemapDetected: true },
+    { id: 5, name: '演示空列表', domain: 'empty-demo.example.com', kws: 0, comps: 0, added: '2025-08-01', hasGSC: false, onPageSitemapDetected: true, onPageListEmpty: true },
   ],
   keywords: [
     { id:1, kw:'外贸建站', rank:2,  prev:5,  best:1, bestPage:'/products.html',  extraPages:1, vol:'1万-10万', comp:'中', cpc:'¥1.29-¥5.29', trend:13,  imp:12400, clk:320,  ctr:'2.6%', avgRank:3.2, groups:['☆关注','品牌词'], added:'2025-01-01', updated:'2025-09-30' },
@@ -178,12 +180,12 @@ const DB = {
       },
       {
         id: 'https',
-        label: '全站 HTTPS 安全',
+        label: 'HTTPS 安全',
         issueLevel: 'advice',
         score: 5,
         maxScore: 10,
         summaryBrief: 'HTTPS 正常，证书即将到期',
-        ruleDesc: '检查全站是否强制 HTTPS 与 SSL 证书是否在有效期内；未加密将严重影响排名与用户信任。',
+        ruleDesc: '检查网站首页（根路径）HTTPS 与 SSL 证书是否在有效期内；未加密将严重影响排名与用户信任。',
         criteriaBiz: '网站虽然有加密，但数字证书在未来 7 天内即将过期，存在随时断供导致无法访问的风险。',
         criteriaTech: 'HTTPS 连接正常，但 SSL 证书剩余有效期 ≤ 7 天。',
         problem: '当前：HTTPS 可正常访问，SSL 证书剩余 5 天（到期日 2025-10-05，预警阈值 7 天）。\n结论：证书即将过期，存在访问中断与安全告警风险。',
@@ -216,6 +218,8 @@ const DB = {
       { kw: 'cabinet hinges wholesale', rank: 11, rankAt: '2025-09-21 09:40:00', engine: 'Google · 美国' },
       { kw: 'industrial hinges b2b', rank: 19, rankAt: '2025-09-27 11:02:18', engine: 'Google · 美国' },
       { kw: 'hinge supplier china', rank: 24, rankAt: '2025-09-25 16:44:09', engine: 'Google · 美国' },
+      { kw: 'seasonal promo hinge', rank: 18, rankAt: '2025-09-16 14:20:00', engine: 'Google · 美国' },
+      { kw: 'seasonal promo hinge', rank: null, rankAt: '2025-09-30 08:00:00', engine: 'Google · 美国' },
     ],
     '/Cabinet-Hinges-s/': [
       { kw: '橱柜铰链', rank: 12, rankAt: '2025-09-29 07:30:00', engine: 'Google · 美国' },
@@ -241,12 +245,25 @@ const DB = {
     { path: '/products/cabinet-hinges', title: '橱柜铰链 · 产品聚合', keyword: 'cabinet hinges', keywordSrc: '启发式', score: 73, dimScores: { title: 13, meta: 7, headings: 16, body: 18, media: 5, url: 6, code: 8 }, httpStatus: 200, indexEngines: { google: true, bing: true, yandex: false }, issues: 5, issueBreakdown: { critical: 0, warning: 2, suggestion: 3 }, onPageScoreAt: '2025-09-21', tags: ['产品'], metaDesc: '橱柜铰链规格与选型（示例）。', metaKeywords: 'cabinet hinges', dimA: 'Meta ✓ · URL 含词 ✓', dimB: 'H1 ✓', dimC: '正文 ✓', dimD: 'ItemList ✓' },
     { path: '/1JO-JIC-MALE-74-CONE-SAE-O-RING-BOSS-hexagon-adapter-pd508135.html', title: '1JO JIC MALE 74°CONE/ SAE O-RING BOSS hexagon adapter', keyword: 'JIC male 74 cone SAE O-RING BOSS adapter', keywordSrc: '启发式', score: 71, dimScores: { title: 12, meta: 6, headings: 14, body: 15, media: 4, url: 6, code: 14 }, httpStatus: 200, indexEngines: { google: true, bing: true, yandex: false }, issues: 6, issueBreakdown: { critical: 0, warning: 3, suggestion: 3 }, onPageScoreAt: '2025-09-30', pageType: 'product-detail', tags: ['产品', '液压'], metaDesc: 'JIC MALE 74°CONE/ SAE O-RING BOSS hexagon adapter. And also can customize products according to the customers requirement.', metaKeywords: 'JIC adapter, SAE O-RING BOSS, hydraulic fittings, 1JO', listSummary: '产品详情 · 规格表缺失 · FAQ 已有', dimA: 'Title 与 H1 重复度高', dimB: 'H1 ✓ · 缺规格 H2', dimC: '正文偏薄 · 核心词露出不足', dimD: 'Product schema 待补 · 询盘表单 ✓' },
     { path: '/de/', title: '德语首页（示例）', keyword: 'Scharniere B2B', keywordSrc: '启发式', score: 68, dimScores: { title: 13, meta: 6, headings: 16, body: 12, media: 5, url: 5, code: 11 }, httpStatus: 200, indexEngines: { google: false, bing: false, yandex: false }, issues: 4, issueBreakdown: { critical: 0, warning: 1, suggestion: 3 }, onPageScoreAt: '2025-09-10', tags: ['多语言'], metaDesc: 'DE 首页 Meta（示例）', metaKeywords: 'de, hardware', dimA: 'hreflang 待补', dimB: 'H1 ✓', dimC: '短文', dimD: '内链 ✓ · Hreflang 待补' },
+    { path: '/features/cp-demo.html', title: 'CP 功能聚合页（示例）', keyword: '', keywordSrc: '', score: 65, dimScores: { title: 10, meta: 5, headings: 12, body: 14, media: 4, url: 5, code: 15 }, httpStatus: 200, indexEngines: { google: true, bing: false, yandex: false }, issues: 3, issueBreakdown: { critical: 0, warning: 2, suggestion: 1 }, onPageScoreAt: '2025-09-15', tags: [], metaDesc: 'CP 页（示例）', metaKeywords: 'feature, cp page', _schemaHasOther: true },
   ],
   rankedLandingPages: [
     { path: '/products.html', title: '产品目录 · 紧固件与铰链', bestKw: 'cabinet hinges wholesale', rank: 8, rankedKwCount: 14, engine: 'Google · 美国', firstSeen: '2025-09-08', lastSeen: '2025-09-28' },
     { path: '/Cabinet-Hinges-s/', title: '橱柜铰链分类', bestKw: '橱柜铰链', rank: 12, rankedKwCount: 9, engine: 'Google · 美国', firstSeen: '2025-09-12', lastSeen: '2025-09-28' },
     { path: '/blog/construction-hardware-trends.html', title: '建筑五金出海趋势', bestKw: 'construction hardware', rank: 24, rankedKwCount: 6, engine: 'Google · 美国', firstSeen: '2025-09-18', lastSeen: '2025-09-25' },
     { path: '/', title: 'RHHardware 首页', bestKw: 'B2B hardware', rank: 15, rankedKwCount: 11, engine: 'Google · 必应 · 美国', firstSeen: '2025-09-01', lastSeen: '2025-09-30' },
+    { path: '/about-us.html', title: '关于锐华 / 工厂与认证', bestKw: 'about rhhardware', rank: 18, rankedKwCount: 3, engine: 'Google · 美国', firstSeen: '2025-09-05', lastSeen: '2025-09-26' },
+    { path: '/contact.html', title: '联系我们 · 询盘表单', bestKw: 'contact hardware', rank: 28, rankedKwCount: 2, engine: 'Google · 美国', firstSeen: '2025-09-10', lastSeen: '2025-09-24' },
+    { path: '/products/cabinet-hinges', title: '橱柜铰链 · 产品聚合', bestKw: 'cabinet hinges', rank: 11, rankedKwCount: 5, engine: 'Google · 美国', firstSeen: '2025-09-14', lastSeen: '2025-09-27' },
+    { path: '/1JO-JIC-MALE-74-CONE-SAE-O-RING-BOSS-hexagon-adapter-pd508135.html', title: 'JIC MALE hexagon adapter', bestKw: 'JIC adapter', rank: 32, rankedKwCount: 2, engine: 'Google · 美国', firstSeen: '2025-09-16', lastSeen: '2025-09-22' },
+    { path: '/de/', title: '德语首页（示例）', bestKw: 'Scharniere B2B', rank: 41, rankedKwCount: 1, engine: 'Google · 美国', firstSeen: '2025-09-08', lastSeen: '2025-09-20' },
+  ],
+  /** 曝光页数据概览 · 按「抓取任务」维度的趋势（演示；一点一任务） */
+  exposurePageRankCrawlTasks: [
+    { taskAt: '2025-09-08', rankedPageCount: 2, avgBestRank: 22.5 },
+    { taskAt: '2025-09-15', rankedPageCount: 3, avgBestRank: 19.8 },
+    { taskAt: '2025-09-22', rankedPageCount: 3, avgBestRank: 17.6 },
+    { taskAt: '2025-09-28', rankedPageCount: 4, avgBestRank: 14.5 },
   ],
 };
 
@@ -389,6 +406,9 @@ const state = {
   onPageLinkRelFilter: null,
   /** 曝光页：有排名关键词弹窗路径 */
   rankedKwModalPath: null,
+  /** 有排名关键词弹窗表头排序 */
+  rankedKwModalSortKey: 'kw',
+  rankedKwModalSortDir: 'asc',
   /** 待办任务：按页面路径筛选 */
   dashboardTasksPageFilter: '',
   /** 待办：按问题等级（与站点得分徽章联动） */
@@ -399,6 +419,9 @@ const state = {
   dashboardCrawlSub: 'kw',
   /** 仪表盘 · 最近抓取按搜索引擎筛选 */
   dashboardCrawlEngineFilter: 'all',
+  /** 仪表盘 · 页面概览列表分页 */
+  dashboardCrawlPagesPage: 1,
+  dashboardCrawlPagesPageSize: 10,
   /** 演示：AI 点数余额 */
   aiPointsDemo: 12800,
   /** 演示：各槽位 AI 推荐是否已展开 { slot: 1 } */
@@ -418,6 +441,11 @@ const state = {
   dashboardTasksSortDir: 'asc',
   /** 仪表盘 · 全站 SEO 检测进度 0–100（演示：瞬时完成） */
   dashboardSeoScanPct: 100,
+  /** 站点基建检测：idle | scanning */
+  dashboardInfraScanStatus: 'idle',
+  /** 当前站点已完成站点基建检测次数（≥2 后才可展示「新页面提醒」） */
+  dashboardInfraScanCount: 0,
+  _infraScanSiteId: null,
   /** On-Page 列表：行勾选（提交索引批量） */
   onPageSeoBulkSelected: {},
   /** 标签筛选下拉是否展开 */
@@ -435,17 +463,23 @@ const state = {
   /** 曝光页面：路径/标题搜索 */
   pageRankListFilter: '',
   /** 曝光页面：表头排序 */
-  pageRankListSortKey: '',
-  pageRankListSortDir: 'asc',
+  pageRankListSortKey: 'rankedKwCount',
+  pageRankListSortDir: 'desc',
   /** 曝光页面：是否展示上方数据概览 */
   pageRankListShowMetrics: true,
   /** On-Page 列表表头排序 */
   onPageSeoSortKey: '',
   onPageSeoSortDir: 'asc',
+  /** On-Page 列表分页与搜索（搜索写入 state 后整表重渲染） */
+  onPageSeoListPage: 1,
+  onPageSeoListPageSize: 20,
+  onPageSeoFilterQuery: '',
   /** 曝光页面列表：字段配置面板 */
   pageRankListFieldOpen: false,
   pageRankListColOrder: null,
   pageRankListColHidden: null,
+  /** 曝光页列表「页面」列是否显示标题（false 时仅保留 URL） */
+  pageRankListShowPageTitle: true,
   /** 编辑目标词弹窗：草稿词条（取消关闭时丢弃） */
   onPageKwModalDraft: null,
 };
@@ -514,8 +548,8 @@ function siteLeadongSaasAuthorized() {
 function modalLeadongSaasLockBannerHTML() {
   if (siteLeadongSaasAuthorized()) return '';
   return `<div class="modal-saas-lock-banner" role="note">
-    <strong>需要授权绑定领动 SaaS 独立站后才可编辑并同步到站前台</strong>
-    <p>当前站点未检测到有效的独立站授权，本弹窗内字段为只读预览。可将下方 AI 推荐内容复制后，在独立站后台对应位置手动粘贴；完成授权后，保存将可按流程同步到站点（示例）。</p>
+    <strong>需要授权绑定独立站后才可编辑并同步到站前台</strong>
+    <p>当前站点未检测到有效的独立站授权，本弹窗内字段为只读预览。可将下方 AI 推荐内容复制后，在独立站后台对应位置手动粘贴；完成授权后，保存将可按流程同步到站点。</p>
   </div>`;
 }
 
@@ -668,7 +702,10 @@ function formatDateRangeDisplay() {
 function renderTopbarDateRange() {
   const wrap = $('topbarDateWrap');
   if (!wrap) return;
-  const showDate = ['dashboard', 'search', 'geo'].includes(state.primary);
+  const showDate =
+    state.primary === 'dashboard' ||
+    state.primary === 'geo' ||
+    (state.primary === 'search' && state.secondary !== 'page-seo');
   if (!showDate) {
     wrap.innerHTML = '';
     wrap.style.display = 'none';
@@ -952,14 +989,14 @@ const ONPAGE_PAGE_TYPES = [
   { id: 'marketing-lp', label: '营销落地页', hint: '活动/渠道投放专题页，突出单一转化目标与卖点。' },
   { id: 'marketing-cv', label: '营销转化页', hint: '表单、询盘、注册等强转化页，短文也需意图明确。' },
   { id: 'case-study', label: '客户案例页', hint: '案例故事、成功实践，宜有可信细节与相关内链。' },
-  { id: 'about-contact', label: '联系/关于页', hint: '公司介绍、联系方式、资质；URL 含词常可豁免。' },
+  { id: 'about-contact', label: '联系/关于页', hint: '公司介绍、联系方式、资质。' },
   { id: 'tag-page', label: '标签页', hint: '按标签聚合的内容列表，注意与主栏目区分避免重复收录。' },
   { id: 'resource', label: '资源页', hint: '下载、白皮书、目录等资源聚合，宜说明资源类型与获取方式。' },
 ];
 
 const ONPAGE_PAGE_TYPES_MANUAL = ONPAGE_PAGE_TYPES.filter(t => !t.systemOnly);
 
-const ONPAGE_DIAG_DRAWER_HINT = '【检测范围】Title、Meta、Headings、正文、图片 Alt、URL、结构化数据等可量化规则项。【检测目的】对照目标词与行业基线，标出严重问题、优化建议与已通过项，便于逐项修复。【与 AI 测评】本模块不做语义深度、E-E-A-T 主观评估，分数与 AI 测评独立。';
+const ONPAGE_DIAG_DRAWER_HINT = '检测Title、Meta、Headings、正文、图片 Alt、URL、结构化数据等可量化规则项。对照目标词与行业基线，标出严重问题、优化建议与已通过项，便于逐项修复。';
 
 const ONPAGE_AI_DRAWER_HINT = '聚焦搜索意图、内容质量、主题覆盖、语义完整性、E-E-A-T、转化、内容缺口与增长机会。';
 
@@ -972,11 +1009,18 @@ const ONPAGE_SEO_COL_LABELS = {
   status: '状态',
   index: '索引',
   score: '页面得分',
-  issues: '检测得分',
+  issues: '检测问题',
 };
 /** On-Page 列表搜索：含 * 时对 URL 路径做通配匹配 */
 const ONPAGE_SEO_SEARCH_HINT = '在路径、标题、目标词中查找。支持用 * 做模糊匹配，例如 /blog/* 只看博客目录下的页面。';
 const PAGE_RANK_LIST_SEARCH_HINT = '在路径、标题、最佳关键词中查找。支持用 * 做模糊匹配，例如 /products/* 只看产品目录下的曝光页。';
+/** 曝光页 / 落地页 URL 有排名关键词明细弹窗 · 表头悬停说明 */
+const URL_RANK_MODAL_TH_HINTS = {
+  kw: '在选择的时间段内，该页面仍保有搜索排名的监控关键词。',
+  rank: '该词最近一次成功抓取到的自然搜索排名。',
+  engine: '该条排名数据来自的搜索引擎与目标地区。',
+  time: '上述排名最后一次成功抓取完成的时间；若有多条记录，取时间最近的一次。',
+};
 /** 页面标签弹窗：不可删除的系统类标签（页面类型等） */
 const ONPAGE_SYSTEM_TAGS = new Set(['首页', '产品分类页', '产品详情页', '目录', '博客', 'Blog', '关于页', '联系页', '关于我们']);
 
@@ -993,6 +1037,11 @@ function collectOnPageSeoAllTags() {
   });
   return [...s].sort((a, b) => a.localeCompare(b, 'zh-CN'));
 }
+
+/** 单页目标词上限（编辑弹窗保存上限） */
+const ONPAGE_KW_MAX = 10;
+/** 列表列内最多展示的 chip 数，超出显示 +N */
+const ONPAGE_KW_LIST_DISPLAY_MAX = 3;
 
 /** 目标词字段：支持逗号/中文标点/换行分隔的多关键词 */
 function parseMultiKw(raw) {
@@ -1069,10 +1118,9 @@ function collectOnPageSeoHttpStatuses(rows) {
   return [...s].sort((a, b) => a - b);
 }
 
+/** 本期索引监控仅 Google（GSC） */
 const ONPAGE_INDEX_ENGINES = [
   { key: 'google', short: 'G', label: 'Google', logoUrl: 'https://www.google.com/favicon.ico' },
-  { key: 'bing', short: 'B', label: 'Bing', logoUrl: 'https://www.bing.com/favicon.ico' },
-  { key: 'yandex', short: 'Y', label: 'Yandex', logoUrl: 'https://yandex.com/favicon.ico' },
 ];
 
 function siteHasGscConnected() {
@@ -1080,18 +1128,71 @@ function siteHasGscConnected() {
   return !!(si && (si.hasGSC || si.gscAuthorized));
 }
 
+function siteGscAccountBlocked() {
+  const si = site();
+  return !!(si && si.gscAccountBlocked);
+}
+
+/** 本期页面库是否已从 sitemap.xml 解析到 URL */
+function siteOnPageSitemapDetected() {
+  const si = site();
+  return si.onPageSitemapDetected !== false;
+}
+
+/** 当前站点在「页面整合优化」列表中展示的页面行（本期仅 sitemap 来源） */
+function onPageSeoPagesForCurrentSite() {
+  if (!siteOnPageSitemapDetected()) return [];
+  if (site().onPageListEmpty) return [];
+  return DB.onPageSeoPages || [];
+}
+
+function onPageSeoListEmptyPaneHTML(kind) {
+  if (kind === 'no-sitemap') {
+    return `<div class="onpage-seo-list-empty" role="status">
+      <h4 class="onpage-seo-list-empty-title">未检测到 Sitemap</h4>
+      <p class="onpage-seo-list-empty-desc">尚未发现可解析的 <strong>sitemap.xml</strong>，无法生成页面列表。请确认站点根目录或 robots.txt 中已声明站点地图，并在「仪表盘 › 网站概览 › 站点基建」中重新检测后返回查看。</p>
+      <button type="button" class="btn-primary btn-sm" onclick="state.primary='dashboard';state.secondary='overview';render();">前往网站概览</button>
+    </div>`;
+  }
+  return `<div class="onpage-seo-list-empty" role="status">
+    <h4 class="onpage-seo-list-empty-title">暂无页面</h4>
+    <p class="onpage-seo-list-empty-desc">已检测到 Sitemap，但当前未解析到可展示的 URL。请检查 Sitemap 是否为空、是否被 robots 屏蔽，或等待下一次同步完成。</p>
+  </div>`;
+}
+
+function onPageSeoIndexThInnerHTML() {
+  const lab = ONPAGE_SEO_COL_LABELS.index;
+  const hint = '该页是否已被 Google 收录。需先在「网站设置 › 授权管理」绑定 Google Search Console；完成站点地图检测后，列表会随页面库更新。本期仅展示 Google 收录状态。';
+  if (siteGscAccountBlocked()) {
+    const blockHint = 'Google 账号状态异常，暂无法查询收录情况。请按 Google 指引处理账号后，在「网站设置 › 授权管理」重新授权。';
+    return `<div class="onpage-seo-th-inner onpage-seo-th-inner--index-warn">
+      <span class="onpage-seo-th-gsc-warn" tabindex="0" title="${escapeAttr(blockHint)}">
+        <span class="onpage-seo-th-gsc-warn-ic" aria-hidden="true">!</span>
+        <span class="onpage-th-hint-label">
+          <span class="onpage-th-hint-text">${escapeHtmlStr(lab)}</span>
+          <span class="onpage-th-hint-pop" role="tooltip">${escapeHtmlStr(blockHint)}</span>
+        </span>
+      </span>
+    </div>`;
+  }
+  return `<div class="onpage-seo-th-inner">${onPageThHintLabelHTML(lab, hint)}</div>`;
+}
+
 function onPageSeoIndexCellHTML(r) {
+  if (siteGscAccountBlocked()) {
+    return `<div class="onpage-index-cell onpage-index-cell--blocked" onclick="event.stopPropagation();" title="GSC 授权账号异常，索引功能已暂停">—</div>`;
+  }
   if (!siteHasGscConnected()) {
     return `<div class="onpage-index-cell onpage-index-cell--noauth" tabindex="0">
       <span class="onpage-index-noauth-txt">未配置</span>
       <div class="onpage-index-noauth-pop" role="tooltip">
-        <div class="onpage-index-noauth-pop-inner">连接 Google Search Console 后，可在此查看各搜索引擎的收录与展示情况。</div>
+        <div class="onpage-index-noauth-pop-inner">连接 Google Search Console 后，可在此查看 Google 对该页的索引状态。</div>
         <button type="button" class="btn-link onpage-index-noauth-pop-link" onclick="event.stopPropagation();state.primary='settings';state.settingsTab='site-mgmt';state.settingsSub='auth';render();">前往授权管理</button>
       </div>
     </div>`;
   }
   const ix = r.indexEngines && typeof r.indexEngines === 'object' ? r.indexEngines : {};
-  return `<div class="onpage-index-logos" onclick="event.stopPropagation();" title="各搜索引擎收录与展示状态（示例）">${ONPAGE_INDEX_ENGINES.map(e => {
+  return `<div class="onpage-index-logos" onclick="event.stopPropagation();" title="Google 索引状态（示例）">${ONPAGE_INDEX_ENGINES.map(e => {
     const on = ix[e.key] ? ' onpage-index-logo--on' : '';
     const src = escapeAttr(e.logoUrl || '');
     const lab = escapeAttr(`${e.label} ${ix[e.key] ? '已索引' : '未索引'}`);
@@ -1195,68 +1296,65 @@ window.onPageToggleLinkRelFilter = function (mode) {
 };
 
 function getRankedLandingPagesForView() {
-  const all = DB.rankedLandingPages || [];
+  const all = (DB.rankedLandingPages || []).map(enrichRankedLandingPageRow);
   if (state.primary !== 'search' || state.secondary !== 'page-rank-list') return all;
   const f = state.pageRankListEngineFilter;
   if (!f || f === 'all') return all;
   return all.filter(p => String(p.engine || '') === f);
 }
 
-function rankedLandingPagesTrendSeries(pages) {
-  const list = pages || getRankedLandingPagesForView();
-  const endVal = Math.max(0, list.length);
-  const n = Math.max(7, Math.min(31, daysInclusiveLabel(state.dateRangeStart, state.dateRangeEnd)));
-  const series = [];
-  const seed = (state.dateRangeStart + state.dateRangeEnd).length + endVal * 7;
-  let v = Math.max(0, endVal - Math.min(endVal, Math.ceil(n / 3)));
-  for (let i = 0; i < n; i++) {
-    const t = n === 1 ? 1 : i / (n - 1);
-    const target = Math.round(v + (endVal - v) * t + ((seed + i * 11) % 3) - 1);
-    series.push(Math.max(0, Math.min(endVal, target)));
-  }
-  if (n > 0) series[n - 1] = endVal;
-  return { series, n, endVal };
+const EXPOSURE_PAGE_TREND_MAX_TASKS = 15;
+
+function getExposurePageCrawlTasksInRange() {
+  const start = state.dateRangeStart;
+  const end = state.dateRangeEnd;
+  return (DB.exposurePageRankCrawlTasks || [])
+    .filter(t => t && t.taskAt && t.taskAt >= start && t.taskAt <= end)
+    .sort((a, b) => String(a.taskAt).localeCompare(String(b.taskAt)));
 }
 
-function rankedLandingPagesAvgRankTrendSeries(pages) {
-  const list = pages || getRankedLandingPagesForView();
-  const ranks = list.map(p => p.rank).filter(r => r != null && !Number.isNaN(r));
-  const endAvg = ranks.length ? ranks.reduce((a, b) => a + b, 0) / ranks.length : 28;
-  const n = Math.max(7, Math.min(31, daysInclusiveLabel(state.dateRangeStart, state.dateRangeEnd)));
-  const series = [];
-  for (let i = 0; i < n; i++) {
-    const t = n === 1 ? 1 : i / (n - 1);
-    const v = endAvg + (1 - t) * 5.5 + Math.sin(i * 0.7) * 0.35;
-    series.push(Math.round(v * 10) / 10);
+/** 曝光页概览：卡片=筛选条件下最后一次抓取任务指标；折线最多最近 15 次任务 */
+function rankedLandingPagesTrendFromCrawlTasks() {
+  const tasksAll = getExposurePageCrawlTasksInRange();
+  const lastTask = tasksAll.length ? tasksAll[tasksAll.length - 1] : null;
+  const cardCount = lastTask && lastTask.rankedPageCount != null ? lastTask.rankedPageCount : 0;
+  const cardAvg = lastTask && lastTask.avgBestRank != null && !Number.isNaN(Number(lastTask.avgBestRank))
+    ? Number(lastTask.avgBestRank).toFixed(1)
+    : '—';
+  let tasks = tasksAll;
+  if (tasks.length > EXPOSURE_PAGE_TREND_MAX_TASKS) {
+    tasks = tasks.slice(-EXPOSURE_PAGE_TREND_MAX_TASKS);
   }
-  if (n > 0) series[n - 1] = Math.round(endAvg * 10) / 10;
-  return { series };
+  if (!tasks.length) {
+    return { seriesCount: [], seriesAvg: [], dates: [], cardCount, cardAvg, taskTotal: 0, taskShown: 0 };
+  }
+  return {
+    seriesCount: tasks.map(t => t.rankedPageCount),
+    seriesAvg: tasks.map(t => t.avgBestRank),
+    dates: tasks.map(t => t.taskAt),
+    cardCount,
+    cardAvg,
+    taskTotal: tasksAll.length,
+    taskShown: tasks.length,
+  };
 }
 
-function rankedLandingPagesStatsPanelsHTML(pageList) {
-  const pages = pageList || (DB.rankedLandingPages || []);
-  const ranks = pages.map(p => p.rank).filter(r => r != null && !Number.isNaN(r));
-  const avg = ranks.length ? (ranks.reduce((a, b) => a + b, 0) / ranks.length).toFixed(1) : '—';
-  const { series: seriesCount } = rankedLandingPagesTrendSeries(pages);
-  const { series: seriesAvg } = rankedLandingPagesAvgRankTrendSeries(pages);
+function rankedLandingPagesStatsPanelsHTML() {
+  const trend = rankedLandingPagesTrendFromCrawlTasks();
   const trendUid = 'dcrawl';
-  const trendPages = seriesCount.length
-    ? `<div class="som-chart" title="有排名页面数量变化趋势">${sparklineSVG(seriesCount, '#3b82f6', trendUid + 'pc')}</div>`
-    : '';
-  const trendAvg = seriesAvg.length
-    ? `<div class="som-chart" title="平均最佳排名趋势（数字越小表示越靠前）">${sparklineSVG(seriesAvg, '#8b5cf6', trendUid + 'pa')}</div>`
-    : '';
-  const hintRankedPages = '统计周期内，至少有一个监控关键词在自然搜索中获得排名的独立页面数量。';
-  const hintAvgBest = '各页面「最佳关键词」排名的平均值；数字越小表示整体越靠前。';
+  const trendPages = rankedPagesTrendSparklineHTML(trend.seriesCount, '#3b82f6', trendUid + 'pc', '有排名页面数', trend.dates);
+  const trendAvg = rankedPagesTrendSparklineHTML(trend.seriesAvg, '#8b5cf6', trendUid + 'pa', '平均最佳排名', trend.dates);
+  const hintRankedPages = '卡片为当前筛选下最后一次抓取任务的有排名页面数；折线最多展示最近 15 次任务。';
+  const hintAvgBest = '卡片为最后一次抓取任务的平均最佳排名；折线最多展示最近 15 次任务。';
   return `<div class="site-overview-metrics dashboard-page-rank-metrics dashboard-crawl-page-metrics">
     <div class="som-panel">
       <div class="som-label" title="${escapeAttr(hintRankedPages)}">有排名页面</div>
-      <div class="som-value-row"><span class="som-value">${pages.length}</span></div>
+      <div class="som-value-row"><span class="som-value">${trend.cardCount}</span></div>
       ${trendPages}
     </div>
     <div class="som-panel">
       <div class="som-label" title="${escapeAttr(hintAvgBest)}">平均最佳排名</div>
-      <div class="som-value-row"><span class="som-value">${avg}</span></div>
+      <div class="som-value-row"><span class="som-value">${trend.cardAvg}</span></div>
       ${trendAvg}
     </div>
   </div>`;
@@ -1305,7 +1403,7 @@ function dashboardKwSpark4PanelsHTML() {
 }
 
 function getDashboardCrawlPages() {
-  const all = DB.rankedLandingPages || [];
+  const all = (DB.rankedLandingPages || []).map(enrichRankedLandingPageRow);
   const f = state.dashboardCrawlEngineFilter;
   if (!f || f === 'all') return all;
   return all.filter(p => String(p.engine || '') === f);
@@ -1331,11 +1429,62 @@ function dashboardCrawlEngineSelectHTML() {
 
 window.setDashboardCrawlEngineFilter = function (v) {
   state.dashboardCrawlEngineFilter = v || 'all';
+  state.dashboardCrawlPagesPage = 1;
   render();
 };
 
+function dashboardCrawlPagesPagedSlice() {
+  const all = getDashboardCrawlPages();
+  const size = Math.min(50, Math.max(5, state.dashboardCrawlPagesPageSize || 10));
+  const totalPages = Math.max(1, Math.ceil(all.length / size));
+  const page = Math.min(Math.max(1, state.dashboardCrawlPagesPage || 1), totalPages);
+  const start = (page - 1) * size;
+  return { rows: all.slice(start, start + size), total: all.length, page, totalPages, pageSize: size };
+}
+
+function listTablePagerFooterHTML(total, page, totalPages, pageSize, pageFn, sizeFn) {
+  if (total <= 0) return '';
+  return `
+    <div class="article-list-footer onpage-seo-list-footer dashboard-crawl-pages-footer">
+      <div class="article-list-footer-left">
+        <span class="article-list-footer-meta">共 ${total} 条</span>
+        <span class="article-list-page-size-label">每页</span>
+        <select class="article-list-page-size" onchange="${sizeFn}(+this.value)">
+          <option value="10"${pageSize === 10 ? ' selected' : ''}>10</option>
+          <option value="20"${pageSize === 20 ? ' selected' : ''}>20</option>
+          <option value="50"${pageSize === 50 ? ' selected' : ''}>50</option>
+        </select>
+        <span class="article-list-page-size-label">条</span>
+      </div>
+      <div class="article-list-pager">
+        <button type="button" class="btn-default" style="height:28px;padding:0 8px;" ${page <= 1 ? 'disabled' : ''} onclick="${pageFn}(${page - 1})">‹</button>
+        <button type="button" class="btn-primary" style="height:28px;padding:0 10px;">${page}</button>
+        <span style="font-size:12px;color:var(--text-3);padding:0 4px;">/ ${totalPages}</span>
+        <button type="button" class="btn-default" style="height:28px;padding:0 8px;" ${page >= totalPages ? 'disabled' : ''} onclick="${pageFn}(${page + 1})">›</button>
+      </div>
+    </div>`;
+}
+
+window.setDashboardCrawlPagesListPageSize = function (n) {
+  state.dashboardCrawlPagesPageSize = n;
+  state.dashboardCrawlPagesPage = 1;
+  render();
+};
+
+window.setDashboardCrawlPagesListPage = function (n) {
+  state.dashboardCrawlPagesPage = n;
+  render();
+};
+
+function dashboardCrawlOverviewTableFootHTML(total, maxRows, moreLabel) {
+  if (total <= maxRows) return '';
+  return `<p class="dashboard-crawl-table-foot">共 ${total} 条，此处展示前 ${maxRows} 条；${moreLabel}</p>`;
+}
+
 function dashboardCrawlOverviewKwTableHTML() {
-  const kws = getDashboardCrawlKeywords();
+  const kwsAll = getDashboardCrawlKeywords();
+  const max = DASHBOARD_CRAWL_OVERVIEW_MAX_ROWS;
+  const kws = kwsAll.slice(0, max);
   const rows = kws.map(k => {
     const bestCell = k.bestPage
       ? `<button type="button" class="td-link btn-td-link" onclick="event.stopPropagation();state.kwBestPagesKwId=${k.id};openModal('kw-best-pages');">${httpsLockPrefixHTML()}${escapeHtmlStr(k.bestPage)}${k.extraPages ? ` <span class="badge badge-blue">+${k.extraPages}</span>` : ''}</button>`
@@ -1343,17 +1492,19 @@ function dashboardCrawlOverviewKwTableHTML() {
     const rk = k.rank != null ? `<span class="badge badge-blue">${k.rank}</span>` : '<span style="color:var(--text-3);">—</span>';
     return `<tr><td><span class="td-kw">${escapeHtmlStr(k.kw)}</span></td><td>${rk}</td><td style="font-size:12px;">${bestCell}</td></tr>`;
   }).join('');
-  return `<div class="table-wrap"><table class="data-table"><thead><tr><th>关键词</th><th>最新排名</th><th>排名最佳网页</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  const foot = dashboardCrawlOverviewTableFootHTML(
+    kwsAll.length,
+    max,
+    '完整列表请前往「搜索 › 我的关键词」。'
+  );
+  return `<div class="table-wrap"><table class="data-table"><thead><tr><th>关键词</th><th>最新排名</th><th>排名最佳网页</th></tr></thead><tbody>${rows}</tbody></table></div>${foot}`;
 }
 
 function dashboardCrawlOverviewPagesTableHTML() {
-  const pages = getDashboardCrawlPages();
+  const { rows: pages, total, page, totalPages, pageSize } = dashboardCrawlPagesPagedSlice();
   const rows = pages.map(p => {
     const cnt = p.rankedKwCount != null
       ? rankedKwCountLinkHTML(p.path, p.rankedKwCount)
-      : '—';
-    const bestCell = p.path
-      ? `<button type="button" class="td-link btn-td-link" onclick="event.stopPropagation();openRankedPageKwModal('${escapeAttr(p.path)}');">${httpsLockPrefixHTML()}<code>${escapeHtmlStr(p.path)}</code></button>`
       : '—';
     return `
     <tr>
@@ -1364,16 +1515,15 @@ function dashboardCrawlOverviewPagesTableHTML() {
       <td style="font-size:13px;text-align:right;">${cnt}</td>
       <td><span class="td-kw">${escapeHtmlStr(p.bestKw || '—')}</span></td>
       <td>${p.rank != null ? `<span class="badge badge-blue">${p.rank}</span>` : '—'}</td>
-      <td style="font-size:12px;">${bestCell}</td>
     </tr>`;
   }).join('');
+  const H = PAGE_RANK_LIST_COL_HINTS;
   return `<div class="table-wrap"><table class="data-table"><thead><tr>
-    <th>页面</th>
-    <th style="width:108px;text-align:right;">${onPageThHintLabelHTML('有排名关键词数', PAGE_RANK_LIST_COL_HINTS.rankedKwCount)}</th>
-    <th>最佳关键词</th>
-    <th style="width:88px;">最佳排名</th>
-    <th>${onPageThHintLabelHTML('排名最佳网页', '该页面在监控词下曾获得排名的代表落地页；点击可查看该页全部有排名关键词。')}</th>
-  </tr></thead><tbody>${rows}</tbody></table></div>`;
+    <th>${onPageThHintLabelHTML('页面', H.page)}</th>
+    <th style="width:108px;text-align:right;">${onPageThHintLabelHTML('有排名关键词数', H.rankedKwCount)}</th>
+    <th>${onPageThHintLabelHTML('最佳关键词', H.bestKw)}</th>
+    <th style="width:88px;">${onPageThHintLabelHTML('最佳排名', H.rank)}</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>${listTablePagerFooterHTML(total, page, totalPages, pageSize, 'setDashboardCrawlPagesListPage', 'setDashboardCrawlPagesListPageSize')}`;
 }
 
 function dashboardCrawlOverviewSectionHTML() {
@@ -1382,7 +1532,7 @@ function dashboardCrawlOverviewSectionHTML() {
   const kwA = sub === 'kw' ? ' active' : '';
   const pgA = sub === 'pages' ? ' active' : '';
   const body = sub === 'pages'
-    ? `${rankedLandingPagesStatsPanelsHTML(getDashboardCrawlPages())}${dashboardCrawlOverviewPagesTableHTML()}`
+    ? `${rankedLandingPagesStatsPanelsHTML()}${dashboardCrawlOverviewPagesTableHTML()}`
     : `${dashboardKwSpark4PanelsHTML()}${dashboardCrawlOverviewKwTableHTML()}`;
   return `
   <div class="panel dashboard-overview-module dashboard-crawl-overview-panel">
@@ -1414,12 +1564,12 @@ const PAGE_RANK_LIST_COL_LABELS = {
   lastSeen: '最后曝光',
 };
 const PAGE_RANK_LIST_COL_HINTS = {
-  page: '当前网站内，曾在自然搜索中获得曝光的落地页，含标题与网址路径。',
-  rankedKwCount: '该页面下，曾在监控搜索引擎中获得过排名的关键词数量。',
-  bestKw: '结合曝光与点击率等因素，为您挑选的代表性搜索词。',
-  rank: '上述代表性搜索词在最近一次统计中的最好名次；数字越小越靠前。',
-  firstSeen: '该页面首次出现在所选统计范围内的日期。',
-  lastSeen: '该页面在统计范围内最近一次仍保留排名的日期。',
+  page: '在选择的时间段和搜索引擎下，曾获得自然搜索排名的页面。',
+  rankedKwCount: '该页排进搜索结果中的关键词数量（按各词在时间段内最后一次成功抓取统计）。点击数字可查看完整关键词列表。',
+  bestKw: '该页排名最好的关键词词。',
+  rank: '「最佳关键词」当前的搜索排名。',
+  firstSeen: '该页在选择的时间段内，第一次出现有排名记录的日期。',
+  lastSeen: '该页在选择的时间段内，最近一次仍保有排名记录的日期。',
 };
 
 function ensurePageRankListTableState() {
@@ -1438,10 +1588,17 @@ function ensurePageRankListTableState() {
   }
   if (!state.pageRankListColHidden || typeof state.pageRankListColHidden !== 'object') state.pageRankListColHidden = {};
   PAGE_RANK_LIST_COL_IDS.forEach(id => {
+    if (id === 'page') return;
     if (state.pageRankListColHidden[id] == null) state.pageRankListColHidden[id] = false;
   });
-  state.pageRankListColHidden.page = false;
+  if (state.pageRankListShowPageTitle == null) state.pageRankListShowPageTitle = true;
 }
+
+window.setPageRankListShowPageTitle = function (show) {
+  ensurePageRankListTableState();
+  state.pageRankListShowPageTitle = !!show;
+  render();
+};
 
 window.togglePageRankListFieldPanel = function (ev) {
   ev.stopPropagation();
@@ -1485,9 +1642,13 @@ function pageRankListFieldConfigPanelHTML() {
     <div class="kw-field-config-dropdown" onclick="event.stopPropagation()">
       <div class="kw-field-config-title">显示字段与顺序</div>
       <div class="kw-field-config-row kw-field-config-row--fixed">
-        <span class="kw-field-label"><strong>${PAGE_RANK_LIST_COL_LABELS.page}</strong></span>
-        <span class="kw-field-move kw-field-move--na" title="固定在首列">—</span>
+        <label class="kw-field-label">
+          <input type="checkbox" ${state.pageRankListShowPageTitle !== false ? 'checked' : ''} onchange="setPageRankListShowPageTitle(this.checked)"/>
+          <span><strong>${PAGE_RANK_LIST_COL_LABELS.page}</strong> · 显示页面标题</span>
+        </label>
+        <span class="kw-field-move kw-field-move--na" title="页面列固定展示 URL">—</span>
       </div>
+      <p class="kw-field-config-note">取消「显示页面标题」后，列表仍保留「页面」列与 URL，仅隐藏标题行。</p>
       ${movable.map(id => `
         <div class="kw-field-config-row">
           <label class="kw-field-label">
@@ -1542,6 +1703,14 @@ window.applyPageRankListFilters = function () {
 
 function rankedLandingPageCellHTML(id, r) {
   if (id === 'page') {
+    const pathOnly = state.pageRankListShowPageTitle === false;
+    if (pathOnly) {
+      return `<td>
+        <div class="onpage-page-cell onpage-page-cell--path-only">
+          <div class="onpage-page-path">${httpsLockPrefixHTML()}<code>${escapeHtmlStr(r.path)}</code></div>
+        </div>
+      </td>`;
+    }
     return `<td>
         <div class="onpage-page-cell">
           <div class="onpage-page-title">${escapeHtmlStr(r.title)}</div>
@@ -1577,9 +1746,12 @@ window.sortPageRankListCol = function (id) {
 
 function sortRankedLandingPages(pages) {
   const key = state.pageRankListSortKey;
-  if (!key || !PAGE_RANK_LIST_SORTABLE.has(key)) return pages;
+  const list = pages.slice();
+  if (!key || !PAGE_RANK_LIST_SORTABLE.has(key)) {
+    return list.sort((a, b) => (b.rankedKwCount || 0) - (a.rankedKwCount || 0));
+  }
   const dir = state.pageRankListSortDir === 'desc' ? -1 : 1;
-  return pages.slice().sort((a, b) => {
+  return list.sort((a, b) => {
     if (key === 'rankedKwCount') return ((a.rankedKwCount || 0) - (b.rankedKwCount || 0)) * dir;
     if (key === 'rank') {
       const ar = a.rank != null ? Number(a.rank) : 99999;
@@ -1612,21 +1784,17 @@ function rankedLandingPagesTableAndStatsHTML(opts) {
   const showToolbar = opts && opts.showToolbar != null ? !!opts.showToolbar : isSearchPage;
   let pages = isSearchPage ? getRankedLandingPagesForView() : (DB.rankedLandingPages || []);
   pages = sortRankedLandingPages(pages);
-  const ranks = pages.map(p => p.rank).filter(r => r != null && !Number.isNaN(r));
-  const avg = ranks.length ? (ranks.reduce((a, b) => a + b, 0) / ranks.length).toFixed(1) : '—';
-  const { series: seriesCount } = rankedLandingPagesTrendSeries(pages);
-  const { series: seriesAvg } = rankedLandingPagesAvgRankTrendSeries(pages);
+  const trend = rankedLandingPagesTrendFromCrawlTasks();
   const trendUid = isSearchPage ? 'prl' : 'dash';
-  const trendPages = seriesCount.length
-    ? `<div class="som-chart" title="所选时间内有排名页面数量变化">${sparklineSVG(seriesCount, '#3b82f6', trendUid + 'pc')}</div>`
-    : '';
-  const trendAvg = seriesAvg.length
-    ? `<div class="som-chart" title="平均最佳排名变化（数字越小表示越靠前）">${sparklineSVG(seriesAvg, '#8b5cf6', trendUid + 'pa')}</div>`
-    : '';
-  const hintRankedPages = '统计周期内，至少有一个监控关键词在自然搜索中获得排名的独立页面数量。';
-  const hintAvgBest = '各页面「最佳关键词」排名的平均值；数字越小表示整体越靠前。';
+  const trendPages = rankedPagesTrendSparklineHTML(trend.seriesCount, '#3b82f6', trendUid + 'pc', '有排名页面数', trend.dates);
+  const trendAvg = rankedPagesTrendSparklineHTML(trend.seriesAvg, '#8b5cf6', trendUid + 'pa', '平均最佳排名', trend.dates);
+  const hintRankedPages = '卡片为当前筛选下最后一次抓取任务的有排名页面数；折线最多展示最近 15 次任务。';
+  const hintAvgBest = '卡片为最后一次抓取任务的平均最佳排名；折线最多展示最近 15 次任务。';
   ensurePageRankListTableState();
-  const colIds = state.pageRankListColOrder.filter(id => !state.pageRankListColHidden[id]);
+  const colIds = [
+    'page',
+    ...state.pageRankListColOrder.filter(id => id !== 'page' && !state.pageRankListColHidden[id]),
+  ];
   const tablePages = maxTableRows != null ? pages.slice(0, maxTableRows) : pages;
   const theadRow = `<tr>${colIds.map(id => rankedLandingPageThHTML(id)).join('')}</tr>`;
   const bodyFixed = tablePages.map(r => {
@@ -1660,14 +1828,14 @@ function rankedLandingPagesTableAndStatsHTML(opts) {
       <div class="som-panel">
         <div class="som-label" title="${escapeAttr(hintRankedPages)}">有排名页面</div>
         <div class="som-value-row">
-          <span class="som-value">${pages.length}</span>
+          <span class="som-value">${trend.cardCount}</span>
         </div>
         ${trendPages}
       </div>
       <div class="som-panel">
         <div class="som-label" title="${escapeAttr(hintAvgBest)}">平均最佳排名</div>
         <div class="som-value-row">
-          <span class="som-value">${avg}</span>
+          <span class="som-value">${trend.cardAvg}</span>
         </div>
         ${trendAvg}
       </div>
@@ -1792,8 +1960,8 @@ window.toggleOnPageSeoFilterPageType = function (ptId) {
   if (i >= 0) state.onPageSeoFilterPageTypes.splice(i, 1);
   else state.onPageSeoFilterPageTypes.push(ptId);
   state.onPageSeoTagDdOpen = true;
+  state.onPageSeoListPage = 1;
   render();
-  requestAnimationFrame(() => applyOnPageSeoListFilters());
 };
 
 window.setOnPageSeoTagDdQuery = function (v) {
@@ -1827,8 +1995,8 @@ window.toggleOnPageSeoStatusCode = function (code) {
   if (ix >= 0) state.onPageSeoStatusFilter.splice(ix, 1);
   else state.onPageSeoStatusFilter.push(s);
   state.onPageSeoStatusDdOpen = true;
+  state.onPageSeoListPage = 1;
   render();
-  requestAnimationFrame(() => applyOnPageSeoListFilters());
 };
 
 window.onPageSubmitIndexingRow = function (i, e) {
@@ -1862,15 +2030,45 @@ window.toggleOnPageSeoBulkRow = function (i, on, e) {
   if (on) state.onPageSeoBulkSelected[i] = 1;
   else delete state.onPageSeoBulkSelected[i];
   render();
-  requestAnimationFrame(() => applyOnPageSeoListFilters());
 };
 
 window.toggleOnPageSeoBulkAll = function (on) {
   state.onPageSeoBulkSelected = {};
-  if (on) (DB.onPageSeoPages || []).forEach((_, j) => { state.onPageSeoBulkSelected[j] = 1; });
+  if (on) {
+    onPageSeoListFilteredEntries().forEach(({ i }) => { state.onPageSeoBulkSelected[i] = 1; });
+  }
   render();
-  requestAnimationFrame(() => applyOnPageSeoListFilters());
 };
+
+window.onPageBulkRunPageAudit = function () {
+  const sel = state.onPageSeoBulkSelected || {};
+  const ids = Object.keys(sel).map(Number).filter(j => sel[j]);
+  if (!ids.length) {
+    toast('请先勾选要检测的页面', 'error');
+    return;
+  }
+  ids.forEach((i, n) => {
+    window.setTimeout(() => {
+      if (typeof onPageSeoRerunAudit === 'function') onPageSeoRerunAudit(i);
+    }, n * 750);
+  });
+  toast(`已对 ${ids.length} 个页面开始常规检测（示例），请稍候刷新列表`);
+};
+
+function onPageSeoBulkSelectedCount() {
+  return Object.keys(state.onPageSeoBulkSelected || {}).filter(k => state.onPageSeoBulkSelected[k]).length;
+}
+
+function onPageSeoBulkCheckboxThHTML() {
+  const entries = onPageSeoListFilteredEntries();
+  const allOn = entries.length > 0 && entries.every(({ i }) => state.onPageSeoBulkSelected && state.onPageSeoBulkSelected[i]);
+  return `<th class="onpage-seo-th-check" style="width:40px;"><input type="checkbox" title="全选当前筛选结果" ${allOn ? ' checked' : ''} onclick="event.stopPropagation();toggleOnPageSeoBulkAll(this.checked)"/></th>`;
+}
+
+function onPageSeoBulkCheckboxTdHTML(i) {
+  const on = state.onPageSeoBulkSelected && state.onPageSeoBulkSelected[i];
+  return `<td class="onpage-seo-td-check" onclick="event.stopPropagation();"><input type="checkbox"${on ? ' checked' : ''} onclick="event.stopPropagation();toggleOnPageSeoBulkRow(${i}, this.checked, event)"/></td>`;
+}
 
 function resolveRankedKwSamplesKey(path) {
   const p = String(path || '').trim();
@@ -1885,6 +2083,8 @@ function resolveRankedKwSamplesKey(path) {
 window.openRankedPageKwModal = function (path) {
   const p = String(path || '').trim();
   if (!p) return;
+  state.rankedKwModalSortKey = 'kw';
+  state.rankedKwModalSortDir = 'asc';
   state.rankedKwModalPath = resolveRankedKwSamplesKey(p);
   openModal('ranked-page-kws');
 };
@@ -1916,15 +2116,49 @@ function installRankedKwCountLinkDelegate() {
   }, true);
 }
 
+const RANKED_KW_MODAL_SORTABLE = new Set(['kw', 'rank', 'time']);
+
+window.sortRankedKwModalCol = function (id) {
+  if (!RANKED_KW_MODAL_SORTABLE.has(id)) return;
+  if (state.rankedKwModalSortKey === id) {
+    state.rankedKwModalSortDir = state.rankedKwModalSortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    state.rankedKwModalSortKey = id;
+    state.rankedKwModalSortDir = id === 'rank' ? 'asc' : id === 'time' ? 'desc' : 'asc';
+  }
+  renderModal();
+};
+
+function sortRankedKwModalRows(rows) {
+  const key = state.rankedKwModalSortKey || 'kw';
+  const dir = state.rankedKwModalSortDir === 'desc' ? -1 : 1;
+  return rows.slice().sort((a, b) => {
+    if (key === 'kw') {
+      return String(a.kw || '').localeCompare(String(b.kw || ''), 'zh-CN') * dir;
+    }
+    if (key === 'rank') {
+      const ra = a.rank != null ? Number(a.rank) : 1e9;
+      const rb = b.rank != null ? Number(b.rank) : 1e9;
+      return (ra - rb) * dir;
+    }
+    if (key === 'time') {
+      const ta = Date.parse(String(a.rankAt || '').replace(' ', 'T')) || 0;
+      const tb = Date.parse(String(b.rankAt || '').replace(' ', 'T')) || 0;
+      return (ta - tb) * dir;
+    }
+    return 0;
+  });
+}
+
 function getRankedKwRowsForModal(path) {
   const key = resolveRankedKwSamplesKey(path);
   const raw = (DB.onPageRankedKwSamples && DB.onPageRankedKwSamples[key]) || [];
-  const merged = mergeRankedKwSampleRows(raw);
+  const merged = getRankedKwRowsWithRankOnLastCrawl(raw);
   if (merged.length) return merged;
-  const pg = (DB.rankedLandingPages || []).find(p => {
+  const pg = enrichRankedLandingPageRow((DB.rankedLandingPages || []).find(p => {
     const pk = resolveRankedKwSamplesKey(p.path);
     return pk === key || String(p.path || '') === String(path || '');
-  });
+  }));
   if (!pg) return [];
   const rows = [];
   if (pg.bestKw) {
@@ -2077,22 +2311,37 @@ window.dismissDashboardTask = function (taskId) {
   toast('已忽略该条待办；下次整站检测或该页面重新检测后将再次显示（示例）');
 };
 
-window.openDashboardSeoRescanConfirm = function () {
-  state.modal = 'dashboard-seo-rescan-confirm';
-  renderModal();
-  const ov = $('modalOverlay');
-  if (ov) ov.style.display = 'flex';
-};
+function runDashboardInfraScanDemo(onDone) {
+  if (state.dashboardInfraScanStatus === 'scanning') return;
+  state.dashboardInfraScanStatus = 'scanning';
+  render();
+  window.setTimeout(() => {
+    const s = DB.dashboardSeoSummary;
+    if (s) s.lastScanAt = formatDateYMD(DEMO_TODAY);
+    state.dashboardDismissedTaskIds = {};
+    (DB.dashboardTasks || []).filter(t => (t.scope || 'page') === 'site').forEach(t => {
+      if (state.dashboardDismissedTaskIds) delete state.dashboardDismissedTaskIds[t.id];
+    });
+    state.dashboardInfraScanStatus = 'idle';
+    state.dashboardInfraScanCount = (state.dashboardInfraScanCount || 0) + 1;
+    if (typeof onDone === 'function') onDone();
+    else {
+      render();
+      toast('网站技术基础检测已完成（示例），检测项已更新');
+    }
+  }, 2200);
+}
 
 window.dashboardRescanDemoExecute = function () {
-  const s = DB.dashboardSeoSummary;
-  if (s) s.lastScanAt = formatDateYMD(DEMO_TODAY);
-  state.dashboardDismissedTaskIds = {};
-  (DB.dashboardTasks || []).filter(t => (t.scope || 'page') === 'site').forEach(t => {
-    if (state.dashboardDismissedTaskIds) delete state.dashboardDismissedTaskIds[t.id];
-  });
-  render();
-  toast('网站技术基础检测已完成（示例），检测项已更新');
+  runDashboardInfraScanDemo();
+};
+
+window.openDashboardSeoRescanConfirm = function () {
+  if (state.dashboardInfraScanStatus === 'scanning') {
+    toast('站点基建检测进行中，请稍候', 'error');
+    return;
+  }
+  openModal('dashboard-seo-rescan-confirm');
 };
 
 function modalDashboardSeoRescanConfirm() {
@@ -2102,7 +2351,7 @@ function modalDashboardSeoRescanConfirm() {
     <button type="button" class="modal-close" data-close>×</button>
   </div>
   <div class="modal-body">
-    <p style="font-size:14px;color:var(--text-2);line-height:1.55;margin:0;">将仅对<strong>网站技术基础</strong>（Robots.txt、Sitemap、全站 HTTPS，模块 A）重新检测，不扫描单页内容（示例）。确定继续？</p>
+    <p style="font-size:14px;color:var(--text-2);line-height:1.55;margin:0;">将仅对<strong>网站技术基础</strong>（Robots.txt、Sitemap、首页 HTTPS 安全）重新检测，不扫描单页内容（示例）。确定继续？</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn-default" data-close>取消</button>
@@ -2115,6 +2364,16 @@ window.onPageDrawerRescanCurrent = function () {
   if (i == null) return;
   window.onPageSeoRerunAudit(i);
 };
+
+function seedOnPageTargetKwFromMetaOnFirstAudit(row) {
+  if (!row || row._onPageKwSeededFromMeta) return;
+  row._onPageKwSeededFromMeta = true;
+  if (parseMultiKw(row.keyword).length) return;
+  const raw = row.metaKeywords;
+  if (!raw || raw === '—') return;
+  const parts = String(raw).split(/[,，;；]/).map(s => s.trim()).filter(Boolean).slice(0, ONPAGE_KW_MAX);
+  if (parts.length) row.keyword = parts.join('\n');
+}
 
 window.onPageSeoRerunAudit = function (i) {
   const r = DB.onPageSeoPages[i];
@@ -2131,6 +2390,7 @@ window.onPageSeoRerunAudit = function (i) {
       render();
       return;
     }
+    seedOnPageTargetKwFromMetaOnFirstAudit(row);
     const base = row.score != null ? Number(row.score) : 70;
     row.score = Math.min(100, Math.max(40, base + Math.round((Math.random() - 0.35) * 10)));
     row.onPageScoreAt = formatDateYMD(DEMO_TODAY);
@@ -2148,9 +2408,6 @@ window.onPageSeoRerunAudit = function (i) {
     clearDashboardDismissedForPage(row.path);
     toast('已重新测评当前页面（示例）');
     render();
-    if (state.primary === 'search' && state.secondary === 'page-seo') {
-      requestAnimationFrame(() => applyOnPageSeoListFilters());
-    }
     if (state.onPageSeoDrawerIndex === i) renderDrawer();
   }, 700);
 };
@@ -2220,14 +2477,21 @@ function onPageSeoTagsCellHTML(r, i) {
 }
 
 function onPageSeoKeywordCellHTML(r, i) {
-  const kws = parseMultiKw(r.keyword);
-  const inner = kws.length
-    ? `<div class="onpage-kw-chips">${kws.map(k => `<span class="onpage-kw-chip">${escapeHtmlStr(k)}</span>`).join('')}</div>`
-    : '<span style="color:var(--text-3);">—</span>';
-  return `<div class="onpage-kw-table-cell">
-    <div class="onpage-kw-table-inner">${inner}</div>
-    <button type="button" class="onpage-kw-inline-edit" title="编辑目标词" aria-label="编辑目标词" onclick="event.stopPropagation();state.onPageSeoDrawerIndex=${i};openModal('onpage-drawer-kw');">${ONPAGE_SVG_EDIT}</button>
-  </div>`;
+  const all = parseMultiKw(r.keyword).slice(0, ONPAGE_KW_MAX);
+  const show = all.slice(0, ONPAGE_KW_LIST_DISPLAY_MAX);
+  const extra = all.length - show.length;
+  const openKw = `event.stopPropagation();state.onPageSeoDrawerIndex=${i};openModal('onpage-drawer-kw');`;
+  let inner;
+  if (!all.length) {
+    inner = `<button type="button" class="onpage-kw-empty-btn" onclick="${openKw}" title="点击设置目标词">—</button>`;
+  } else {
+    const chips = show.map(k => `<button type="button" class="onpage-kw-chip onpage-kw-chip--btn" onclick="${openKw}" title="点击编辑目标词">${escapeHtmlStr(k)}</button>`).join('');
+    const more = extra > 0
+      ? `<button type="button" class="onpage-kw-chip onpage-kw-chip--more" onclick="${openKw}" title="还有 ${extra} 个目标词，点击编辑">+${extra}</button>`
+      : '';
+    inner = `<div class="onpage-kw-chips onpage-kw-chips--clickable">${chips}${more}</div>`;
+  }
+  return `<div class="onpage-kw-table-cell"><div class="onpage-kw-table-inner">${inner}</div></div>`;
 }
 
 function onPageSeoPageTitleCellHTML(r, i) {
@@ -2260,8 +2524,12 @@ window.sortOnPageSeoCol = function (id) {
     state.onPageSeoSortKey = id;
     state.onPageSeoSortDir = id === 'score' ? 'desc' : 'asc';
   }
+  state.onPageSeoListPage = 1;
   render();
 };
+
+window.setOnPageSeoListPageSize = setOnPageSeoListPageSize;
+window.setOnPageSeoListPage = setOnPageSeoListPage;
 
 function onPageSeoSortValue(row, id) {
   if (id === 'status') return Number(row.httpStatus) || 200;
@@ -2277,22 +2545,91 @@ function onPageSeoSortValue(row, id) {
   return 0;
 }
 
-function sortOnPageSeoPageRows(rows) {
-  const base = rows.map((r, i) => ({ r, i }));
+function onPageSeoRowMatchesFilters(row, raw, dom, ptF, stF) {
+  const http = row.httpStatus != null ? String(Number(row.httpStatus)) : '200';
+  if (stF && stF.length && !stF.includes(http)) return false;
+  const rowPt = row.pageType || '';
+  if (ptF && ptF.length && !ptF.includes(rowPt)) return false;
+  if (!raw) return true;
+  const qLower = raw.toLowerCase();
+  if (raw.includes('*')) {
+    const path = String(row.path || '').toLowerCase();
+    const fullUrl = (`https://${dom}${row.path}`).toLowerCase();
+    const pat = qLower.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+    let ok = false;
+    try {
+      const re = new RegExp(pat, 'i');
+      ok = re.test(path) || re.test(fullUrl);
+    } catch (e) {
+      ok = path.includes(raw.replace(/\*/g, ''));
+    }
+    if (!ok) {
+      const plain = qLower.replace(/\*/g, '').trim();
+      if (plain) {
+        const kws = parseMultiKw(row.keyword).join(' ');
+        const blob = `${(row.title || '')} ${kws} ${path}`.toLowerCase();
+        ok = blob.includes(plain);
+      }
+    }
+    return ok;
+  }
+  const kws = parseMultiKw(row.keyword).join(' ');
+  const blob = `${(row.title || '')} ${kws} ${(row.path || '')}`.toLowerCase();
+  return blob.includes(qLower);
+}
+
+function onPageSeoListFilteredEntries() {
+  const dom = site().domain;
+  const raw = (state.onPageSeoFilterQuery || '').trim();
+  const ptF = state.onPageSeoFilterPageTypes && state.onPageSeoFilterPageTypes.length ? state.onPageSeoFilterPageTypes : null;
+  const stF = state.onPageSeoStatusFilter && state.onPageSeoStatusFilter.length ? state.onPageSeoStatusFilter : null;
+  const out = [];
+  (onPageSeoPagesForCurrentSite() || []).forEach((r) => {
+    const i = (DB.onPageSeoPages || []).indexOf(r);
+    if (i < 0) return;
+    if (!onPageSeoRowMatchesFilters(r, raw, dom, ptF, stF)) return;
+    out.push({ r, i });
+  });
+  return sortOnPageSeoPageRows(out);
+}
+
+function sortOnPageSeoPageRows(entries) {
   const key = state.onPageSeoSortKey;
-  if (!key || !ONPAGE_SEO_SORTABLE.has(key)) return base;
+  if (!key || !ONPAGE_SEO_SORTABLE.has(key)) {
+    return entries.slice().sort((a, b) => a.i - b.i);
+  }
   const dir = state.onPageSeoSortDir === 'desc' ? -1 : 1;
-  return base.slice().sort((a, b) => (onPageSeoSortValue(a.r, key) - onPageSeoSortValue(b.r, key)) * dir);
+  return entries.slice().sort((a, b) => (onPageSeoSortValue(a.r, key) - onPageSeoSortValue(b.r, key)) * dir);
+}
+
+function onPageSeoListPagedSlice() {
+  const all = onPageSeoListFilteredEntries();
+  const size = Math.min(100, Math.max(10, state.onPageSeoListPageSize || 20));
+  const totalPages = Math.max(1, Math.ceil(all.length / size));
+  const page = Math.min(Math.max(1, state.onPageSeoListPage || 1), totalPages);
+  const start = (page - 1) * size;
+  return { rows: all.slice(start, start + size), total: all.length, page, totalPages, pageSize: size };
+}
+
+function setOnPageSeoListPageSize(n) {
+  state.onPageSeoListPageSize = n;
+  state.onPageSeoListPage = 1;
+  render();
+}
+
+function setOnPageSeoListPage(n) {
+  state.onPageSeoListPage = n;
+  render();
 }
 
 function onPageSeoThAttrs(id) {
-  if (id === 'page') return { style: 'min-width:200px;', hint: '页面标题与路径；点击行打开抽屉查看详情与检测。' };
-  if (id === 'keyword') return { style: 'min-width:140px;', hint: '您希望重点优化的一组搜索词，可写入多条。' };
-  if (id === 'pageType' || id === 'tags') return { style: 'min-width:140px;', hint: '页面类型最多选 1 项，用于豁免规则与检测提示（悬停选项可看说明）。' };
-  if (id === 'status') return { style: 'min-width:72px;', hint: '访问该地址时服务器返回的状态码，用于发现打不开或跳转异常。' };
-  if (id === 'index') return { style: 'min-width:120px;', hint: '各搜索引擎是否已收录该页面；未配置时需先完成授权。' };
-  if (id === 'score') return { style: 'min-width:72px;', hint: '七维规则分合计（满分 100）。' };
-  if (id === 'issues') return { style: 'min-width:100px;', hint: '常规检测中「严重」与「建议」问题条数，色标与抽屉内筛选一致。' };
+  if (id === 'page') return { style: 'min-width:200px;', hint: '来自站点地图（sitemap）的页面地址；在「仪表盘 › 网站概览」完成站点地图检测后，列表会同步更新。' };
+  if (id === 'keyword') return { style: 'min-width:140px;', hint: '为该页设定的 SEO 目标词，点击可编辑。' };
+  if (id === 'pageType' || id === 'tags') return { style: 'min-width:140px;', hint: '页面类型（如首页、产品详情等），点击标签可修改。' };
+  if (id === 'status') return { style: 'min-width:72px;', hint: '打开该页面网址时，服务器返回的状态码，便于发现无法访问或跳转异常。' };
+  if (id === 'index') return { style: 'min-width:120px;', hint: '' };
+  if (id === 'score') return { style: 'min-width:72px;', hint: '常规检测的七维规则总分，展示最近一次检测结果，打开页面详情时会自动更新。' };
+  if (id === 'issues') return { style: 'min-width:100px;', hint: '常规检测待处理的问题数量：红色数字为严重问题，橙色为优化建议。' };
   return { style: 'min-width:100px;', hint: '' };
 }
 
@@ -2421,19 +2758,61 @@ function wrapSearchLayout(contentHTML) {
    ──────────────────────────────────────────────────────────── */
 
 /* ── Sparkline SVG (area + line chart) ── */
-function sparklineSVG(data, color, uid) {
+function trendSparklineDateLabels(pointCount) {
+  const n = Math.max(1, pointCount);
+  const start = parseYMD(state.dateRangeStart);
+  const end = parseYMD(state.dateRangeEnd);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const t = n === 1 ? 0 : i / (n - 1);
+    const ms = start.getTime() + t * (end.getTime() - start.getTime());
+    out.push(formatDateYMD(new Date(ms)));
+  }
+  return out;
+}
+
+function sparklineSVG(data, color, uid, opts) {
   color = color || '#3b82f6';
+  opts = opts && typeof opts === 'object' ? opts : null;
   const w = 140, h = 46, pad = 4;
+  if (!data || !data.length) return '';
   const min = Math.min(...data), max = Math.max(...data);
   const rng = max - min || 1;
-  const pts = data.map((v, i) => {
-    const x = pad + (i / (data.length - 1)) * (w - pad * 2);
+  const dates = opts && opts.dates ? opts.dates : (opts && opts.metricLabel ? trendSparklineDateLabels(data.length) : null);
+  const metricLabel = opts && opts.metricLabel ? opts.metricLabel : '';
+  const formatVal = opts && opts.formatVal ? opts.formatVal : v => String(v);
+  const pts = [];
+  const hitNodes = [];
+  data.forEach((v, i) => {
+    const x = pad + (i / Math.max(1, data.length - 1)) * (w - pad * 2);
     const y = h - pad - ((v - min) / rng) * (h - pad * 3);
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
+    pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+    if (metricLabel && dates) {
+      const tip = `抓取任务：${dates[i] || '—'} · ${metricLabel}：${formatVal(v)}`;
+      hitNodes.push(`<circle class="sparkline-hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="transparent" pointer-events="all"><title>${escapeHtmlStr(tip)}</title></circle>`);
+    }
   });
   const poly = pts.join(' ');
   const area = `${poly} ${(w - pad).toFixed(1)},${h} ${pad},${h}`;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="slg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity="0.15"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs><polygon points="${area}" fill="url(#slg${uid})"/><polyline points="${poly}" stroke="${color}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const hits = hitNodes.length ? hitNodes.join('') : '';
+  const cls = hits ? ' som-chart-svg--interactive' : '';
+  return `<svg class="som-chart-svg${cls}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="slg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity="0.15"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs><polygon points="${area}" fill="url(#slg${uid})"/><polyline points="${poly}" stroke="${color}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>${hits}</svg>`;
+}
+
+function rankedPagesTrendSparklineHTML(series, color, uid, metricLabel, taskDates) {
+  if (!series || !series.length) return '';
+  const formatVal = metricLabel === '平均最佳排名'
+    ? v => (Number.isInteger(v) ? String(v) : Number(v).toFixed(1))
+    : v => String(Math.round(v));
+  const dates = taskDates && taskDates.length === series.length
+    ? taskDates
+    : trendSparklineDateLabels(series.length);
+  const svg = sparklineSVG(series, color, uid, {
+    metricLabel,
+    formatVal,
+    dates,
+  });
+  return `<div class="som-chart som-chart--trend" role="img" aria-label="${escapeAttr(metricLabel + '趋势')}">${svg}</div>`;
 }
 
 /* ── Rank change bars (paired up/down columns) ── */
@@ -2596,8 +2975,13 @@ const SITE_INFRA_MODULE_A_HINT = '这是决定网站能否被搜索引擎「发�
 const ONPAGE_INFRA_DIMENSIONS = [
   { id: 'robots', label: 'Robots.txt 协议健康度', shortLabel: 'Robots', max: 10 },
   { id: 'sitemap', label: 'Sitemap 站点地图', shortLabel: 'Sitemap', max: 10 },
-  { id: 'https', label: '全站 HTTPS 安全', shortLabel: 'HTTPS', max: 10 },
+  { id: 'https', label: 'HTTPS 安全', shortLabel: 'HTTPS', max: 10 },
 ];
+
+/** 仪表盘「最近抓取」子表最多展示行数（完整数据见「我的关键词」「曝光页面」） */
+const DASHBOARD_CRAWL_OVERVIEW_MAX_ROWS = 10;
+
+const SITE_INFRA_SCANNING_HINT = '正在检测 Robots.txt、Sitemap 与首页 HTTPS，请稍候…';
 
 function dashboardInfraSevBadgeHTML(issueLevel) {
   return onPageWincherBadgeHTML(dashboardTaskSevKey({ issueLevel }));
@@ -2636,7 +3020,23 @@ function dashboardInfraDimDetailHTML(c) {
   return `<div class="dashboard-infra-dim-detail">${prob}${sug}</div>`;
 }
 
+function dashboardInfraScanningPlaceholderHTML() {
+  const rows = ONPAGE_INFRA_DIMENSIONS.map(def => `
+    <div class="dashboard-infra-dim dashboard-infra-dim--scanning" aria-hidden="true">
+      <div class="dashboard-infra-dim-sum dashboard-infra-dim-sum--static">
+        <span class="dashboard-infra-dim-status"><span class="badge badge-gray">检测中</span></span>
+        <strong class="dashboard-infra-dim-name">${escapeHtmlStr(def.label)}</strong>
+        <span class="dashboard-infra-dim-brief dashboard-infra-dim-brief--shimmer">—</span>
+      </div>
+    </div>`).join('');
+  return `<div class="dashboard-infra-scanning-wrap" role="status" aria-live="polite">
+    <p class="dashboard-infra-scanning-msg">${escapeHtmlStr(SITE_INFRA_SCANNING_HINT)}</p>
+    <div class="dashboard-infra-dim-list dashboard-infra-dim-list--scanning">${rows}</div>
+  </div>`;
+}
+
 function dashboardInfraChecksHTML(summary) {
+  if (state.dashboardInfraScanStatus === 'scanning') return dashboardInfraScanningPlaceholderHTML();
   const checks = (summary && summary.infraChecks) || [];
   const byId = {};
   checks.forEach(c => { if (c && c.id) byId[c.id] = c; });
@@ -2657,11 +3057,25 @@ function dashboardInfraChecksHTML(summary) {
   return `<div class="dashboard-infra-dim-list" aria-label="网站技术基础检测项">${rows}</div>`;
 }
 
+const DASHBOARD_NEW_PAGES_LIST_MAX = 10;
+
+function dashboardInfraScanCountReady() {
+  const sid = state.siteId;
+  if (state._infraScanSiteId !== sid) {
+    state._infraScanSiteId = sid;
+    const hasBaseline = !!(DB.dashboardSeoSummary && DB.dashboardSeoSummary.lastScanAt);
+    state.dashboardInfraScanCount = hasBaseline ? Math.max(state.dashboardInfraScanCount || 0, 2) : 0;
+  }
+  return (state.dashboardInfraScanCount || 0) >= 2;
+}
+
 function dashboardNewPagesNoticeHTML() {
+  if (!dashboardInfraScanCountReady()) return '';
   const pages = (DB.dashboardNewPages || []).filter(p => p && p.path);
   if (!pages.length) return '';
   const n = pages.length;
-  const list = pages.slice(0, 5).map(p => `
+  const visible = pages.slice(0, DASHBOARD_NEW_PAGES_LIST_MAX);
+  const list = visible.map(p => `
     <li class="dashboard-new-page-item">
       <div class="dashboard-new-page-main">
         ${p.title ? `<span class="dashboard-new-page-title">${escapeHtmlStr(p.title)}</span>` : ''}
@@ -2669,14 +3083,18 @@ function dashboardNewPagesNoticeHTML() {
       </div>
       ${p.foundAt ? `<time class="dashboard-new-page-at">${escapeHtmlStr(p.foundAt)}</time>` : ''}
     </li>`).join('');
-  const more = n > 5 ? `<p class="dashboard-new-pages-more">另有 ${n - 5} 个新页面未列出（示例）</p>` : '';
+  const scrollHint = n > visible.length
+    ? `<p class="dashboard-new-pages-scroll-hint">共 ${n} 个新页面，列表内可滚动查看（最多列出 ${DASHBOARD_NEW_PAGES_LIST_MAX} 条）</p>`
+    : '';
   return `
   <div class="panel dashboard-overview-module dashboard-new-pages-module">
     <div class="dashboard-module-hd"><span class="dashboard-module-hd-text">新页面提醒</span></div>
     <div class="dashboard-new-pages-inner">
       <p class="dashboard-new-pages-lead">检测到 <strong>${n}</strong> 个新页面，建议尽快完成单页常规检测与优化。</p>
-      <ul class="dashboard-new-pages-list">${list}</ul>
-      ${more}
+      <div class="dashboard-new-pages-list-scroll" role="region" aria-label="新页面列表">
+        <ul class="dashboard-new-pages-list">${list}</ul>
+      </div>
+      ${scrollHint}
       <p class="dashboard-seo-nudge dashboard-seo-nudge--inline">前往 <button type="button" class="btn-link dashboard-seo-nudge-link" onclick="goOnPageSeoFromDashboard()">页面整合优化</button> 查看并优化新页面。</p>
     </div>
   </div>`;
@@ -2705,13 +3123,14 @@ function dashboardSeoInfraDimBtnHTML(key, label, val, max) {
 
 function dashboardSeoOverviewSectionHTML() {
   const s = DB.dashboardSeoSummary;
-  const last = s.lastScanAt ? escapeHtmlStr(s.lastScanAt) : '—';
+  const scanning = state.dashboardInfraScanStatus === 'scanning';
+  const last = scanning ? '检测中…' : (s.lastScanAt ? escapeHtmlStr(s.lastScanAt) : '—');
   const infoBtn = (hint, label) => `<span class="dashboard-seo-info-wrap" tabindex="0">
     <button type="button" class="dashboard-seo-info-btn" aria-label="${escapeAttr(label || '查看说明')}">?</button>
     <span class="dashboard-seo-info-pop" role="tooltip">${typeof hint === 'string' ? escapeHtmlStr(hint) : hint}</span>
   </span>`;
   return `
-  <div class="panel dashboard-overview-module">
+  <div class="panel dashboard-overview-module${scanning ? ' dashboard-overview-module--infra-scanning' : ''}">
     <div class="dashboard-module-hd dashboard-module-hd--with-hint">
       <span class="dashboard-module-hd-text">${SITE_INFRA_MODULE_A_TITLE}</span>
       ${infoBtn(SITE_INFRA_MODULE_A_HINT, '网站健康度说明')}
@@ -2723,8 +3142,8 @@ function dashboardSeoOverviewSectionHTML() {
     </div>
     <div class="dashboard-seo-foot">
       <div class="dashboard-seo-foot-primary">
-        <button type="button" class="btn-default btn-sm" onclick="openDashboardSeoRescanConfirm()">重新检测</button>
-        <span class="dashboard-seo-last-scan"><span class="dashboard-seo-last-scan-lbl">上次检测</span><time class="dashboard-seo-last-scan-at" datetime="${escapeAttr(s.lastScanAt || '')}">${last}</time></span>
+        <button type="button" class="btn-default btn-sm" onclick="openDashboardSeoRescanConfirm()"${scanning ? ' disabled' : ''}>重新检测</button>
+        <span class="dashboard-seo-last-scan"><span class="dashboard-seo-last-scan-lbl">${scanning ? '检测状态' : '上次检测'}</span><time class="dashboard-seo-last-scan-at" datetime="${escapeAttr(s.lastScanAt || '')}">${last}</time></span>
       </div>
     </div>
   </div>`;
@@ -2946,24 +3365,73 @@ window.submitSiteRankCrawlBatch = function () {
   render();
 };
 
-function mergeRankedKwSampleRows(raw) {
+function rankedKwRankAtYMD(rankAt) {
+  const d = String(rankAt || '').trim().slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : '';
+}
+
+function rankedKwRowInDateRange(row, startStr, endStr) {
+  const ymd = rankedKwRankAtYMD(row.rankAt || row.at);
+  if (!ymd) return true;
+  return ymd >= startStr && ymd <= endStr;
+}
+
+/** 每条关键词在所选日期范围内取「最后一次成功抓取」记录（仅计入有排名的抓取，按排名时间最新） */
+function mergeRankedKwLastCrawlRows(raw, opts) {
+  const start = (opts && opts.start) || state.dateRangeStart;
+  const end = (opts && opts.end) || state.dateRangeEnd;
   const arr = Array.isArray(raw) ? raw.slice() : [];
   const map = new Map();
   arr.forEach(row => {
+    if (!rankedKwRowInDateRange(row, start, end)) return;
     const eng = String(row.engine || '—');
     const kw = String(row.kw || '').trim();
     if (!kw) return;
-    const k = `${eng}||${kw}`;
     const at = String(row.rankAt || row.at || '');
     const rnk = row.rank != null && !Number.isNaN(Number(row.rank)) ? Number(row.rank) : null;
+    if (rnk == null) return;
+    const k = `${eng}||${kw}`;
     const prev = map.get(k);
-    if (!prev) map.set(k, { kw, rank: rnk, rankAt: at, engine: eng });
-    else {
-      const prevAt = String(prev.rankAt || '');
-      if (at > prevAt) map.set(k, { kw, rank: rnk, rankAt: at, engine: eng });
+    if (!prev) {
+      map.set(k, { kw, rank: rnk, rankAt: at, engine: eng });
+      return;
     }
+    const prevAt = String(prev.rankAt || '');
+    if (at > prevAt) map.set(k, { kw, rank: rnk, rankAt: at, engine: eng });
   });
   return Array.from(map.values()).sort((a, b) => String(a.kw).localeCompare(String(b.kw), 'zh-CN'));
+}
+
+function getRankedKwRowsWithRankOnLastCrawl(raw, opts) {
+  return mergeRankedKwLastCrawlRows(raw, opts);
+}
+
+function computeRankedLandingPageDerived(p) {
+  const key = resolveRankedKwSamplesKey(p.path);
+  const raw = (DB.onPageRankedKwSamples && DB.onPageRankedKwSamples[key]) || [];
+  const withRank = getRankedKwRowsWithRankOnLastCrawl(raw);
+  if (!withRank.length) {
+    return { ...p, rankedKwCount: 0, bestKw: p.bestKw || '', rank: p.rank };
+  }
+  const best = withRank.slice().sort((a, b) => {
+    const dr = a.rank - b.rank;
+    if (dr !== 0) return dr;
+    return String(a.kw).localeCompare(String(b.kw), 'zh-CN');
+  })[0];
+  return {
+    ...p,
+    rankedKwCount: withRank.length,
+    bestKw: best.kw,
+    rank: best.rank,
+  };
+}
+
+function enrichRankedLandingPageRow(p) {
+  if (!p || !p.path) return p;
+  const key = resolveRankedKwSamplesKey(p.path);
+  const raw = DB.onPageRankedKwSamples && DB.onPageRankedKwSamples[key];
+  if (raw && raw.length) return computeRankedLandingPageDerived(p);
+  return p;
 }
 
 function dashboardTaskSupportsEdit(t) {
@@ -4255,10 +4723,17 @@ function relatedKwPickToggle(checkbox, encodedKw) {
 
 /* ── 产研：近期改动页面（功能逻辑说明入口与抽屉内跳转） ── */
 const LOGIC_SPEC_SHEET_URL = 'https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNQlK4J88yRJ6SRZ89?scode=ADEAhgd4AAg02zkiNGAHUAbAYSAL8&tab=mxiezk';
+/** 与 index.html 同目录，供「常规检测」逻辑说明引用 */
+const LOGIC_ONPAGE_DIAG_SPEC_URL = 'SEO测评维度.html';
 
 /** 仅在说明 AI 提示词、测评维度时于句末追加 */
 function logicHelpSpecDocRef() {
   return `（详见<a href="${LOGIC_SPEC_SHEET_URL}" target="_blank" rel="noopener noreferrer">SEO / AI 规范表</a>）`;
+}
+
+/** 常规检测规则与字段细则（本地规范页） */
+function logicHelpOnPageDiagSpecRef() {
+  return `（详见<a href="${LOGIC_ONPAGE_DIAG_SPEC_URL}" target="_blank" rel="noopener noreferrer">SEO测评维度</a>）`;
 }
 
 /** 本期交付范围（功能逻辑说明与可跳转页面） */
@@ -4376,6 +4851,7 @@ const LOGIC_CHANGE_PAGE_DEFS = LOGIC_DRAWER_ACTIVE_DEFS;
 
 /** 页面整合优化 · 页面详情抽屉各页签（三级目录；列表逻辑在二级「页面整合优化」） */
 const LOGIC_DRAWER_PAGE_SEO_CHILDREN = [
+  { id: 'search-page-seo--drawer', navLabel: '页面详情（顶栏）', navSort: 211 },
   { id: 'search-page-seo--diag', navLabel: '常规检测', navSort: 212 },
   { id: 'search-page-seo--ai', navLabel: 'AI 测评', navSort: 213 },
   { id: 'search-page-seo--kw', navLabel: '关键词', navSort: 214 },
@@ -6211,14 +6687,14 @@ function onPageWincherModelMergedWithAiAudit(baseModel, row) {
   bump('meta', 'Meta 目标词', mod('tdk'));
   bump('headings', 'H1 目标词', mod('headings'));
   bump('body', '文题一致', mod('body'));
-  bump('media', 'Alt 非空', mod('images'));
+  bump('media', 'Alt非空', mod('images'));
   const sch = mod('schema');
   const soc = mod('social');
   let techMod = null;
   if (sch && sch.aiScore != null && soc && soc.aiScore != null) {
     techMod = Number(sch.aiScore) <= Number(soc.aiScore) ? sch : soc;
   } else techMod = sch || soc;
-  bump('code', 'JSON-LD 结构', techMod);
+  bump('code', '结构化数据', techMod);
   return { groups, extra };
 }
 
@@ -6352,6 +6828,15 @@ function onPageDiagToolbarHTML(row, model) {
 }
 
 function onPageWincherDiagnoseHTML(row) {
+  const idx = (DB.onPageSeoPages || []).indexOf(row);
+  const scanning = idx >= 0 && state.onPageSeoAuditRefreshing && state.onPageSeoAuditRefreshing[idx];
+  if (scanning) {
+    return `<div class="onpage-audit-scanning" role="status" aria-live="polite">
+      <div class="onpage-audit-scanning-ring" aria-hidden="true"></div>
+      <p class="onpage-audit-scanning-txt">正在检测当前页面…</p>
+      <p class="onpage-audit-scanning-sub">检测频率以技术评估为准，演示约 0.7 秒</p>
+    </div>`;
+  }
   const base = onPageWincherCollectModel(row);
   const model = onPageWincherModelMergedWithAiAudit(base, row);
   return onPageDiagToolbarHTML(row, model) + onPageWincherDiagnoseFilteredHTML(model, row);
@@ -7981,7 +8466,64 @@ const ONPAGE_SCHEMA_TYPE_HELP = {
     text: '适用于博客或新闻类文章，帮助搜索引擎理解标题、作者、发布时间等信息，更容易展示富摘要。',
     img: 'https://developers.google.com/static/search/docs/images/articles01.png',
   },
+  'jsonld-product': {
+    title: '产品信息',
+    text: '适用于产品详情页，标注名称、图片、价格区间等，便于商品类富摘要。',
+    img: 'https://developers.google.com/static/search/docs/images/product-rich-result.png',
+  },
+  'jsonld-other': {
+    title: '其他',
+    text: '页面存在未纳入白名单的 Schema 类型时归入此类，便于研发核对与补全映射。',
+    img: '',
+  },
 };
+
+/** 结构化类型白名单（与 SEO / AI 规范表一致，演示子集） */
+const ONPAGE_SCHEMA_SLICE_DEFS = [
+  { slice: 'jsonld-org', label: '机构信息', types: ['Organization'] },
+  { slice: 'jsonld-web', label: '网站信息', types: ['WebSite'] },
+  { slice: 'jsonld-blog', label: '博客文章', types: ['BlogPosting', 'Article', 'NewsArticle'] },
+  { slice: 'jsonld-product', label: '产品信息', types: ['Product'] },
+  { slice: 'jsonld-other', label: '其他', types: [] },
+];
+
+function resolveOnPageSchemaTabs(row) {
+  const slices = new Set(['jsonld-org', 'jsonld-web']);
+  if (/\/blog\//i.test(String(row.path || ''))) slices.add('jsonld-blog');
+  if (row.pageType === 'product-detail' || /-pd\d+\.html$/i.test(String(row.path || ''))) slices.add('jsonld-product');
+  if (row._schemaHasOther || /\/features\//i.test(String(row.path || ''))) slices.add('jsonld-other');
+  return ONPAGE_SCHEMA_SLICE_DEFS.filter(d => slices.has(d.slice));
+}
+
+function getOnPageSchemaSnippetsForSlice(row, slice, dom) {
+  row.onPageSchemaJsonOverride = row.onPageSchemaJsonOverride && typeof row.onPageSchemaJsonOverride === 'object' ? row.onPageSchemaJsonOverride : {};
+  const key = slice;
+  if (row.onPageSchemaJsonOverride[key + '__multi']) {
+    try {
+      const arr = JSON.parse(row.onPageSchemaJsonOverride[key + '__multi']);
+      if (Array.isArray(arr)) return arr.map(String);
+    } catch (e) { /* fall through */ }
+  }
+  return [getOnPageSchemaJsonText(row, slice, dom)];
+}
+
+function buildOnPageAllSchemaEditText(row, dom) {
+  if (row.onPageSchemaAllOverride) return row.onPageSchemaAllOverride;
+  const tabs = resolveOnPageSchemaTabs(row);
+  const blocks = [];
+  tabs.forEach(t => {
+    const snippets = getOnPageSchemaSnippetsForSlice(row, t.slice, dom);
+    snippets.forEach((json, idx) => {
+      const suffix = snippets.length > 1 ? ` #${idx + 1}` : '';
+      blocks.push({
+        label: t.label + suffix,
+        slice: t.slice,
+        json: typeof json === 'string' ? json : JSON.stringify(json, null, 2),
+      });
+    });
+  });
+  return JSON.stringify(blocks, null, 2);
+}
 
 function getOnPageSchemaSliceDefaultJson(row, slice, dom) {
   const siteName = String(site().name || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
@@ -7991,6 +8533,12 @@ function getOnPageSchemaSliceDefaultJson(row, slice, dom) {
   }
   if (slice === 'jsonld-web') {
     return `{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "${siteName}",\n  "url": "https://${dom}/"\n}`;
+  }
+  if (slice === 'jsonld-product') {
+    return `{\n  "@context": "https://schema.org",\n  "@type": "Product",\n  "name": "${headline}"\n}`;
+  }
+  if (slice === 'jsonld-other') {
+    return `{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "${headline}"\n}`;
   }
   return `{\n  "@context": "https://schema.org",\n  "@type": "BlogPosting",\n  "headline": "${headline}",\n  "datePublished": ""\n}`;
 }
@@ -8002,8 +8550,8 @@ function getOnPageSchemaJsonText(row, slice, dom) {
 }
 
 function onPageSchemaSliceLabelZh(slice) {
-  const m = { 'jsonld-org': '机构信息', 'jsonld-web': '网站信息', 'jsonld-blog': '博客文章' };
-  return m[slice] || '结构化信息';
+  const d = ONPAGE_SCHEMA_SLICE_DEFS.find(x => x.slice === slice);
+  return d ? d.label : '结构化信息';
 }
 
 function onPageSchemaSubtabWithInfoHTML(slice, label, isActive) {
@@ -8019,25 +8567,41 @@ function onPageSchemaSubtabWithInfoHTML(slice, label, isActive) {
 
 window.saveOnPageSchemaJsonFromModal = function () {
   if (!siteLeadongSaasAuthorized()) {
-    toast('需先完成领动 SaaS 独立站授权绑定后才可保存（示例）', 'error');
+    toast('需先完成领动 SaaS 独立站授权绑定后才可保存至领动 SaaS 后台（示例）', 'error');
     return;
   }
   const idx = state.onPageSeoDrawerIndex;
   const row = idx != null ? DB.onPageSeoPages[idx] : null;
   const el = $('modalOnPageSchemaJson');
   if (!row || !el) return;
-  const slice = state.onPageSchemaSlice || 'jsonld-org';
   const raw = String(el.value || '').trim();
+  let blocks;
   try {
-    JSON.parse(raw);
+    blocks = JSON.parse(raw);
+    if (!Array.isArray(blocks)) throw new Error('not array');
+    blocks.forEach(b => {
+      if (b && b.json != null) JSON.parse(typeof b.json === 'string' ? b.json : JSON.stringify(b.json));
+    });
   } catch (e) {
-    toast('内容格式有误：请检查结构化数据片段是否为合法 JSON', 'error');
+    toast('内容格式有误：须为 JSON 数组，每项含 label、slice、json 字段', 'error');
     return;
   }
+  row.onPageSchemaAllOverride = raw;
   row.onPageSchemaJsonOverride = row.onPageSchemaJsonOverride && typeof row.onPageSchemaJsonOverride === 'object' ? row.onPageSchemaJsonOverride : {};
-  row.onPageSchemaJsonOverride[slice] = raw;
+  const bySlice = {};
+  blocks.forEach(b => {
+    const sl = b.slice || 'jsonld-other';
+    if (!bySlice[sl]) bySlice[sl] = [];
+    const j = typeof b.json === 'string' ? b.json : JSON.stringify(b.json, null, 2);
+    bySlice[sl].push(j);
+  });
+  Object.keys(bySlice).forEach(sl => {
+    const arr = bySlice[sl];
+    if (arr.length === 1) row.onPageSchemaJsonOverride[sl] = arr[0];
+    else row.onPageSchemaJsonOverride[sl + '__multi'] = JSON.stringify(arr);
+  });
   closeModal();
-  toast('已保存结构化数据（示例）');
+  toast('已保存本页全部结构化数据并同步至领动 SaaS 后台（示例）');
   render();
   renderDrawer();
 };
@@ -8463,6 +9027,12 @@ function onPageIssueCellHTML(r) {
   return escapeHtmlStr(String(r.issues));
 }
 
+function isKwInMyLibrary(kw) {
+  if (!kw || !Array.isArray(DB.myKeywords)) return false;
+  const k = String(kw).trim().toLowerCase();
+  return DB.myKeywords.some((x) => String(x.word || x).trim().toLowerCase() === k);
+}
+
 function onPageKwKebabHTML(listId, rowIdx, kw, inLibrary) {
   const id = `okw-${listId}-${rowIdx}`;
   const kwAttr = escapeAttr(kw);
@@ -8490,7 +9060,7 @@ function onPageSchemaKebabHTML(key) {
 }
 
 function onPageSeoDrawerKwRowHTML(row) {
-  const kws = parseMultiKw(row.keyword);
+  const kws = parseMultiKw(row.keyword).slice(0, ONPAGE_KW_MAX);
   let disp;
   if (kws.length) {
     disp = kws.map((k, i) => {
@@ -8777,7 +9347,7 @@ function onPageSeoDrawerTabBody(row) {
         <td style="font-size:12px;color:var(--text-2);">${escapeHtmlStr(rn.engine)}</td>
         <td style="font-size:12px;color:var(--text-2);">${escapeHtmlStr(rn.rankDate)}</td>
         <td style="font-size:12px;" title="${densTitle}">${escapeHtmlStr(dens)}</td>
-        <td class="onpage-actions-td">${onPageKwKebabHTML('rank', ri, rn.kw, rn.inLibrary)}</td>
+        <td class="onpage-actions-td">${onPageKwKebabHTML('rank', ri, rn.kw, rn.inLibrary || isKwInMyLibrary(rn.kw))}</td>
       </tr>`;
     }).join('');
     const gscBody = gscRows.map((g, gi) => {
@@ -8790,17 +9360,17 @@ function onPageSeoDrawerTabBody(row) {
         <td style="font-size:12px;">${escapeHtmlStr(g.ctr)}</td>
         <td>${g.rank != null ? `<span class="badge badge-gray">${g.rank}</span>` : '—'}</td>
         <td style="font-size:12px;" title="${densTitle}">${escapeHtmlStr(dens)}</td>
-        <td class="onpage-actions-td">${onPageKwKebabHTML('gsc', gi, g.kw, false)}</td>
+        <td class="onpage-actions-td">${onPageKwKebabHTML('gsc', gi, g.kw, isKwInMyLibrary(g.kw))}</td>
       </tr>`;
     }).join('');
     const rankBlock = `
       <table class="data-table onpage-mini-table">
-        <thead><tr>${onPageThWithHint('关键词', '与当前页面一起被监测或关联的搜索词。', '')}${onPageThWithHint('排名', '该词在搜索结果中的大致位置；数字越小越靠前。', 'style="width:72px;"')}${onPageThWithHint('搜索引擎', '这条排名数据来自哪个搜索引擎及地区。', 'style="width:120px;"')}${onPageThWithHint('排名日期', '我们最近一次抓到该排名的时间。', 'style="width:104px;"')}${onPageThWithHint('密度', '该词在当前页可解析文本中的近似出现占比，用于判断露出是否过低或偏高（示例）。', 'style="width:72px;"')}<th style="width:52px;text-align:right;">操作</th></tr></thead>
+        <thead><tr>${onPageThWithHint('关键词', '与当前页面一起被监测的搜索词。', '')}${onPageThWithHint('排名', '该词在搜索结果中的位置。', 'style="width:72px;"')}${onPageThWithHint('搜索引擎', '这条排名数据来自哪个搜索引擎及地区。', 'style="width:120px;"')}${onPageThWithHint('排名日期', '最近一次抓到该排名的时间。', 'style="width:104px;"')}${onPageThWithHint('密度', '该词在当前页可解析文本中的近似出现占比，用于判断露出是否过低或偏高。', 'style="width:72px;"')}<th style="width:52px;text-align:right;">操作</th></tr></thead>
         <tbody>${rankBody}</tbody>
       </table>`;
     const gscTable = `
       <table class="data-table onpage-mini-table">
-        <thead><tr>${onPageThWithHint('关键词', '用户在所选日期区间内、通过 Google 搜索看到您这条链接时使用的查询词。', '')}${onPageThWithHint('曝光', '所选日期区间内，您的链接在搜索结果中的展示总次数（汇总）。', 'style="width:72px;"')}${onPageThWithHint('点击', '所选日期区间内，用户从搜索结果点击进入您网站的总次数（汇总）。', 'style="width:56px;"')}${onPageThWithHint('CTR', '所选日期区间内，点击次数占曝光次数的比例（汇总）。', 'style="width:56px;"')}${onPageThWithHint('排名', '所选日期区间内，该查询下您的链接平均排名（示例）。', 'style="width:72px;"')}${onPageThWithHint('密度', '该查询词在当前页可解析文本中的近似占比（示例）。', 'style="width:72px;"')}<th style="width:52px;text-align:right;">操作</th></tr></thead>
+        <thead><tr>${onPageThWithHint('关键词', '用户在所选日期区间内、通过 Google 搜索看到您这条链接时使用的查询词。', '')}${onPageThWithHint('曝光', '所选日期区间内，此页面链接在搜索结果中的展示总次数。', 'style="width:72px;"')}${onPageThWithHint('点击', '所选日期区间内，用户从搜索结果点击进入您网站的总次数。', 'style="width:56px;"')}${onPageThWithHint('CTR', '所选日期区间内，点击次数占曝光次数的比例。', 'style="width:56px;"')}${onPageThWithHint('排名', '所选日期区间内，该查询下您的链接平均排名。', 'style="width:72px;"')}${onPageThWithHint('密度', '该查询词在当前页可解析文本中的近似占比。', 'style="width:72px;"')}<th style="width:52px;text-align:right;">操作</th></tr></thead>
         <tbody>${gscBody}</tbody>
       </table>`;
     const gscBlock = hasGsc ? gscTable : onPageGscUnauthorizedPaneHTML();
@@ -8815,7 +9385,7 @@ function onPageSeoDrawerTabBody(row) {
     const recBody = recRows.map((rn, rj) => {
       const rt = escapeAttr(rn.reason);
       const rel = rn.relevance != null ? `${rn.relevance}%` : '—';
-      const inLib = parseMultiKw(row.keyword).some(k => String(k).toLowerCase() === String(rn.kw).toLowerCase());
+      const inLib = isKwInMyLibrary(rn.kw) || parseMultiKw(row.keyword).some(k => String(k).toLowerCase() === String(rn.kw).toLowerCase());
       return `<tr>
         <td style="font-size:13px;"><span class="td-kw" title="${rt}">${escapeHtmlStr(rn.kw)}</span></td>
         <td style="font-size:12px;white-space:nowrap;">${escapeHtmlStr(rn.intent || '—')}</td>
@@ -8839,8 +9409,8 @@ function onPageSeoDrawerTabBody(row) {
       </table>
       <p class="onpage-kw-rec-foot" title="${recReasonDefault}">以上为 AI 结合当前页内容给出的关键词拓展示例；正式环境将接入实时数据与模型策略。</p>`;
     const recommendEmpty = `<div class="onpage-kw-rec-empty">
-      <p class="onpage-kw-rec-empty-txt">点击下方 <strong>AI 推荐</strong>，由 AI 结合当前页内容与上方统计区间生成可监控关键词（示例）。</p>
-      <button type="button" class="btn-dash-ai btn-sm" onclick="onPageKwRecommendFetch()" title="${recReasonDefault}">${AI_REC_SVG}<span class="btn-dash-ai-lbl">AI 推荐</span><span class="ai-rec-pill">示例</span></button>
+      <p class="onpage-kw-rec-empty-txt">点击下方 <strong>AI 推荐</strong>，由 AI 结合当前页内容与上方统计区间生成可监控关键词。</p>
+      <button type="button" class="btn-dash-ai btn-sm" onclick="onPageKwRecommendFetch()" title="${recReasonDefault}">${AI_REC_SVG}<span class="btn-dash-ai-lbl">AI 推荐</span></button>
     </div>`;
     const recommendBlock = state.onPageKwRecommendLoaded ? recommendTable : recommendEmpty;
     const kwMain = mode === 'recommend'
@@ -8870,34 +9440,22 @@ function onPageSeoDrawerTabBody(row) {
   }
 
   if (tab === 'schema') {
-    const isBlog = row.path.indexOf('blog') >= 0;
+    const tabs = resolveOnPageSchemaTabs(row);
     let slice = state.onPageSchemaSlice || 'jsonld-org';
-    const allowed = ['jsonld-org', 'jsonld-web', ...(isBlog ? ['jsonld-blog'] : [])];
-    if (!allowed.includes(slice)) {
-      slice = 'jsonld-org';
-      state.onPageSchemaSlice = 'jsonld-org';
+    if (!tabs.some(t => t.slice === slice)) {
+      slice = tabs[0] ? tabs[0].slice : 'jsonld-org';
+      state.onPageSchemaSlice = slice;
     }
-    const subTabs = [
-      onPageSchemaSubtabWithInfoHTML('jsonld-org', '机构信息', slice === 'jsonld-org'),
-      onPageSchemaSubtabWithInfoHTML('jsonld-web', '网站信息', slice === 'jsonld-web'),
-      ...(isBlog ? [onPageSchemaSubtabWithInfoHTML('jsonld-blog', '博客文章', slice === 'jsonld-blog')] : []),
-    ].join('');
-    const jsonShown = escapeHtmlStr(getOnPageSchemaJsonText(row, slice, dom));
-    let pane = '';
-    if (slice === 'jsonld-org') {
-      pane = `<pre class="onpage-schema-snippet">${jsonShown}</pre>`;
-    } else if (slice === 'jsonld-web') {
-      pane = `<pre class="onpage-schema-snippet">${jsonShown}</pre>`;
-    } else {
-      pane = isBlog
-        ? `<pre class="onpage-schema-snippet">${jsonShown}</pre>`
-        : `<p class="onpage-schema-empty">当前页面未检测到博客文章类结构化数据（示例）。</p>`;
-    }
+    const subTabs = tabs.map(t => onPageSchemaSubtabWithInfoHTML(t.slice, t.label, slice === t.slice)).join('');
+    const snippets = getOnPageSchemaSnippetsForSlice(row, slice, dom);
+    const pane = snippets.length
+      ? `<div class="onpage-schema-snippet-group">${snippets.map(j => `<pre class="onpage-schema-snippet">${escapeHtmlStr(j)}</pre>`).join('')}</div>`
+      : `<p class="onpage-schema-empty">当前类型下暂无可展示的结构化片段（示例）。</p>`;
     return `
     <div class="onpage-drawer-tab-pane">
       <div class="onpage-aitdk-section-head onpage-aitdk-section-head--row" style="margin-bottom:10px;">
         <h3 class="onpage-aitdk-section-title" style="margin:0;">结构化数据</h3>
-        <button type="button" class="btn-primary btn-sm" onclick="openModal('onpage-schema-json')">编辑</button>
+        <button type="button" class="btn-primary btn-sm" onclick="openModal('onpage-schema-json')">编辑本页全部</button>
       </div>
       <div class="onpage-subtabs onpage-subtabs--schema">${subTabs}</div>
       ${pane}
@@ -9010,13 +9568,9 @@ function onPageSeoDrawerHTML(row) {
 }
 
 window.saveOnPageKwFromModal = function () {
-  if (!siteLeadongSaasAuthorized()) {
-    toast('需先完成领动 SaaS 独立站授权绑定后才可保存（示例）', 'error');
-    return;
-  }
   const idx = state.onPageSeoDrawerIndex;
   if (idx == null || !DB.onPageSeoPages[idx]) return;
-  const kws = Array.isArray(state.onPageKwModalDraft) ? state.onPageKwModalDraft.filter(Boolean) : [];
+  const kws = Array.isArray(state.onPageKwModalDraft) ? state.onPageKwModalDraft.filter(Boolean).slice(0, ONPAGE_KW_MAX) : [];
   if (!kws.length) {
     toast('请至少添加一个目标词', 'error');
     return;
@@ -9029,10 +9583,6 @@ window.saveOnPageKwFromModal = function () {
 };
 
 window.onPageKwModalAddOne = function () {
-  if (!siteLeadongSaasAuthorized()) {
-    toast('需先完成领动 SaaS 独立站授权绑定后才可编辑（示例）', 'error');
-    return;
-  }
   const el = $('modalOnPageKwInput');
   const raw = (el && el.value ? el.value : '').trim();
   if (!raw) {
@@ -9040,10 +9590,15 @@ window.onPageKwModalAddOne = function () {
     return;
   }
   if (!Array.isArray(state.onPageKwModalDraft)) state.onPageKwModalDraft = [];
+  if (state.onPageKwModalDraft.length >= ONPAGE_KW_MAX) {
+    toast(`每页最多 ${ONPAGE_KW_MAX} 个目标词`, 'error');
+    return;
+  }
   const parts = parseMultiKw(raw);
   let added = 0;
   parts.forEach(p => {
     if (!p) return;
+    if (state.onPageKwModalDraft.length >= ONPAGE_KW_MAX) return;
     if (state.onPageKwModalDraft.includes(p)) return;
     state.onPageKwModalDraft.push(p);
     added += 1;
@@ -9059,10 +9614,6 @@ window.onPageKwModalAddOne = function () {
 };
 
 window.onPageKwModalRemoveChip = function (i) {
-  if (!siteLeadongSaasAuthorized()) {
-    toast('需先完成领动 SaaS 独立站授权绑定后才可编辑（示例）', 'error');
-    return;
-  }
   if (!Array.isArray(state.onPageKwModalDraft)) return;
   state.onPageKwModalDraft.splice(i, 1);
   state.modal = 'onpage-drawer-kw';
@@ -9110,13 +9661,29 @@ window.onPageCloseTabsMore = function () {
 
 window.addPageKwToLibraryFromStr = function (kw) {
   if (!kw) return;
-  toast('已加入我的关键词库（示例）：' + kw);
+  if (!Array.isArray(DB.myKeywords)) DB.myKeywords = [];
+  if (DB.myKeywords.some((k) => (k.word || k) === kw)) {
+    toast('该词已在关键词库中', 'error');
+    return;
+  }
+  DB.myKeywords.push({ word: kw, source: 'onpage-ranked' });
+  toast('已加入我的关键词库：' + kw);
 };
 
 window.setPageTargetKwFromStr = function (kw) {
   const idx = state.onPageSeoDrawerIndex;
-  if (!kw || idx == null || !DB.onPageSeoPages[idx]) return;
-  DB.onPageSeoPages[idx].keyword = kw;
+  const row = idx != null ? DB.onPageSeoPages[idx] : null;
+  if (!kw || !row) return;
+  const existing = parseMultiKw(row.keyword);
+  if (existing.includes(kw)) {
+    toast('该词已在当前页目标词中', 'error');
+    return;
+  }
+  if (existing.length >= ONPAGE_KW_MAX) {
+    toast(`每页最多 ${ONPAGE_KW_MAX} 个目标词，请先删除后再添加`, 'error');
+    return;
+  }
+  row.keyword = existing.length ? joinMultiKw([...existing, kw]) : kw;
   toast('已设为当前页目标词');
   render();
   renderDrawer();
@@ -9125,17 +9692,13 @@ window.setPageTargetKwFromStr = function (kw) {
 window.addPageKwToLibraryFromDrawer = function (btn) {
   const kw = btn.getAttribute('data-kw');
   if (!kw) return;
-  toast('已加入我的关键词库（示例）：' + kw);
+  addPageKwToLibraryFromStr(kw);
 };
 
 window.setPageTargetKwFromDrawer = function (btn) {
   const kw = btn.getAttribute('data-kw');
-  const idx = state.onPageSeoDrawerIndex;
-  if (!kw || idx == null || !DB.onPageSeoPages[idx]) return;
-  DB.onPageSeoPages[idx].keyword = kw;
-  toast('已设为当前页目标词');
-  render();
-  renderDrawer();
+  if (!kw) return;
+  setPageTargetKwFromStr(kw);
 };
 
 window.openOnPageSeoDrawer = function (idx) {
@@ -9157,15 +9720,15 @@ window.openOnPageSeoDrawer = function (idx) {
   state.onPageLinkSub = 'in';
   state.onPageLinkRelFilter = null;
   const pg = DB.onPageSeoPages[idx];
-  const isBlog = pg && pg.path.indexOf('blog') >= 0;
-  const allowed = ['jsonld-org', 'jsonld-web', ...(isBlog ? ['jsonld-blog'] : [])];
+  const schemaTabs = pg ? resolveOnPageSchemaTabs(pg) : [];
   let sl = state.onPageSchemaSlice;
-  if (!allowed.includes(sl) || sl === 'gaps' || sl === 'preview') {
-    sl = isBlog ? 'jsonld-blog' : 'jsonld-org';
+  if (!schemaTabs.some(t => t.slice === sl) || sl === 'gaps' || sl === 'preview') {
+    sl = schemaTabs[0] ? schemaTabs[0].slice : 'jsonld-org';
   }
   state.onPageSchemaSlice = sl;
   $('drawerOverlay').style.display = 'block';
   renderDrawer();
+  if (!state.onPageSeoAuditRefreshing[idx]) onPageSeoRerunAudit(idx);
 };
 
 /** 列表 HTTP 状态徽章（示例） */
@@ -9219,13 +9782,18 @@ function onPageSeoToolbarFilterDdHTML(statusCodes) {
 /** 搜索 › On-Page SEO */
 function pageOnPageSEO() {
   ensureOnPageSeoTableState();
-  const rows = DB.onPageSeoPages;
-  const sorted = sortOnPageSeoPageRows(rows);
+  const sitemapOk = siteOnPageSitemapDetected();
+  const pages = onPageSeoPagesForCurrentSite();
   const colIds = state.onPageSeoColOrder.filter(id => !state.onPageSeoColHidden[id]);
-  const statusCodes = collectOnPageSeoHttpStatuses(rows);
-  const thRow = colIds.map((id) => {
+  const statusCodes = collectOnPageSeoHttpStatuses(pages);
+  const { rows: pagedRows, total, page, totalPages, pageSize } = onPageSeoListPagedSlice();
+  const bulkN = onPageSeoBulkSelectedCount();
+  const thRow = onPageSeoBulkCheckboxThHTML() + colIds.map((id) => {
     const a = onPageSeoThAttrs(id);
     const lab = ONPAGE_SEO_COL_LABELS[id];
+    if (id === 'index') {
+      return `<th style="${a.style}">${onPageSeoIndexThInnerHTML()}</th>`;
+    }
     if (ONPAGE_SEO_SORTABLE.has(id)) {
       const btn = tableSortThBtnHTML(lab, a.hint, id, state.onPageSeoSortKey, state.onPageSeoSortDir, 'sortOnPageSeoCol');
       return `<th style="${a.style}" class="th-sort-th"><div class="onpage-seo-th-inner onpage-seo-th-inner--sort">${btn}</div></th>`;
@@ -9233,10 +9801,24 @@ function pageOnPageSEO() {
     const hint = a.hint ? onPageThHintLabelHTML(lab, a.hint) : escapeHtmlStr(lab);
     return `<th style="${a.style}"><div class="onpage-seo-th-inner">${hint}</div></th>`;
   }).join('');
-  const rowHtml = sorted.map(({ r, i }) => {
+
+  if (!sitemapOk) {
+    return `
+  <div class="panel onpage-seo-table-panel onpage-seo-table-panel--empty" style="overflow:visible;">
+    ${onPageSeoListEmptyPaneHTML('no-sitemap')}
+  </div>`;
+  }
+  if (!pages.length) {
+    return `
+  <div class="panel onpage-seo-table-panel onpage-seo-table-panel--empty" style="overflow:visible;">
+    ${onPageSeoListEmptyPaneHTML('no-pages')}
+  </div>`;
+  }
+
+  const rowHtml = pagedRows.length ? pagedRows.map(({ r, i }) => {
     const rt = Array.isArray(r.tags) ? r.tags : [];
     const http = r.httpStatus != null ? Number(r.httpStatus) : 200;
-    const cells = colIds.map(id => {
+    const cells = onPageSeoBulkCheckboxTdHTML(i) + colIds.map(id => {
       let c = '';
       if (id === 'page') c = onPageSeoPageTitleCellHTML(r, i);
       else if (id === 'keyword') c = onPageSeoKeywordCellHTML(r, i);
@@ -9254,13 +9836,34 @@ function pageOnPageSEO() {
           <tr class="onpage-seo-row onpage-seo-row--click${rowBusy}" data-i="${i}" data-http="${http}" data-page-type="${escapeAttr(pt)}" data-tags="${escapeAttr(tagsPipe)}" onclick="openOnPageSeoDrawer(${i})">
             ${cells}
           </tr>`;
-  }).join('');
+  }).join('')
+    : `<tr><td colspan="${colIds.length + 1}" style="text-align:center;padding:28px;color:var(--text-3);">无匹配页面，请调整搜索或筛选条件</td></tr>`;
+  const footer = total > 0 ? `
+    <div class="article-list-footer onpage-seo-list-footer">
+      <div class="article-list-footer-left">
+        <span class="article-list-footer-meta">共 ${total} 条</span>
+        <span class="article-list-page-size-label">每页</span>
+        <select class="article-list-page-size" onchange="setOnPageSeoListPageSize(+this.value)">
+          <option value="20"${pageSize === 20 ? ' selected' : ''}>20</option>
+          <option value="50"${pageSize === 50 ? ' selected' : ''}>50</option>
+          <option value="100"${pageSize === 100 ? ' selected' : ''}>100</option>
+        </select>
+        <span class="article-list-page-size-label">条</span>
+      </div>
+      <div class="article-list-pager">
+        <button type="button" class="btn-default" style="height:28px;padding:0 8px;" ${page <= 1 ? 'disabled' : ''} onclick="setOnPageSeoListPage(${page - 1})">‹</button>
+        <button type="button" class="btn-primary" style="height:28px;padding:0 10px;">${page}</button>
+        <span style="font-size:12px;color:var(--text-3);padding:0 4px;">/ ${totalPages}</span>
+        <button type="button" class="btn-default" style="height:28px;padding:0 8px;" ${page >= totalPages ? 'disabled' : ''} onclick="setOnPageSeoListPage(${page + 1})">›</button>
+      </div>
+    </div>` : '';
   return `
   <div class="onpage-seo-toolbar panel onpage-seo-toolbar--panel" style="margin-bottom:12px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
     <div class="onpage-seo-search-wrap" style="display:flex;align-items:stretch;gap:10px;min-width:200px;flex:1;max-width:480px;">
-      ${onPageSeoSearchInnerHTML({ inputId: 'onpageSeoFilter', oninput: 'filterOnPageSeoRows(this.value)' })}
+      ${onPageSeoSearchInnerHTML({ inputId: 'onpageSeoFilter', value: state.onPageSeoFilterQuery || '', oninput: 'filterOnPageSeoRows(this.value)' })}
     </div>
     ${onPageSeoToolbarFilterDdHTML(statusCodes)}
+    ${bulkN ? `<button type="button" class="btn-default btn-sm onpage-bulk-audit-btn" onclick="onPageBulkRunPageAudit()">页面检测</button><span class="onpage-bulk-sel-meta">已选 ${bulkN} 项</span>` : ''}
     <div class="toolbar-spacer" style="flex:1;min-width:8px;"></div>
     <div class="toolbar-field-wrap" onclick="event.stopPropagation()">
       <button type="button" class="btn-icon" title="显示字段与顺序" onclick="toggleOnPageSeoFieldPanel(event)">⋮</button>
@@ -9279,68 +9882,19 @@ function pageOnPageSEO() {
         <tbody id="onpageSeoTbody">${rowHtml}</tbody>
       </table>
     </div>
+    ${footer}
   </div>`;
 }
 
-window.filterOnPageSeoRows = function () {
-  applyOnPageSeoListFilters();
+window.filterOnPageSeoRows = function (val) {
+  const elIn = $('onpageSeoFilter');
+  state.onPageSeoFilterQuery = val != null ? String(val) : (elIn && elIn.value != null ? elIn.value : '');
+  state.onPageSeoListPage = 1;
+  render();
 };
 
-window.applyOnPageSeoListFilters = function () {
-  const elIn = $('onpageSeoFilter');
-  const raw = (elIn && elIn.value ? elIn.value : '').trim();
-  const qLower = raw.toLowerCase();
-  const dom = site().domain;
-  const ptF = state.onPageSeoFilterPageTypes && state.onPageSeoFilterPageTypes.length ? state.onPageSeoFilterPageTypes : null;
-  const stF = state.onPageSeoStatusFilter && state.onPageSeoStatusFilter.length ? state.onPageSeoStatusFilter : null;
-  document.querySelectorAll('.onpage-seo-row').forEach(tr => {
-    const i = +tr.getAttribute('data-i');
-    const row = DB.onPageSeoPages[i];
-    if (!row) {
-      tr.style.display = '';
-      return;
-    }
-    const http = row.httpStatus != null ? String(Number(row.httpStatus)) : '200';
-    if (stF && !stF.includes(http)) {
-      tr.style.display = 'none';
-      return;
-    }
-    const rowPt = tr.getAttribute('data-page-type') || row.pageType || '';
-    if (ptF && !ptF.includes(rowPt)) {
-      tr.style.display = 'none';
-      return;
-    }
-    if (!raw) {
-      tr.style.display = '';
-      return;
-    }
-    let ok = false;
-    if (raw.includes('*')) {
-      const path = String(row.path || '').toLowerCase();
-      const fullUrl = (`https://${dom}${row.path}`).toLowerCase();
-      const pat = qLower.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-      try {
-        const re = new RegExp(pat, 'i');
-        ok = re.test(path) || re.test(fullUrl);
-      } catch (e) {
-        ok = path.includes(raw.replace(/\*/g, ''));
-      }
-      if (!ok) {
-        const plain = qLower.replace(/\*/g, '').trim();
-        if (plain) {
-          const kws = parseMultiKw(row.keyword).join(' ');
-          const blob = `${(row.title || '')} ${kws} ${path}`.toLowerCase();
-          ok = blob.includes(plain);
-        }
-      }
-    } else {
-      const kws = parseMultiKw(row.keyword).join(' ');
-      const blob = `${(row.title || '')} ${kws} ${(row.path || '')}`.toLowerCase();
-      ok = blob.includes(qLower);
-    }
-    tr.style.display = ok ? '' : 'none';
-  });
-};
+/** 兼容旧调用：筛选已在 render → pageOnPageSEO 中按 state 完成，勿再触发 render */
+window.applyOnPageSeoListFilters = function () {};
 
 /* ── Route to content page ── */
 function getPageHTML() {
@@ -9417,7 +9971,7 @@ function aiRecoReasonForRevealKey(revealKey) {
 function aiRecoLockApplyButtons(applyHtml) {
   const raw = String(applyHtml || '');
   if (siteLeadongSaasAuthorized()) return raw;
-  const lockTip = escapeAttr('需先完成领动 SaaS 独立站授权绑定后才可应用并同步到独立站（示例）');
+  const lockTip = escapeAttr('需先完成独立站授权绑定后才可应用并同步到独立站');
   return raw.replace(/<button(\s[^>]*)>([\s\S]*?)<\/button>/gi, (full, attrs, inner) => {
     if (/\bdisabled\b/i.test(attrs)) return full;
     return `<span class="ai-rec-apply-hint-wrap" data-ai-reason-tip="${lockTip}"><button${attrs} disabled="disabled">${inner}</button></span>`;
@@ -9635,14 +10189,12 @@ function modalOnPageDrawerKw() {
   const idx = state.onPageSeoDrawerIndex;
   const row = idx != null ? DB.onPageSeoPages[idx] : null;
   const draft = Array.isArray(state.onPageKwModalDraft) ? state.onPageKwModalDraft : [];
-  const saasLocked = !siteLeadongSaasAuthorized();
-  const ro = saasLocked ? ' readonly' : '';
-  const ic = saasLocked ? ' form-input--saas-readonly' : '';
-  const addDis = saasLocked ? ' disabled="disabled" style="opacity:0.55;cursor:not-allowed;"' : '';
+  const atMax = draft.length >= ONPAGE_KW_MAX;
   const chips = draft.map((k, ki) => {
-    const xBtn = saasLocked ? '' : `<button type="button" class="onpage-tag-x" onclick="onPageKwModalRemoveChip(${ki})" aria-label="删除">×</button>`;
+    const xBtn = `<button type="button" class="onpage-tag-x" onclick="onPageKwModalRemoveChip(${ki})" aria-label="删除">×</button>`;
     return `<span class="tag tag-gray onpage-kw-modal-chip">${escapeHtmlStr(k)}${xBtn}</span>`;
   }).join('');
+  const addDis = atMax ? ' disabled="disabled" style="opacity:0.55;cursor:not-allowed;"' : '';
   return `
   <div class="modal-header modal-header--split">
     <div class="modal-header-main">
@@ -9652,22 +10204,21 @@ function modalOnPageDrawerKw() {
     <button type="button" class="modal-close" data-close>×</button>
   </div>
   <div class="modal-body">
-    ${modalLeadongSaasLockBannerHTML()}
     ${row ? `<p style="font-size:12px;color:var(--text-3);margin:0 0 12px;line-height:1.45;">${escapeHtmlStr(row.title)}</p>` : ''}
     <div class="onpage-kw-modal-chips">${chips || '<span style="color:var(--text-3);font-size:13px;">暂无目标词，请在下方输入并添加</span>'}</div>
     <div class="form-group" style="margin-top:14px;">
       <label class="form-label">添加关键词</label>
       <div style="display:flex;gap:8px;align-items:stretch;">
-        <input type="text" id="modalOnPageKwInput" class="form-input${ic}" placeholder="输入后点击添加，或按 Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();onPageKwModalAddOne();}"${ro} />
+        <input type="text" id="modalOnPageKwInput" class="form-input" placeholder="输入后点击添加，或按 Enter" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();onPageKwModalAddOne();}"${atMax ? ' readonly' : ''} />
         <button type="button" class="btn-default" onclick="onPageKwModalAddOne()"${addDis}>添加</button>
       </div>
-      <div class="form-hint">首条通常作为主目标词；可多次添加。保存后写入当前页的 SEO 目标词字段。</div>
+      <div class="form-hint">每页最多 ${ONPAGE_KW_MAX} 个目标词；首条通常作为主目标词。保存后写入当前页的 SEO 目标词字段。</div>
       ${aiRecoPreviewOnlyHTML('kw-modal')}
     </div>
   </div>
   <div class="modal-footer">
     <button class="btn-default" data-close>取消</button>
-    <button class="btn-primary" onclick="saveOnPageKwFromModal()"${modalPrimarySaveBtnLockedAttrs()}>保存</button>
+    <button class="btn-primary" onclick="saveOnPageKwFromModal()">保存</button>
   </div>`;
 }
 
@@ -9772,35 +10323,32 @@ function modalOnPageSchemaJson() {
   const idx = state.onPageSeoDrawerIndex;
   const row = idx != null ? DB.onPageSeoPages[idx] : null;
   const dom = site().domain;
-  const slice = state.onPageSchemaSlice || 'jsonld-org';
   if (!row) {
-    return `<div class="modal-header"><span class="modal-title">编辑结构化数据</span><button class="modal-close" data-close>×</button></div><div class="modal-body"><p style="font-size:13px;color:var(--text-2);">无法加载页面。</p></div><div class="modal-footer"><button class="btn-default" data-close>关闭</button></div>`;
+    return `<div class="modal-header"><span class="modal-title">编辑本页结构化数据</span><button class="modal-close" data-close>×</button></div><div class="modal-body"><p style="font-size:13px;color:var(--text-2);">无法加载页面。</p></div><div class="modal-footer"><button class="btn-default" data-close>关闭</button></div>`;
   }
   const pfSch = state.onPageAiAuditEditorPrefill;
-  const schemaModalLbl = (pfSch && pfSch.schemaKind === 'product')
-    ? '产品信息'
-    : (pfSch && pfSch.schemaKind === 'blog')
-      ? '博客文章'
-      : onPageSchemaSliceLabelZh(slice);
-  const raw = (pfSch && pfSch.kind === 'schema-json' && pfSch.json != null)
-    ? String(pfSch.json)
-    : getOnPageSchemaJsonText(row, slice, dom);
+  let raw;
+  if (pfSch && pfSch.kind === 'schema-json' && pfSch.json != null) {
+    raw = JSON.stringify([{ label: 'AI 推荐', slice: state.onPageSchemaSlice || 'jsonld-org', json: String(pfSch.json) }], null, 2);
+  } else {
+    raw = buildOnPageAllSchemaEditText(row, dom);
+  }
   const saasLocked = !siteLeadongSaasAuthorized();
   const ro = saasLocked ? ' readonly' : '';
   const tc = saasLocked ? ' form-textarea--saas-readonly' : '';
   return `
   <div class="modal-header modal-header--split">
     <div class="modal-header-main">
-      <span class="modal-title">编辑结构化数据 · ${escapeHtmlStr(schemaModalLbl)}</span>
+      <span class="modal-title">编辑本页结构化数据</span>
       ${aiRecoTriggerInlineHTML('schema-json', 4)}
     </div>
     <button type="button" class="modal-close" data-close>×</button>
   </div>
   <div class="modal-body">
     ${modalLeadongSaasLockBannerHTML()}
-    <p class="form-hint form-hint--schema-sync">若前台页面正文、标题或关键信息有调整，请同步检查并更新下方 JSON，避免出现<strong>结构化数据与页面实际内容不一致</strong>的情况。</p>
-    <textarea id="modalOnPageSchemaJson" class="form-textarea form-textarea--schema-json${tc}" style="min-height:240px;font-family:ui-monospace,monospace;font-size:12px;" placeholder="${escapeAttr(SCHEMA_JSON_INPUT_PLACEHOLDER)}"${ro}>${escapeHtmlStr(String(raw || ''))}</textarea>
-    <div class="form-hint">保存后，将把当前片段写回页面的结构化数据配置（示例）。</div>
+    <p class="form-hint form-hint--schema-sync">统一编辑当前页面<strong>全部</strong> JSON-LD 片段。保存后<strong>同步写入独立站后台</strong>对应页面字段。</p>
+    <textarea id="modalOnPageSchemaJson" class="form-textarea form-textarea--schema-json${tc}" style="min-height:280px;font-family:ui-monospace,monospace;font-size:12px;" placeholder="JSON 数组：每项含 label、slice、json 字段"${ro}>${escapeHtmlStr(String(raw || ''))}</textarea>
+    <div class="form-hint">已授权的独立站仅部分页面类型支持后台单独编辑结构化数据；不支持编辑的页面类型弹窗为只读。</div>
     ${aiRecoPreviewOnlyHTML('schema-json')}
   </div>
   <div class="modal-footer">
@@ -9868,14 +10416,19 @@ function modalOnPageDrawerTdk() {
 
 function modalRankedPageKws() {
   const p = state.rankedKwModalPath;
-  const merged = getRankedKwRowsForModal(p);
+  const merged = sortRankedKwModalRows(getRankedKwRowsForModal(p));
   const title = p ? `有排名关键词 · ${escapeHtmlStr(p)}` : '有排名关键词';
   const H = URL_RANK_MODAL_TH_HINTS;
+  const sk = state.rankedKwModalSortKey || 'kw';
+  const sd = state.rankedKwModalSortDir || 'asc';
+  const thKw = tableSortThBtnHTML('关键词', H.kw, 'kw', sk, sd, 'sortRankedKwModalCol');
+  const thRank = tableSortThBtnHTML('最新排名', H.rank, 'rank', sk, sd, 'sortRankedKwModalCol');
+  const thTime = tableSortThBtnHTML('排名时间', H.time, 'time', sk, sd, 'sortRankedKwModalCol');
   const body = merged.length
     ? `<table class="data-table"><thead><tr>
-        <th title="${escapeAttr(H.kw)}">关键词</th>
-        <th style="width:88px;" title="${escapeAttr(H.rank)}">最新排名</th>
-        <th style="width:180px;" title="${escapeAttr(H.time)}">排名时间</th>
+        <th class="th-sort-th">${thKw}</th>
+        <th class="th-sort-th" style="width:88px;">${thRank}</th>
+        <th class="th-sort-th" style="width:180px;">${thTime}</th>
       </tr></thead><tbody>${merged.map(x => `
       <tr><td><span class="td-kw">${escapeHtmlStr(x.kw)}</span></td><td>${x.rank != null ? `<span class="badge badge-blue">${x.rank}</span>` : '—'}</td><td style="font-size:12px;color:var(--text-3);">${escapeHtmlStr(x.rankAt || '—')}</td></tr>`).join('')}</tbody></table>`
     : '<p style="font-size:13px;color:var(--text-2);">当前没有可展示的数据。</p>';
@@ -9950,7 +10503,7 @@ function renderModal() {
     if (!Array.isArray(state.onPageKwModalDraft)) {
       const idx = state.onPageSeoDrawerIndex;
       const row = idx != null ? DB.onPageSeoPages[idx] : null;
-      state.onPageKwModalDraft = row ? [...parseMultiKw(row.keyword)] : [];
+      state.onPageKwModalDraft = row ? parseMultiKw(row.keyword).slice(0, ONPAGE_KW_MAX) : [];
     }
     box.innerHTML = modalOnPageDrawerKw();
   }
@@ -10096,10 +10649,14 @@ function bindWizard() {
     state.wizardStep = 1;
     state.wizardData = { domain:'', alias:'', keywords:'', engines:[] };
     closeModal();
-    state.primary = 'settings';
-    state.settingsTab = 'site-mgmt';
+    state.primary = 'dashboard';
+    state.dashboardTab = 'overview';
     render();
-    toast('网站添加成功！');
+    toast('网站添加成功，正在执行首次站点基建检测…');
+    runDashboardInfraScanDemo(() => {
+      render();
+      toast('首次站点基建检测已完成（示例）');
+    });
   };
   $('modalBox').querySelectorAll('[data-close]').forEach(el => el.onclick = closeModal);
 }
@@ -10569,7 +11126,7 @@ function modalSiteSettings() {
                     <span style="font-size:13px;font-weight:700;">Google Search Console</span>
                     <span class="badge badge-green">已授权</span>
                   </div>
-                  <div style="font-size:12px;color:var(--text-2);">可在技术 SEO、On-Page 与关键词模块查看与本域名一致的自然搜索数据（示例）。</div>
+                  <div style="font-size:12px;color:var(--text-2);">可在相关功能模块查看与本域名一致的自然搜索数据。</div>
                 </div>
               </div>
               <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
@@ -10588,7 +11145,7 @@ function modalSiteSettings() {
                   <img class="auth-platform-card__brand" src="${GOOGLE_SEARCH_CONSOLE_LOGO}" alt="" width="120" height="40" style="object-fit:contain;"/>
                   <div class="auth-platform-card__info">
                     <div class="auth-platform-card__title">Google Search Console</div>
-                    <p class="auth-platform-card__desc">授权当前站点后，可在技术 SEO、On-Page 与关键词模块查看与本域名一致的自然搜索数据（示例）。</p>
+                    <p class="auth-platform-card__desc">授权当前站点后，可在相关功能模块查看与本域名一致的自然搜索数据。</p>
                   </div>
                 </div>
                 <button type="button" class="btn-primary auth-platform-card__cta" onclick="demoAuthorizeGSCFromSettings()">前往授权</button>
@@ -10893,68 +11450,95 @@ function logicHelpPermHTML(requirements) {
   return `<p class="logic-help-p"><strong>功能权限</strong></p><ul class="logic-help-ul">${items}</ul>`;
 }
 
+function logicHelpPointsConsumeListHTML() {
+  return `<ul class="logic-help-ul">
+        <li><strong>页面整合优化 › AI 测评</strong>（开始 / 重新检测）：18 点/ 次（待定）</li>
+        <li><strong>页面整合优化 › AI 推荐</strong>（关键词、TDK、结构化数据等字段 AI 推荐）：按场景计费（待定）</li>
+      </ul>`;
+}
+
 function logicHelpDashboardOverviewHTML() {
-  const spec = logicHelpSpecDocRef();
+  const spec = logicHelpOnPageDiagSpecRef();
+  const infraHint = SITE_INFRA_MODULE_A_HINT;
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>仪表盘 › 网站概览（按顶栏当前站点展示；切换站点后整页数据同步切换）。</p>
       <p class="logic-help-p logic-help-p--note"><strong>导航调整说明</strong>：原「网站总览」已改名为「网站列表」，并移至侧栏「全部站点」下级；本「网站概览」为用户登录后的默认着陆页。</p>
       ${logicHelpPermHTML('本页整体：无额外功能权限要求（登录后可访问）。各子板块权限见下。')}
       <p class="logic-help-p"><strong>一、网站健康度（站点基建）</strong></p>
-      ${logicHelpPermHTML('本板块：无额外功能权限要求。')}
+      ${logicHelpPermHTML('须当前账号已开通「页面整合优化」功能；未开通时本板块不展示。')}
       <ul class="logic-help-ul">
-        <li><strong>检测范围</strong>：仅三项站点级基础设施——Robots.txt 协议、Sitemap 站点地图、全站 HTTPS 安全；不抓取单页标题/正文，不参与单页七维规则评分。</li>
-        <li><strong>列表行</strong>：状态徽章仅展示「通过」「建议」「严重」之一（不展示分数 pill）；检测项名称固定三项；摘要一行为折叠态结论。</li>
-        <li><strong>展开详情</strong>：无「当前问题」「优化建议」小标题；两段正文分别对应规范中的问题描述与优化建议，去掉「当前：」「建议：」等前缀后展示；口径对齐《SEO评分维度》模块 A，不编造未实现能力（如 GSC 提交）。</li>
-        <li><strong>重新检测</strong>：二次确认后仅重跑上述三项基建；更新各项状态与页脚「上次检测」日期；不触发单页整合优化扫描。</li>
-        <li><strong>板块说明</strong>：标题旁「?」悬停展示检测边界。</li>
+        <li><strong>检测范围</strong>：仅三项站点级基础设施——Robots.txt 协议、Sitemap 站点地图、HTTPS 安全（仅检测网站首页/根路径的 HTTPS 与证书，非逐页扫描）。（站点基建判定口径与单页规则评分细则${spec}）</li>
+        <li><strong>列表行</strong>：状态徽章仅展示「通过」「建议」「严重」之一；检测项名称固定三项；摘要一行为折叠态结论。</li>
+        <li><strong>展开详情</strong>：按规范表${spec}所列场景，在详情区展示「当前问题」「优化建议」两列对应正文。</li>
+        <li><strong>自动检测</strong>：本期<strong>不</strong>按固定周期自动重检；<strong>首次添加网站</strong>成功后立即执行<strong>一次</strong>站点基建检测。</li>
+        <li><strong>重新检测</strong>：用户手动点击「重新检测」并经二次确认后触发；检测过程中展示「检测中」状态、占位骨架与提示文案，期间禁用重复点击；完成后更新各项状态与「上次检测」时间；不触发单页整合优化扫描。</li>
+        <li><strong>板块说明</strong>：标题旁「?」悬停展示以下文案：${infraHint}</li>
         <li><strong>引导</strong>：底部链至「页面整合优化」，处理单页规则项。</li>
       </ul>
       <p class="logic-help-p"><strong>二、新页面提醒</strong></p>
       ${logicHelpPermHTML('须当前账号已开通「页面整合优化」功能；未开通时本板块不展示。')}
       <ul class="logic-help-ul">
-        <li><strong>新页面定义</strong>：在本站点<strong>页面整合优化</strong>页面库中尚不存在、且通过站点抓取或 Sitemap 等渠道<strong>新发现</strong>的可索引 URL（含新发布、新入地图、新被抓取但尚未纳入页面库的路径）。已纳入页面库或已人工忽略/合并的 URL 不再计为新页面。</li>
-        <li><strong>展示条件</strong>：仅当存在至少 1 个新页面时展示本板块；无新页面时<strong>整板块隐藏</strong>（不占位）。</li>
-        <li><strong>列表</strong>：最多展示 5 条；每条为标题 → 路径 → 右侧发现时间（自然日）；超过 5 条时底部提示「另有 N 条未列出」。</li>
+        <li><strong>新页面定义</strong>：对比<strong>上一次站点基建检测</strong>时解析到的站点地图 URL 集合，本次检测中<strong>新增</strong>且尚未纳入「页面整合优化」页面库的地址计为新页面。</li>
+        <li><strong>展示条件</strong>：须已完成<strong>至少两次</strong>站点基建检测（首次检测仅建立站点地图基线，<strong>不展示</strong>本板块，避免将整站 URL 误判为新页面）；且存在至少 1 个新页面时展示；无新页面时<strong>整板块隐藏</strong>（不占位）。</li>
+        <li><strong>自动隐藏</strong>：执行<strong>站点基建「重新检测」</strong>后，以最新一次站点地图对比结果<strong>整体覆盖</strong>提醒列表。</li>
+        <li><strong>列表</strong>：最多列出 10 条；每条为标题 → 路径 → 右侧发现时间（自然日）。列表区域<strong>固定高度</strong>（约可见 2 条），超出部分在板块内<strong>纵向滚动</strong>查看。</li>
         <li><strong>操作</strong>：「前往页面整合优化」跳转至搜索 › 页面整合优化列表，不自动打开单页抽屉。</li>
       </ul>
       <p class="logic-help-p"><strong>三、最近抓取（关键词概览 / 页面概览）</strong></p>
       ${logicHelpPermHTML(['须当前账号已开通「关键词管理」与「关键词排名抓取」功能；缺一未开通则本板块不展示。'])}
       <ul class="logic-help-ul">
         <li><strong>板块定位</strong>：展示当前站点、当前所选搜索引擎下，<strong>最近一次排名抓取任务</strong>完成后的汇总与明细入口；顶部可切换搜索引擎、点击「更新排名」发起抓取，并显示「最近更新」时间。</li>
-        <li><strong>关键词概览</strong>：展示本站点<strong>我的关键词</strong>中、与当前筛选搜索引擎相关的监控词。表格列：关键词、最新排名、排名最佳网页（可点开查看该词下表现最好的落地页）。仅展示在该引擎下仍有排名数据或仍参与监控的词；统计卡片（有排名关键词数、排名升降、平均排名、排名分布等）与「我的关键词」列表在同一抓取周期、同一引擎口径下汇总。细则见「我的关键词」功能逻辑。</li>
-        <li><strong>页面概览</strong>：展示本站点在<strong>曝光页面</strong>列表规则下、该引擎内有排名曝光的落地页。表格列：页面（标题+路径）、有排名关键词数、最佳关键词、最佳排名、排名最佳网页。有排名关键词数为可点击数字，点击弹出「有排名关键词」明细弹窗（见「曝光页面」说明）。上方统计卡片（有排名页面数、平均最佳排名趋势等）与曝光页列表同源。细则见「曝光页面」功能逻辑。</li>
-      </ul>
-      <p class="logic-help-p logic-help-p--note">站点基建判定口径与单页规则评分细则${spec}。</p>`;
+        <li><strong>数据量</strong>：仪表盘内表格<strong>不展示全部</strong>监控词/曝光页，默认最多展示前 10 条并注明总数；完整数据须前往「搜索 › 我的关键词」或「搜索 › 曝光页面」。</li>
+        <li><strong>关键词概览</strong>：展示本站点「我的关键词」中、与当前筛选搜索引擎相关的监控词（表格列：关键词、最新排名、排名最佳网页）。统计卡片与「我的关键词」在同一抓取周期、同一引擎口径下汇总。</li>
+        <li><strong>页面概览</strong>：展示本站点在「曝光页面」规则下、该引擎内有排名曝光的落地页（表格列：页面、有排名关键词数、最佳关键词、最佳排名；页面列已含标题与路径，不再单独展示「排名最佳网页」列）。有排名关键词数可点击打开「有排名关键词」明细弹窗。统计卡片与曝光页列表同源。</li>
+      </ul>`;
+}
+
+function logicHelpRankedKwModalHTML() {
+  return `
+      <p class="logic-help-p"><strong>四、「有排名关键词」弹窗</strong></p>
+      <ul class="logic-help-ul">
+        <li><strong>入口</strong>：列表或仪表盘「页面概览」中点击「有排名关键词数」打开；标题为「有排名关键词 · {页面路径}」。</li>
+        <li><strong>数据范围</strong>：与列表「有排名关键词数」一致——按各监控词在<strong>所选日期范围内、该词最后一次成功抓取</strong>的结果，筛选该页仍有排名的词（按词去重列出）。</li>
+        <li><strong>列表列</strong>：关键词、最新排名、排名时间（与表头悬停说明一致）。</li>
+        <li><strong>最新排名</strong>：即该词<strong>最后一次成功抓取</strong>的自然搜索名次（正整数，1 为最好）。</li>
+        <li><strong>排名时间</strong>：取得该「最新排名」的抓取完成时间（自然日 + 时分秒）；若同一词存在多条相同名次记录，取<strong>时间最近</strong>的一次。</li>
+        <li><strong>排序</strong>：表头「关键词」「最新排名」「排名时间」可点击切换升/降序；首次打开默认按关键词升序。不同搜索引擎下的同名关键词分别展示。</li>
+      </ul>`;
 }
 
 function logicHelpPageRankListHTML() {
   const sortCols = logicHelpPageRankSortableColsText();
   const cfgCols = logicHelpPageRankConfigurableColsText();
   return `
-      <p class="logic-help-lead"><strong>入口</strong><br/>搜索 › 曝光页面（与顶栏当前站点、所选搜索引擎联动）。</p>
+      <p class="logic-help-lead"><strong>入口</strong><br/>搜索 › 曝光页面（与顶栏当前站点、所选搜索引擎、顶栏日期筛选联动）。</p>
       ${logicHelpPermHTML(['须当前账号已开通「关键词管理」与「关键词排名抓取」功能。'])}
       <p class="logic-help-p"><strong>一、数据概览</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>有排名页面</strong>：统计周期内至少有一个监控词在该页获得排名的独立 URL 数。</li>
-        <li><strong>平均最佳排名</strong>：各页「最佳排名」的算术平均，数字越小越靠前。</li>
-        <li><strong>趋势图</strong>：所选周期内上述两指标的变化折线。</li>
-        <li><strong>显示切换</strong>：工具栏右侧眼睛图标（无文字）；点击在「隐藏数据概览 / 展示数据概览」间切换；状态仅本次浏览器会话有效。</li>
+        <li><strong>有排名页面</strong>（卡片主数字）：当前顶栏<strong>日期筛选</strong>与<strong>搜索引擎</strong>口径下，<strong>最后一次抓取任务</strong>完成时的有排名独立 URL 数量（该次任务中至少有一个监控词在该页获得排名）。<strong>趋势折线</strong>：横轴为所选日期范围内的抓取任务（一点一任务，按完成时间先后）；纵坐标为各次任务完成时的有排名页面数；<strong>最多展示最近 15 次</strong>任务，更早任务不绘制。</li>
+        <li><strong>平均最佳排名</strong>（卡片主数字）：同上筛选条件下，<strong>最后一次抓取任务</strong>完成时，各有排名页面「最佳排名」的算术平均，数字越小越靠前。<strong>趋势折线</strong>：横轴与展示条数规则同上；纵坐标为各次任务完成时的平均最佳排名（注意纵坐标越往上数值越小，即排名靠前的点在上、排名靠后的点在下）。</li>
+        <li><strong>趋势图</strong>：左右两图分别对应上述两指标。<strong>鼠标悬停</strong>数据点展示该次「抓取任务」完成日期（自然日）及当次指标值；折线最右侧一点与卡片主数字一致（均为最后一次任务结果，演示）。</li>
+        <li><strong>显示切换</strong>：工具栏「眼睛」图标控制本数据概览区（含指标数字与趋势折线图）显示/隐藏，规则见下文。</li>
       </ul>
       <p class="logic-help-p"><strong>二、工具栏（从左到右）</strong></p>
       <ul class="logic-help-ul">
         <li><strong>搜索框</strong>：在路径、页面标题、最佳关键词中匹配；默认子串、不区分大小写；支持星号通配（规则同页面整合优化列表）。</li>
         <li><strong>搜索说明 ℹ</strong>：悬停说明通配用法。</li>
-        <li><strong>眼睛图标</strong>、<strong>字段配置 ⋮</strong>、<strong>导出 ↓</strong>：字段配置可选列——${cfgCols}；「页面」列固定且不可隐藏。</li>
+        <li><strong>眼睛图标</strong>（与「我的关键词」列表的展示/隐藏数据概览一致）：点击在「隐藏数据概览 / 展示数据概览」间切换；隐藏时收起上方指标卡片与趋势折线图，仅保留搜索与表格。</li>
+        <li><strong>字段配置 ⋮</strong>（同「我的关键词」）：打开列配置面板；可勾选显示列、拖拽调整列顺序，保存后生效。可选列——${cfgCols}。「页面」列<strong>固定首列</strong>且不可排序；可取消勾选「显示页面标题」，此时仅隐藏标题、<strong>仍保留 URL</strong>，不隐藏整列。</li>
+        <li><strong>导出 ↓</strong>（同「我的关键词」）：导出当前筛选结果下、按字段配置显示的列表数据。</li>
       </ul>
       <p class="logic-help-p"><strong>三、表格列取值</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>页面</strong>：标题 + 路径。</li>
-        <li><strong>有排名关键词数</strong>：该页在当次统计下有过排名的监控词数量；为可点击数字，点击打开弹窗「有排名关键词 · {路径}」，列表展示关键词、最新排名、排名时间（与仪表盘「页面概览」中点击数字一致）。无明细时弹窗提示「当前没有可展示的数据」。</li>
-        <li><strong>最佳关键词</strong>：代表词（结合曝光与排名选取）。</li>
-        <li><strong>最佳排名</strong>：正整数，1 为最好。</li>
-        <li><strong>首次曝光 / 最后曝光</strong>：该页在统计周期内首次/末次仍保留排名的日期。</li>
-        <li><strong>排序</strong>：可排序列——${sortCols}。首次点「最佳排名」默认升序；首次点其它可排序列默认降序；再点同列反转。</li>
-      </ul>`;
+        <li><strong>页面</strong>：默认展示标题 + 路径；字段配置中可关闭标题，仅保留路径。</li>
+        <li><strong>有排名关键词数</strong>：在所选日期范围内，按<strong>每个监控词各自最后一次成功抓取</strong>的排名结果统计——看该次抓取中该页是否仍有排名后计数；<strong>不是</strong>取「最后一次抓取任务」里各词当次的排名（任务失败或最后一次任务未抓取该词时，不覆盖该词已有成功记录）。为可点击数字，点击打开「有排名关键词」弹窗（细则见第四节）。<br/><em>例</em>：范围 9 月 1–30 日。词 A 于 9 月 20 日单独抓取成功且在本页排名第 12；9 月 30 日抓取任务中该词抓取失败（或抓取任务不包含该词）。统计仍以该词在范围内的<strong>最后一次成功抓取</strong>（9 月 20 日、第 12 名）为准并计入；不因 9 月 30 日任务失败（或未抓取）而排除或记为无排名。</li>
+        <li><strong>最佳关键词</strong>：在所选日期范围内，上述「有排名关键词」中<strong>排名最好（数字最小）</strong>的词；若多名次相同，按关键词字符顺序排序后取<strong>第一个</strong>。</li>
+        <li><strong>最佳排名</strong>：上述「最佳关键词」对应的排名；正整数，1 为最好，与「最佳关键词」成对展示。</li>
+        <li><strong>首次曝光 / 最后曝光</strong>：该页在统计周期内首次/末次仍保留排名的日期（自然日）。</li>
+        <li><strong>默认排序</strong>：进入页面时默认按「有排名关键词数」<strong>降序</strong>（数量多的在前）。</li>
+        <li><strong>表头排序</strong>：可排序列——${sortCols}。首次点「最佳排名」默认升序；首次点其它可排序列默认降序；再点同列反转。</li>
+      </ul>
+      ${logicHelpRankedKwModalHTML()}`;
 }
 
 function logicHelpPageSeoListHTML() {
@@ -10969,57 +11553,91 @@ function logicHelpPageSeoListHTML() {
         <li><strong>搜索</strong>：匹配标题、路径、目标词；子串不区分大小写；支持星号通配路径。</li>
         <li><strong>页面类型筛选</strong>：多选，选项为 ${pageTypes}。</li>
         <li><strong>HTTP 状态筛选</strong>：多选；选项为当前列表中出现过的状态码。</li>
-        <li><strong>字段配置 ⋮</strong>、<strong>导出 ↓</strong>。</li>
+        <li><strong>字段配置 ⋮</strong>（规则同「我的关键词」「曝光页面」）：打开列配置面板；可勾选显示列、拖拽调整列顺序，点击「保存」后生效。可选列——${cfgCols}。表格<strong>最左侧复选框列</strong>固定，不参与字段配置；「页面」列固定且不可隐藏；可取消「显示页面标题」时仅隐藏标题行、保留 URL。</li>
+        <li><strong>导出 ↓</strong>（规则同「我的关键词」「曝光页面」）：导出<strong>当前列表筛选结果</strong>下、且按字段配置<strong>当前可见列</strong>组成的表格数据（通常为 CSV/Excel，以实际上线格式为准）；不包含抽屉内未展开的明细。演示原型为导出成功提示。</li>
       </ul>
-      <p class="logic-help-p"><strong>二、表格列取值</strong></p>
+      <p class="logic-help-p"><strong>二、列表数据与空态</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>页面</strong>：标题 + 路径；HTTPS 站点显示小锁图标。</li>
-        <li><strong>目标词</strong>：1–10 个词以 chip 展示；空为「—」；可编辑（须独立站授权）。</li>
-        <li><strong>页面类型</strong>：中文标签；未设置可点击选择。</li>
-        <li><strong>状态</strong>：HTTP 状态码徽章。</li>
-        <li><strong>索引</strong>：已授权 Google Search Console 时展示各搜索引擎收录图标；未授权显示「未配置」并引导授权。</li>
-        <li><strong>页面得分</strong>：单页规则总分 0–100。</li>
-        <li><strong>检测得分</strong>：常规检测「严重 / 建议」条数 pill（红/橙），与抽屉内筛选色一致；不展示仅归类为「提示」的条数。</li>
-        <li><strong>排序</strong>：可排序——${sortCols}；不可排序——页面、目标词、页面类型。</li>
+        <li><strong>页面来源（本期）</strong>：仅展示当前站点 <strong>sitemap.xml</strong> 中解析到的 URL；在「页面」列表头悬停 ℹ 可查看简要说明。（站点爬虫抓取、建站SaaS数据同步等渠道本期暂不纳入。）</li>
+        <li><strong>未检测到 Sitemap</strong>：不展示表格，提示先配置/暴露 sitemap 并在站点基建中检测通过后刷新。</li>
+        <li><strong>暂无页面</strong>：已检测到 Sitemap 但解析结果为空时展示空态说明。</li>
+        <li><strong>分页</strong>：底部分页，默认每页 20 条，可选 50 / 100；搜索与筛选作用于<strong>全量结果</strong>后再分页；导出范围为当前筛选结果（非仅当前页）。</li>
+        <li><strong>默认排序</strong>：未点击表头时，按当前站点 <strong>sitemap.xml</strong> 中 URL 的解析顺序展示（与地图内顺序一致）。点击可排序列表头后按所选列排序。</li>
+        <li><strong>批量操作</strong>：表格首列为复选框；勾选至少 1 行后工具栏才出现「页面检测」与已选计数，对所选页面执行常规检测（演示为依次触发）。</li>
       </ul>
-      <p class="logic-help-p"><strong>三、行交互</strong></p>
+      <p class="logic-help-p"><strong>三、表格列取值</strong></p>
       <ul class="logic-help-ul">
-        <li>点击行打开右侧抽屉，默认页签「常规检测」。</li>
-        <li><strong>提交收录</strong>：未授权 GSC 时引导授权；批量须先勾选行。</li>
+        <li><strong>页面</strong>：Sitemap 中的 URL；标题为页面前台 Title（若有）；路径为站内路径（HTTPS 显示小锁）。列表头悬停说明 Sitemap 更新规则。</li>
+        <li><strong>目标词</strong>：每页最多 <strong>10</strong> 个；列表最多展示 <strong>3</strong> 个<strong>关键词标签</strong>，超出显示「+N」。无词为「—」。点击标签、「+N」或「—」打开编辑弹窗。<strong>首次常规检测</strong>后若仍为空，按页面前台 Meta Keywords（逗号分隔）按顺序预填，最多 10 个。</li>
+        <li><strong>页面类型</strong>：中文标签；未设置或已设置均可点击修改，规则见「六、页面类型规则」。</li>
+        <li><strong>状态</strong>：该 URL 最近一次 HTTP 状态码徽章；入库或重检时更新。</li>
+        <li><strong>索引</strong>：<strong>本期仅 Google</strong>，依赖 GSC 授权。已授权且账号正常显示 Google 是否已索引；未授权为「未配置」。按日对 Sitemap URL 批量查询（约 <strong>2000 次/天</strong>）。授权账号异常时<strong>整列暂停</strong>，表头警示并引导解封后重新授权。</li>
+        <li><strong>页面得分</strong>：常规检测七维总分 0–100${logicHelpOnPageDiagSpecRef()}。展示最近一次结果；打开抽屉时自动检测当前页；可批量「页面检测」。</li>
+        <li><strong>检测问题</strong>：常规检测「严重 / 建议」条数的<strong>色标数字</strong>（红/橙），与抽屉筛选一致。</li>
+        <li><strong>排序</strong>：可排序列——${sortCols}。</li>
       </ul>
-      <p class="logic-help-p"><strong>四、页面类型规则</strong></p>
+      <p class="logic-help-p"><strong>四、行交互</strong></p>
+      <ul class="logic-help-ul">
+        <li>点击行（复选框、目标词标签区域除外）打开抽屉，默认「常规检测」并触发该页检测。</li>
+      </ul>
+      <p class="logic-help-p"><strong>五、页面类型规则</strong></p>
       <ul class="logic-help-ul">
         <li>每页最多 1 项，选项：${pageTypes}；根路径强制「首页」且只读。</li>
-        <li>影响常规检测豁免与 AI 生成资产范围。</li>
       </ul>
-      <p class="logic-help-p"><strong>五、抽屉默认页签</strong></p>
+      <p class="logic-help-p"><strong>六、抽屉默认页签</strong></p>
       <ul class="logic-help-ul">
         <li>展示：常规检测、AI 测评、关键词、TDK、结构化数据。</li>
         <li>本期隐藏：H 标题、图片、链接、社媒、语言与网址。</li>
       </ul>`;
 }
 
+function logicHelpPageSeoDrawerHeadHTML() {
+  return `
+      <p class="logic-help-lead"><strong>入口</strong><br/>页面整合优化 › 点击行 › 右侧抽屉顶部「页面详情」区域（各页签共用）。</p>
+      ${logicHelpPermHTML('同「页面整合优化」功能权限。')}
+      <p class="logic-help-p"><strong>一、字段说明</strong></p>
+      <ul class="logic-help-ul">
+        <li><strong>页面详情</strong>：固定标题，表示当前正在查看的单页。</li>
+        <li><strong>主标题行</strong>：页面前台 Title；右侧为「页面类型」标签（可点击修改，规则见列表说明）。</li>
+        <li><strong>完整 URL</strong>：当前站点域名 + 路径，HTTPS 显示小锁；点击新窗口打开。</li>
+        <li><strong>目标词</strong>：与列表「目标词」字段同源；以标签展示，点击可打开编辑弹窗（与列表规则一致）；展示最多 3 个标签，保存上限 10 个。</li>
+        <li><strong>AI 推荐（编辑目标词弹窗）</strong>：弹窗标题栏「AI 推荐」每次成功消耗 <strong>2 点</strong>；根据当前页主题生成可监控目标词候选，鼠标悬停信息按钮展示AI推荐的理由，用户点「应用」写入弹窗草稿（须再点保存落库）。余额不足中止；消耗记入点数变更记录。</li>
+      </ul>
+      <p class="logic-help-p"><strong>二、交互</strong></p>
+      <ul class="logic-help-ul">
+        <li>切换下方页签不改变顶栏字段；关闭抽屉后再次打开仍展示该页最新数据。</li>
+      </ul>`;
+}
+
 function logicHelpPageSeoDiagHTML() {
-  const spec = logicHelpSpecDocRef();
+  const spec = logicHelpOnPageDiagSpecRef();
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>页面整合优化 › 点击行 › 抽屉 › 常规检测。</p>
       ${logicHelpPermHTML('同「页面整合优化」功能权限。')}
       <p class="logic-help-p"><strong>一、检测范围</strong></p>
       <ul class="logic-help-ul">
-        <li>七维可量化规则（标题、摘要、标题层级、正文、图片 Alt、URL、结构化数据等）；严重/建议/通过判定${spec}。</li>
-        <li>与 AI 测评独立，不评搜索意图、E-E-A-T、内容缺口等语义项。</li>
+        <li>七维可量化规则（标题、摘要、标题层级、正文、图片 Alt、URL、结构化数据等）；严重/建议/通过判定、检查项命名与量化区间${spec}。</li>
       </ul>
-      <p class="logic-help-p"><strong>二、筛选条</strong></p>
+      <p class="logic-help-p"><strong>二、界面字段与规范表对应</strong>${spec}</p>
       <ul class="logic-help-ul">
-        <li>严重 / 建议 / 通过 三个 pill，点击筛选子项列表；与列表「检测得分」列色标一致。</li>
+        <li><strong>页面得分</strong>：七维子项得分之和（满分 100），对应规范表中各维度「满分」列汇总展示。</li>
+        <li><strong>严重 / 建议 / 通过</strong>：按子检查项判定结果聚合计数；与列表「检测问题」列红/橙色标数字一致。</li>
+        <li><strong>七维折叠块</strong>（Title / Meta / Headings / Body / Media / URL / Code）：块标题与规范表「维度」列一致；块内每一行对应表中「检测指标」列，展示子项得分、严重/建议/通过徽章、问题描述与优化建议。</li>
+        <li>各子项说明文案以规范表「当前问题」「优化建议」列拼接展示；演示原型为示例句。</li>
+        <li><strong>具体版式、折叠默认态、按钮位置以设计稿为准。</strong></li>
       </ul>
-      <p class="logic-help-p"><strong>三、重新检测</strong></p>
+      <p class="logic-help-p"><strong>三、筛选条</strong></p>
       <ul class="logic-help-ul">
-        <li>仅当前页；执行中防重复点击；完成后更新页面得分、问题条数、「最后测评」时间，并刷新列表行。</li>
+        <li>「严重 / 建议 / 通过」三个<strong>筛选标签</strong>，点击筛选下方问题列表；与列表「检测问题」列色标一致。</li>
       </ul>
-      <p class="logic-help-p"><strong>四、标题行</strong></p>
+      <p class="logic-help-p"><strong>四、检测触发与状态</strong></p>
       <ul class="logic-help-ul">
-        <li>展示「最后测评」时间；无跳转 AI 测评快捷按钮。</li>
+        <li><strong>打开抽屉</strong>：自动对当前页执行一次常规检测（若未在检测中）；检测中展示加载动画，期间不可重复触发。（技术可评估单页耗时与队列策略后，再确定具体自动更新的规则。）</li>
+        <li><strong>重新检测</strong>：用户手动点击；完成后更新页面得分、问题条数、「最后测评」时间，并刷新列表行。</li>
+      </ul>
+      <p class="logic-help-p"><strong>五、标题行</strong></p>
+      <ul class="logic-help-ul">
+        <li>展示「最后测评」时间。</li>
       </ul>`;
 }
 
@@ -11031,15 +11649,14 @@ function logicHelpPageSeoAiHTML() {
       <p class="logic-help-p"><strong>一、职责边界</strong></p>
       <ul class="logic-help-ul">
         <li>评估：搜索意图、内容质量、主题覆盖、E-E-A-T、转化、内容缺口、增长机会等语义项。</li>
-        <li>不评估：标题/摘要长度、H1 数量、canonical、robots、死链、图片 Alt 等（归常规检测）。</li>
-        <li>仅依据可见正文，禁止虚构评价、价格、认证与案例。</li>
+        <li>具体判定与输出格式<strong>以提示词为准</strong>${logicHelpSpecDocRef()}。</li>
       </ul>
       <p class="logic-help-p"><strong>二、触发与计费</strong></p>
       <ul class="logic-help-ul">
-        <li>「开始 AI 测评 / 重新检测」：每次成功消耗 <strong>18 点</strong>；余额不足提示「点数不足」并中止。</li>
+        <li>「开始 AI 测评 / 重新检测」：每次成功消耗 <strong>18 点（待定）</strong>；余额不足提示「点数不足」并中止。</li>
         <li>成功后默认打开「总览」子页签；消耗记入设置 › 点数变更记录，事项格式见该说明。</li>
       </ul>
-      <p class="logic-help-p"><strong>三、子页签</strong>（无顶部说明段）</p>
+      <p class="logic-help-p"><strong>三、子页签</strong>（无顶部说明段；各子页签展示与打分<strong>以提示词为准</strong>${logicHelpSpecDocRef()}）</p>
       <ul class="logic-help-ul">
         <li><strong>总览</strong>：综合分与档位、页面类型、搜索意图、意图匹配度、测评摘要。</li>
         <li><strong>维度评估</strong>：各语义维度得分与说明（与规则分无关）。</li>
@@ -11049,8 +11666,8 @@ function logicHelpPageSeoAiHTML() {
       </ul>
       <p class="logic-help-p"><strong>四、应用</strong></p>
       <ul class="logic-help-ul">
-        <li>仅「TDK」「结构化数据」模块提供「应用」：预填对应编辑弹窗，用户确认后保存；未授权独立站时只读。</li>
-        <li>产品页结构化数据应用时，弹窗标题为「产品信息」。</li>
+        <li>仅「TDK」「结构化数据」模块提供「应用」：预填对应编辑弹窗，用户确认后保存。</li>
+        <li>须已授权<strong>领动 SaaS 独立站</strong>方可写入（授权其他建站平台暂不确定支持写回）。未满足授权时弹窗只读。</li>
       </ul>
       <p class="logic-help-p logic-help-p--note">AI 提示词与打分细则${spec}。</p>`;
 }
@@ -11063,7 +11680,6 @@ function logicHelpPageSeoKwHTML() {
       <ul class="logic-help-ul">
         <li>三个子页签：排名词、GSC、推荐；标签旁 ℹ 为字段说明浮层。</li>
         <li>右侧统计日期区间：影响 GSC 与排名数据的统计范围。</li>
-        <li>抽屉「目标词」与列表目标词一致，点击可编辑。</li>
       </ul>
       <p class="logic-help-p"><strong>二、GSC 授权</strong></p>
       <ul class="logic-help-ul">
@@ -11072,34 +11688,37 @@ function logicHelpPageSeoKwHTML() {
       </ul>
       <p class="logic-help-p"><strong>三、排名词</strong></p>
       <ul class="logic-help-ul">
-        <li>列：关键词、排名、搜索引擎、排名日期、密度、操作（加入词库 / 设为目标词）。</li>
-        <li>密度：基于页面可解析文本的近似占比。</li>
+        <li><strong>列表范围</strong>：展示「我的关键词」中、抓取后<strong>当前页 URL</strong>为有排名落地页的监控词；且在该词于<strong>所选日期区间内最后一次被成功抓取</strong>的记录里，该页仍有自然搜索排名（无排名或抓取失败的不展示）。按词去重，默认按排名数字升序。</li>
+        <li>列：关键词、排名、搜索引擎、排名日期、密度、操作。</li>
+        <li>密度：基于页面可解析文本的近似占比（计算逻辑同常规检测中的关键词密度）。</li>
+        <li><strong>加入词库</strong>：将该词加入「我的关键词」；已在库中则按钮禁用并提示「已在词库」。</li>
+        <li><strong>设为目标词</strong>：写入当前页目标词字段；若已满 10 个则按钮禁用，鼠标悬停按钮提示已满10个无法添加；已存在则按钮禁用并提示「已为目标词」。</li>
       </ul>
       <p class="logic-help-p"><strong>四、GSC</strong></p>
       <ul class="logic-help-ul">
-        <li>列：关键词、曝光、点击、CTR、排名、密度、操作；数据为所选日期区间内与该页 URL 相关的查询汇总。</li>
+        <li>须已授权 GSC；未授权时本子页签为空态引导授权。</li>
+        <li>数据为所选日期区间内、<strong>与该页 URL 完全匹配</strong>的 Search Console 查询汇总（演示数据）。</li>
+        <li>列：关键词、曝光、点击、CTR、平均排名、密度、操作（规则同排名词）。</li>
+        <li>按曝光或点击降序展示；切换日期区间后重新拉取。</li>
       </ul>
       <p class="logic-help-p"><strong>五、推荐</strong></p>
       <ul class="logic-help-ul">
         <li>切换至「推荐」时清空上次结果；须点击「AI 推荐」加载表格。</li>
-        <li>列：推荐关键词、意图、关键词类型、相关度、推荐理由、操作（无密度列）。</li>
-      </ul>
-      <p class="logic-help-p"><strong>六、编辑目标词</strong></p>
-      <ul class="logic-help-ul">
-        <li>未授权独立站：只读，不可保存。</li>
-        <li>已授权：可增删词；保存至少保留 1 个词；重复词与空输入有对应提示。</li>
+        <li>列：推荐关键词、意图、关键词类型、相关度、推荐理由、操作。</li>
       </ul>`;
 }
 
 function logicHelpPageSeoTdkHTML() {
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>页面整合优化 › 行抽屉 › TDK。</p>
-      ${logicHelpPermHTML('同「页面整合优化」功能权限；保存还须独立站授权。')}
+      ${logicHelpPermHTML('同「页面整合优化」功能权限；保存还须领动 SaaS 独立站授权。')}
       <p class="logic-help-p"><strong>一、展示与编辑</strong></p>
       <ul class="logic-help-ul">
-        <li>只读表：页面标题、页面摘要、关键词；旁显示当前字数/建议上限（标题 60、摘要 160、关键词 100），超出仅警告不阻断保存。</li>
-        <li>未授权独立站：弹窗只读，保存禁用，可复制后至建站后台粘贴。</li>
-        <li>已授权：保存后同步至站点（以实际上线流程为准）。</li>
+        <li><strong>打开抽屉</strong>时自动拉取页面前台 TDK（Title、Meta Description、Meta Keywords），与常规检测抓取口径一致。</li>
+        <li>只读表展示上述三项；旁显示字数/建议上限（标题 60、摘要 160、关键词 100），超出仅警告不阻断保存。</li>
+        <li>未授权领动 SaaS：编辑弹窗只读，保存禁用，可复制后至建站后台粘贴。</li>
+        <li>已授权：保存后<strong>同步写入领动 SaaS 后台</strong>该页面对应 TDK 字段（自定义页、多数系统页、产品/文章详情与分类等支持；关键词聚合页等部分类型不支持编辑，弹窗只读或技术可提供可行方案）。</li>
+        <li><strong>AI 推荐（编辑标题与摘要弹窗）</strong>：弹窗标题栏「AI 推荐」每次成功消耗 <strong>5 点</strong>；一次性生成标题、摘要、Meta Keywords 草稿，分别展示在对应输入框下方预览区，鼠标悬停信息按钮展示AI推荐的理由，用户可按字段「应用」后须再点「保存」。余额不足中止。</li>
       </ul>
       <p class="logic-help-p"><strong>二、AI 测评应用</strong></p>
       <ul class="logic-help-ul">
@@ -11108,57 +11727,65 @@ function logicHelpPageSeoTdkHTML() {
 }
 
 function logicHelpPageSeoSchemaHTML() {
+  const spec = logicHelpSpecDocRef();
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>页面整合优化 › 行抽屉 › 结构化数据。</p>
-      ${logicHelpPermHTML('同「页面整合优化」功能权限；保存还须独立站授权。')}
-      <p class="logic-help-p"><strong>一、子类型与编辑</strong></p>
+      ${logicHelpPermHTML('同「页面整合优化」功能权限；保存还须领动 SaaS 独立站授权。')}
+      <p class="logic-help-p"><strong>一、数据拉取与子页签</strong></p>
       <ul class="logic-help-ul">
-        <li>子页签：机构信息、网站信息；博客路径另含「博客文章」。</li>
-        <li>展示当前 JSON-LD 片段，可「编辑」；保存前须为合法 JSON，否则提示格式错误。</li>
-        <li>未授权独立站：只读；已授权：保存后同步站点。</li>
+        <li><strong>打开抽屉</strong>时自动拉取页面前台全部 JSON-LD，与常规检测一致。</li>
+        <li>子页签按页面实际出现的 Schema 类型动态展示，中文名称与类型白名单见${spec}（如机构信息、网站信息、博客文章、产品信息等）。</li>
+        <li>检测到的类型不在白名单内时，归入<strong>「其他」</strong>子页签。</li>
+        <li>各子页签下展示该类型的一个或多个 JSON 代码片段（同类型多段则分段展示）。</li>
       </ul>
-      <p class="logic-help-p"><strong>二、AI 测评应用</strong></p>
+      <p class="logic-help-p"><strong>二、统一编辑与保存</strong></p>
       <ul class="logic-help-ul">
-        <li>应用结构化数据推荐时预填 JSON；产品页弹窗标题为「产品信息」；博客为「博客文章」。</li>
+        <li>「编辑本页全部」：在弹窗中<strong>统一编辑当前页所有结构化片段</strong>（非单条类型）；保存前须为合法 JSON。</li>
+        <li><strong>AI 推荐（编辑本页结构化数据弹窗）</strong>：弹窗标题栏「AI 推荐」每次成功消耗 <strong>4 点</strong>；生成符合当前页类型的 JSON-LD 草稿填入编辑区，鼠标悬停信息按钮展示AI推荐的理由，用户确认后须再点「保存」。余额不足中止；未授权领动 SaaS 时只读不可保存。</li>
+        <li>须已授权<strong>领动 SaaS 独立站</strong>；未授权只读。保存为<strong>同步逻辑</strong>：写入独立站后台存储，与增长引擎、前台须为同一套数据，非仅前台插件渲染时读取。</li>
+        <li>领动 SaaS 目前仅部分页面类型支持后台单独编辑结构化数据；产品/文章/图册/视频等分类与详情等<strong>暂不支持</strong>（需技术方案）。不支持类型页面为只读。</li>
+      </ul>
+      <p class="logic-help-p"><strong>三、AI 测评应用</strong></p>
+      <ul class="logic-help-ul">
+        <li>从 AI 测评应用推荐时预填「编辑本页全部」弹窗，用户确认后保存。</li>
       </ul>`;
 }
 
 function logicHelpSettingsPackagePointsHTML() {
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>设置 › 套餐资源 › 资源 ›「变更记录」→ 点数流水弹窗。</p>
-      <p class="logic-help-p logic-help-p--note">从功能逻辑说明进入时，在说明抽屉之下打开演示弹窗。</p>
       <p class="logic-help-p"><strong>一、弹窗范围</strong></p>
       <ul class="logic-help-ul">
         <li>仅展示点数变动；列含日期时间、资源类型、变动类型、事项、变动、变动后余量、操作人。</li>
         <li>可按起止日期（自然日闭区间）筛选。</li>
       </ul>
-      <p class="logic-help-p"><strong>二、本期新增功能的消耗记录</strong></p>
+      <p class="logic-help-p"><strong>二、新增消耗资源点数的功能（成功后入账）</strong></p>
+      ${logicHelpPointsConsumeListHTML()}
+      <p class="logic-help-p"><strong>三、事项文案格式（页面整合优化相关）</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>AI 测评</strong>（页面整合优化 › 抽屉 › AI 测评）：每次成功 <strong>18 点</strong>；余额不足不执行、不入账。</li>
-        <li><strong>事项文案格式</strong>：<strong>功能名称 · 页面 URL · 具体操作</strong>。示例：<em>页面整合优化 · /products.html · Title 优化</em>；<em>页面整合优化 · /blog/… · 结构化数据</em>。不写「AI 推荐」前缀。</li>
-        <li><strong>AI 测评事项示例</strong>：页面整合优化 · {页面路径} · AI 测评（或产品约定的操作名）。</li>
+        <li>格式：<strong>功能名称 · 页面 URL · 具体操作</strong>（本期具体操作为：AI测评 / 关键词推荐 / TDK推荐 / 结构化数据推荐）。示例：<em>页面整合优化 · /products.html · TDK推荐</em>；<em>页面整合优化 · /products.html · AI 测评</em>。</li>
+        <li>余额不足时不执行、不入账。</li>
       </ul>`;
 }
 
 function logicHelpSettingsAuthGscHTML() {
   return `
       <p class="logic-help-lead"><strong>入口</strong><br/>设置 › 网站管理 › 站点「设置」› 授权管理（独立站 + 搜索引擎）。</p>
-      <p class="logic-help-p logic-help-p--note">从功能逻辑说明进入时，打开网站设置弹窗并定位本页签。</p>
       ${logicHelpPermHTML('授权管理本身无单独售卖权限；下列能力受绑定状态影响。')}
       <p class="logic-help-p"><strong>一、领动 SaaS 独立站</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>未授权</strong>：展示说明与「前往授权」；TDK、结构化数据、目标词保存不可用。</li>
-        <li><strong>已授权</strong>：展示已连接信息与「解除授权」「测试连接」。</li>
-        <li><strong>二次授权</strong>：解除后再次绑定时，须绑定<strong>同一</strong>独立站站点，选站下拉冻结为原站点，防误绑。</li>
+        <li><strong>授权后增加同步字段</strong>：用户在增长引擎内保存的<strong>页面 TDK、结构化数据</strong>可<strong>同步至领动独立站前台</strong>；未授权时仅可本地预览或复制，不能落库到站外。</li>
       </ul>
       <p class="logic-help-p"><strong>二、Google Search Console</strong></p>
       <ul class="logic-help-ul">
-        <li><strong>未授权</strong>：列表「索引」为未配置；关键词 GSC 子页签为空态引导；提交收录拦截。</li>
-        <li><strong>已授权</strong>：展示收录与各引擎状态；可解除授权；域名须与 GSC 资源一致。</li>
+        <li><strong>授权流程</strong>：用户点击「前往授权」→ 跳转 Google 账号授权页 → 用户选择/确认与增长引擎当前站点域名一致的 Search Console 资源 → 返回后系统保存授权关系 → 界面展示「已授权」，并开始拉取/展示搜索数据。</li>
+        <li><strong>未授权</strong>：列表「索引」为未配置；关键词抽屉「GSC」为全屏引导。</li>
+        <li><strong>已授权</strong>：展示收录与各搜索引擎状态；可查看 GSC 查询、曝光等指标（域名须与 GSC 资源一致）。</li>
+        <li><strong>解除授权</strong>：用户确认后解除与 Google Search Console 的绑定。历史已入库的搜索指标保留只读；或<strong>不再拉取</strong>新数据（以实际技术策略为准，看是否会存储GSC数据）；界面上依赖该授权的模块恢复「未授权」态——索引列显示未配置、搜索关键词子页签为空态引导。用户可再次授权以重新建立连接。</li>
       </ul>
       <p class="logic-help-p"><strong>三、二者关系</strong></p>
       <ul class="logic-help-ul">
-        <li>独立站授权管「写回页面字段」；GSC 授权管「搜索数据与收录操作」；可只开其一或同时开通。</li>
+        <li>独立站授权管「写回页面字段与同步建站」；GSC 授权管「搜索数据与收录相关读数」；可只开其一或同时开通。</li>
       </ul>`;
 }
 
@@ -11170,15 +11797,6 @@ function logicHelpProviderFeatureEnableHTML() {
         <li>在「增长引擎」模块的<strong>产品功能</strong>列表中增加可勾选项：<strong>页面整合优化</strong>（与既有「关键词管理」「关键词排名抓取」「AI 文章」等并列）。</li>
         <li><strong>勾选</strong>：对客户对应站点开通「搜索 › 页面整合优化」入口及单页检测、AI 测评、TDK/结构化数据等能力。</li>
         <li><strong>未勾选</strong>：客户侧隐藏该入口，或进入后提示未开通（以服务商配置策略为准）。</li>
-      </ul>
-      <p class="logic-help-p"><strong>二、与客户侧权限对应</strong></p>
-      <ul class="logic-help-ul">
-        <li>仪表盘「新页面提醒」依赖「页面整合优化」。</li>
-        <li>「曝光页面」「最近抓取」依赖「关键词管理」+「关键词排名抓取」。</li>
-      </ul>
-      <p class="logic-help-p"><strong>三、示意界面</strong></p>
-      <ul class="logic-help-ul">
-        <li><button type="button" class="btn-link logic-help-inline-btn" onclick="openDevResellerOrderDemoFromLogicHelp()">查看订购界面示意</button>（全屏示例，与 4.1 同场景）。</li>
       </ul>`;
 }
 
@@ -11198,6 +11816,7 @@ function getLogicHelpHTML() {
     'dashboard-overview': logicHelpDashboardOverviewHTML,
     'search-page-rank-list': logicHelpPageRankListHTML,
     'search-page-seo': logicHelpPageSeoListHTML,
+    'search-page-seo--drawer': logicHelpPageSeoDrawerHeadHTML,
     'search-page-seo--diag': logicHelpPageSeoDiagHTML,
     'search-page-seo--ai': logicHelpPageSeoAiHTML,
     'search-page-seo--kw': logicHelpPageSeoKwHTML,
@@ -11350,10 +11969,7 @@ function render() {
   renderPageTabs();
   $('content').innerHTML = getPageHTML();
   if (state.primary === 'search' && state.secondary === 'page-seo') {
-    requestAnimationFrame(() => {
-      bindOnPageDrawerHints($('content'));
-      if (typeof applyOnPageSeoListFilters === 'function') applyOnPageSeoListFilters();
-    });
+    requestAnimationFrame(() => bindOnPageDrawerHints($('content')));
   }
   installRankedKwCountLinkDelegate();
   if (state.primary === 'search' && state.secondary === 'page-rank-list') {

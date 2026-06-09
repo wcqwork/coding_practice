@@ -1,0 +1,75 @@
+﻿=== Sheet: 单页SEO测评场景 ===
+Rows: 38, Cols: 12
+Headers: ['场景编号', '场景类型', '覆盖规则/规则ID', '场景/造数要求', '目标词', '影响扣分说明', '预期各维度得分', '预期页面总分', '问题数预期', '预期展示文案关键词', 'JSON关键检查点', '备注']
+
+Row 1:
+  场景编号: 场景编号
+  场景类型: 场景类型
+  覆盖规则/规则ID: 覆盖规则/规则ID
+  场景/造数要求: 场景/造数要求
+  目标词: 目标词
+  影响扣分说明: 影响扣分说明
+  预期各维度得分: 预期各维度得分
+  预期页面总分: 预期页面总分
+  问题数预期: 问题数预期
+  预期展示文案关键词: 预期展示文案关键词
+  JSON关键检查点: JSON关键检查点
+  备注: 备注
+
+Row 2:
+  场景编号: SEO-M-001
+  场景类型: 满分页基准
+  覆盖规则/规则ID: 全局-满分页-100分
+  场景/造数要求: 构造所有 25 个新版检测项均满足满分条件的页面：Title、Meta、H1、正文、图片、URL、Canonical、社媒协议、Hreflang、结构化数据均正常。
+  目标词: cabinet hinges
+  影响扣分说明: 不扣分；作为新版规则基准。
+  预期各维度得分: Title 16/16；Meta 8/8；Headings 18/18；Body 22/22；Media 5/5；URL 6/6；Code 25/25
+  预期页面总分: 100/100
+  问题数预期: 严重0 / 建议0 / 通过25
+  预期展示文案关键词: 七大维度均表现良好
+  JSON关键检查点: totalScore=100；新版检测项总数=25
+  备注: 满分页通过项按25个检测项计算。
+
+Row 3:
+  场景编号: SEO-M-002
+  场景类型: 综合建议
+  覆盖规则/规则ID: Title长度-4分；Title目标词-lastIndex>60-7分；Meta长度-2分；Meta目标词-lastIndex>160-1分；文意一致性-1分；H1长度-1分；堆砌告警-1分；文题一致-3分；Alt非空-1分；主文图片含词-1分；内链-3分；收录规范-5分；社媒-1分；Hreflang-1分；结构化数据-1分
+  场景/造数要求: 同一页面同时满足：Title 偏长且完整目标词尾字符 >60；Meta 长度偏离且完整目标词尾字符 >160；摘要与正文轻微偏离；唯一 H1 略长；目标词密度处于警告边缘；Title 与正文开篇关联一般；少量图片缺 Alt 且图片 Alt 不含目标词；内链锚文本无意义；未声明 Canonical；社媒协议部分缺失；多语言 Hreflang 不完整；结构化有标记但类型不命中白名单。
+  目标词: cabinet hinges
+  影响扣分说明: Title长度扣2；Title目标词扣3；Meta长度扣2；Meta目标词扣1；文意一致性扣1；H1长度扣1；堆砌告警扣1；文题一致扣2；Alt非空扣2；主文图片含词扣1；同站有效内链扣4；收录规范扣4；社媒分享协议扣2；Hreflang扣1；结构化数据扣3；共扣30。
+  预期各维度得分: Title 11/16；Meta 4/8；Headings 17/18；Body 19/22；Media 2/5；URL 6/6；Code 11/25
+  预期页面总分: 70/100
+  问题数预期: 严重0 / 建议15 / 通过10
+  预期展示文案关键词: Title：有优化空间；Meta：有优化空间；Headings：有优化空间；Body：有优化空间；Media：有优化空间；Code：有优化空间
+  JSON关键检查点: titleLength建议档；titleKeywordFullHit=true；titleKeywordLastIndex>60；metaLength建议档；metaKeywordFullHit=true；metaKeywordLastIndex>160；0.04<=metaBodyJaccard<0.08；60<h1DisplayLength<=100；stuffingScore=1；0.05<=titleBodyJaccard<0.1；0<altMissingRate<=20%；kwImgCount=0；internalLinkCount>0；relevantLinkCount=0；canonicalCount=0；socialMetaScore=1；hreflangScore=1；structuredData.total>0；schemaWhitelistHit=false
+  备注: 单造数综合建议页，用于减少多个轻微建议场景。
+【调试提示】本场景包含15个建议子项，执行失败时难以快速定位。建议优先单独验证以下两处新版逻辑：①Title目标词 lastIndex>60→7分（新版位置判定核心逻辑）；②Meta目标词 lastIndex>160→1分（同上）。如需隔离某条规则，可临时拆出单点页面验证。
+
+Row 4:
+  场景编号: SEO-M-003
+  场景类型: Headings综合异常
+  覆盖规则/规则ID: H1唯一性-多个H1-0分；H1长度-1分；H1目标词-切片命中-2分；Title/H1差异化-2分；层级无跳级-0分
+  场景/造数要求: 同一页面存在多个 H1；首个 H1 长度 60~100；首个 H1 不含完整目标词但切片命中率 >=50%；Title/H1 相似度偏高；页面存在 H1 后直接 H3 的跳级结构，且至少有一个 H2-H6 次级标题。
+  目标词: cabinet hinges
+  影响扣分说明: H1唯一性扣4；H1长度扣1；H1目标词扣3；Title/H1差异化扣1；层级无跳级扣2；共扣11。
+  预期各维度得分: Title 16/16；Meta 8/8；Headings 7/18；Body 22/22；Media 5/5；URL 6/6；Code 25/25
+  预期页面总分: 89/100
+  问题数预期: 严重2 / 建议3 / 通过20
+  预期展示文案关键词: Headings：存在需优先处理的严重项
+  JSON关键检查点: h1Count>=2；60<h1DisplayLength<=100；h1FullKeywordHit=false；h1SliceHitRate>=50%；0.5<titleH1Jaccard<=0.8；subHeadingCount>=1；headingSkipCount>=1
+  备注: 不与子标题结构缺失合并；本场景需存在次级标题才能验证跳级。
+
+Row 5:
+  场景编号: SEO-M-004
+  场景类型: Body建议组合
+  覆盖规则/规则ID: 正文字数-300~499词-4分；含词次数-2次-4分；首段点题-一般-2分
+  场景/造数要求: 基于满分页，主文 300~499 词，目标词出现 2 次且不堆砌，首次完整命中位于一般档。
+  目标词: cabinet hinges
+  影响扣分说明: 正文字数扣2；含词次数扣2；首段点题扣1；共扣5。
+  预期各维度得分: Title 16/16；Meta 8/8；Headings 18/18；Body 17/22；Media 5/5；URL 6/6；Code 25/25
+  预期页面总分: 95/100
+  问题数预期: 严重0 / 建议3 / 通过22
+  预期展示文案关键词: Body：有优化空间
+  JSON关键检查点: 300<=wordCount<500；keywordFreq=2；600<firstKeywordLastIndex<=1200 或 10%<positionPct<=20%
+  备注: 【造数注意】首段点题新版以Display Length字符位置（lastIndex）判档，非词序。中间档（2分）要求：600 < lastIndex ≤ 1200 或 10% < positionPct ≤ 20%。造数时不要按词数控制位置，需直接确认目标词最后一个字符在第几个Display Length字符处。
+

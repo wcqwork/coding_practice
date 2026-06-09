@@ -1,0 +1,198 @@
+﻿Row 6:
+  场景编号: SEO-M-005
+  场景类型: N/A综合
+  场景/造数要求: 同一页面清空目标词、移除主文区图片，页面类型不适用正文字数和 Slug，站点为非多语言站点；相关依赖项均按不适用满分。
+  目标词: 无
+
+Row 7:
+  场景编号: SEO-M-006
+  场景类型: 多目标词综合
+  场景/造数要求: 配置多个目标词：A 词在 Title、Meta、H1、正文、图片 Alt 等正向字段完美命中，用于验证 MAX；B 词在正文中触发堆砌严重红线，用于验证 ANY；其他页面结构保持满分。
+  目标词: drawer slide,cabinet hinges,hardware supplier
+
+Row 8:
+  场景编号: SEO-M-007
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，删除 head 中的 title 标签；H1、Meta、正文等其他内容保持满分条件。
+  目标词: cabinet hinges
+
+Row 9:
+  场景编号: SEO-M-008
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，保留 title 标签但内容为空或仅空白字符；其他项保持满分。
+  目标词: cabinet hinges
+
+Row 10:
+  场景编号: SEO-M-009
+  场景类型: 严重组合
+  场景/造数要求: 基于满分页，同时让 Title 长度严重不合规，并且 Title 不包含完整目标词且切片命中率 <50%。
+  目标词: cabinet hinges
+
+Row 11:
+  场景编号: SEO-M-010
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，删除 meta[name=description] 标签；其他内容保持满分。
+  目标词: cabinet hinges
+
+Row 12:
+  场景编号: SEO-M-011
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，保留 meta[name=description] 但 content 为空；其他项保持满分。
+  目标词: cabinet hinges
+
+Row 13:
+  场景编号: SEO-M-012
+  场景类型: 严重组合
+  场景/造数要求: 基于满分页，同时让 Meta 长度严重不合规、目标词完整词与切片均未命中、摘要与正文严重偏离。
+  目标词: cabinet hinges
+
+Row 14:
+  场景编号: SEO-M-013
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，删除页面 H1；保留 H2-H6 次级标题且不制造跳级。
+  目标词: cabinet hinges
+
+Row 15:
+  场景编号: SEO-M-014
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，保留一个 H1 标签但文本为空；保留 H2-H6 次级标题且不制造跳级。
+  目标词: cabinet hinges
+
+Row 16:
+  场景编号: SEO-M-015
+  场景类型: 严重组合
+  场景/造数要求: 基于满分页，H1 不含完整目标词且切片命中率 <50%，Title/H1 严重重复或脱节，并移除全部 H2-H6 次级标题；不制造层级跳级。
+  目标词: cabinet hinges
+
+Row 17:
+  场景编号: SEO-M-016
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，主文词数 <100；使用单词元目标词并控制密度，确保含词次数、堆砌、首段点题、文题一致均保持满分。
+  目标词: hinges
+
+Row 18:
+  场景编号: SEO-M-017
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，主文区不出现目标词；Title、Meta、H1 可正常包含目标词。
+  目标词: cabinet hinges
+
+Row 19:
+  场景编号: SEO-M-018
+  场景类型: Body建议组合
+  场景/造数要求: 基于满分页，主文区词数 100~299，目标词仅出现 1 次且不堆砌，首次出现明显滞后，并让标题与正文开篇实体重叠极低。
+  目标词: cabinet hinges
+
+Row 20:
+  场景编号: SEO-M-019
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，仅让目标词密度或频次触发堆砌严重红线。
+  目标词: cabinet hinges
+
+Row 21:
+  场景编号: SEO-M-020
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，仅让 Title 与正文开篇实体完全不重合，或正文开篇有效文本过少。
+  目标词: cabinet hinges
+
+Row 22:
+  场景编号: SEO-M-021
+  场景类型: 严重组合
+  场景/造数要求: 基于满分页，让主文区大量图片缺失 Alt，且没有任何图片 Alt 包含目标词。
+  目标词: cabinet hinges
+
+Row 23:
+  场景编号: SEO-M-022
+  场景类型: URL+Hreflang组合
+  场景/造数要求: 同一页面最终 URL 使用 HTTP，页面类型为 Slug 适用类型且 slug 不包含目标词或别名，同时多语言站点 Hreflang 配置不完整。
+  目标词: cabinet hinges
+
+Row 24:
+  场景编号: SEO-M-023
+  场景类型: Code严重综合
+  场景/造数要求: 同一页面增加 noindex，主文区无同域内链，并移除全部 OG/Twitter 社媒分享协议字段；其他项保持满分。
+  目标词: cabinet hinges
+
+Row 25:
+  场景编号: SEO-M-024
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，输出多条 canonical 标签且 href 指向不同 URL。
+  目标词: cabinet hinges
+
+Row 26:
+  场景编号: SEO-M-025
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，将唯一一条 Canonical 的 href 改为指向不同注册域的 URL；其他项保持满分。
+  目标词: cabinet hinges
+
+Row 27:
+  场景编号: SEO-M-026
+  场景类型: 建议单点
+  场景/造数要求: 基于满分页，将 Canonical 的 href 改为相对路径或非 https 绝对 URL；其他项保持满分。
+  目标词: cabinet hinges
+
+Row 28:
+  场景编号: SEO-M-027
+  场景类型: 结构化专项
+  场景/造数要求: 页面仅提供 JSON-LD 格式结构化数据，@type 命中 Google 支持白名单；Microdata 与 RDFa 不提供。
+  目标词: cabinet hinges
+
+Row 29:
+  场景编号: SEO-M-028
+  场景类型: 结构化专项
+  场景/造数要求: 页面仅提供 Microdata 格式结构化数据，itemtype URL 末段映射类型命中白名单；JSON-LD 与 RDFa 不提供。
+  目标词: cabinet hinges
+
+Row 30:
+  场景编号: SEO-M-029
+  场景类型: 结构化专项
+  场景/造数要求: 页面仅提供 RDFa 格式结构化数据，typeof 映射类型命中白名单；JSON-LD 与 Microdata 不提供。
+  目标词: cabinet hinges
+
+Row 31:
+  场景编号: SEO-M-030
+  场景类型: 结构化专项
+  场景/造数要求: 基于满分页，移除 JSON-LD、Microdata、RDFa 等全部结构化数据。
+  目标词: cabinet hinges
+
+Row 32:
+  场景编号: SEO-M-031
+  场景类型: 综合汇总
+  场景/造数要求: 构造包含多个维度问题的综合页：Title 目标词未命中、Meta 长度偏离、H1 多个、正文略短、图片 Alt 少量缺失、HTTP 访问、Canonical 未声明。
+  目标词: cabinet hinges
+
+Row 33:
+  场景编号: SEO-M-032
+  场景类型: 综合汇总
+  场景/造数要求: 构造一个低分但仍可解析的风险页：缺 Title、缺 Meta、缺 H1、正文无目标词、HTTP 访问、noindex、结构化数据缺失。
+  目标词: cabinet hinges
+
+Row 34:
+  场景编号: SEO-M-033
+  场景类型: 建议组合
+  场景/造数要求: 基于满分页，让 Title、Meta、H1 均不包含完整目标词，但分别包含目标词切片，可覆盖切片命中得分档。
+  目标词: cabinet hinges
+
+Row 35:
+  场景编号: SEO-M-034
+  场景类型: 严重组合
+  场景/造数要求: 基于满分页，让 Title、Meta、H1 均不包含完整目标词或有效切片，并移除 H2-H6 次级标题；正文仍自然包含目标词。
+  目标词: cabinet hinges
+
+Row 36:
+  场景编号: SEO-M-035
+  场景类型: 严重单点
+  场景/造数要求: 基于满分页，保留唯一非空 H1，但将文本扩写至 Display Length >100；目标词仍完整包含，其他项保持满分。
+  目标词: cabinet hinges
+
+Row 37:
+  场景编号: SEO-M-036
+  场景类型: N/A专项
+  场景/造数要求: 基于满分页，页面类型属于 Slug 适用列表，但目标词为非 ASCII 且未配置英文别名；Slug 含词按不适用满分。
+  目标词: 橱柜铰链
+
+Row 38:
+  场景编号: SEO-M-037
+  场景类型: 建议单点
+  场景/造数要求: 基于满分页，输出2条或以上 Canonical 标签，但所有 href 经规范化后完全一致（如均指向 https://example.com/product/cabinet-hinges）；无 noindex；其他项保持满分。
+  目标词: cabinet hinges
+
