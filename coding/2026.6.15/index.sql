@@ -1,22 +1,48 @@
 CREATE TABLE IF NOT EXISTS `phoenix_agent_showcase_featured` (
-  `showcase_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-  `organization_id` BIGINT NOT NULL,
+  `showcase_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '精选案例主键ID',
+  `organization_id` BIGINT NOT NULL COMMENT '组织ID',
   `SITE_SETTING_ID` BIGINT NOT NULL COMMENT '网站ID',
   `INDUSTRY_CODES` VARCHAR(255) NOT NULL COMMENT '新行业表编码（非ID）;例如：,1,1,',
-  `LOCATION_IDS` VARCHAR(255) NOT NULL COMMENT '地域表中主键ID（区/县级）;例如：,1,1,',
-  `site_start_time` TIMESTAMP NOT NULL,
-  `site_logon_time` TIMESTAMP NOT NULL,
-  `site_pv` INTEGER NOT NULL,
-  `site_uv` INTEGER NOT NULL,
-  `site_action` INTEGER NOT NULL,
-  `site_inquire` INTEGER NOT NULL,
-  `site_prod_num` INTEGER NOT NULL,
-  `site_article_num` INTEGER NOT NULL,
-  `add_time` TIMESTAMP NOT NULL,
+  `LOCATION_IDS` VARCHAR(255) NOT NULL COMMENT '地域表中主键ID（区/县级）;例如：,Beijing,',
+  `site_start_time` DATETIME NOT NULL COMMENT '网站开通时间',
+  `site_logon_time` DATETIME NOT NULL COMMENT '网站上线时间',
+  `site_pv` INT NOT NULL COMMENT '月浏览量PV',
+  `site_uv` INT NOT NULL COMMENT '月访客量UV',
+  `site_action` INT NOT NULL COMMENT '月网站互动数',
+  `site_inquire` INT NOT NULL COMMENT '月销售机会数',
+  `site_prod_num` INT NOT NULL COMMENT '累计产品总数',
+  `site_article_num` INT NOT NULL COMMENT '累计文章总数',
+  `add_time` DATETIME NOT NULL COMMENT '数据创建时间',
   PRIMARY KEY(`showcase_id`)
-);
+) COMMENT='精选案例表';
 
-CREATE INDEX `phoenix_agent_showcase_featured_index_0`
+CREATE INDEX `idx_phoenix_agent_showcase_featured_organization_id`
 ON `phoenix_agent_showcase_featured` (`organization_id`);
-CREATE INDEX `phoenix_agent_showcase_featured_index_1`
+
+CREATE INDEX `idx_phoenix_agent_showcase_featured_site_setting_id`
 ON `phoenix_agent_showcase_featured` (`SITE_SETTING_ID`);
+
+
+INSERT INTO `phoenix_agent_showcase_featured` 
+  (`organization_id`, `SITE_SETTING_ID`, `INDUSTRY_CODES`, `LOCATION_IDS`, `site_start_time`, `site_logon_time`, `site_pv`, `site_uv`, `site_action`, `site_inquire`, `site_prod_num`, `site_article_num`, `add_time`)
+VALUES
+  (255154, 151929, ',1,', ',China_Jiangsu,', '2019-10-12 17:09:42', '2020-03-15 00:00:00', 76800, 12350, 892, 176, 480, 260, NOW()),
+  (499854, 27821, ',17,', ',China_Jiangsu,', '2017-05-06 10:59:16', '2017-09-20 00:00:00', 53200, 8900, 645, 98, 320, 180, NOW()),
+  (441814, 108044, ',16,', ',Guangdong_Guangzhou,', '2019-02-21 10:17:12', '2019-06-10 00:00:00', 42100, 7200, 510, 85, 250, 150, NOW()),
+  (557684, 108044, ',17,', ',China_Zhejiang,', '2019-02-21 10:17:12', '2019-08-01 00:00:00', 38500, 6100, 430, 72, 200, 120, NOW()),
+  (526074, 108044, ',1,', ',China_Zhejiang,', '2019-02-21 10:17:12', '2019-07-15 00:00:00', 35600, 5800, 380, 65, 180, 95, NOW()),
+  (558674, 897184, ',19,', ',China_Shandong,', '2025-08-07 19:28:42', '2025-10-01 00:00:00', 31200, 5100, 340, 58, 160, 88, NOW()),
+  (548004, 108044, ',17,', ',China_Zhejiang,', '2019-02-21 10:17:12', '2019-09-20 00:00:00', 28700, 4600, 310, 52, 145, 76, NOW()),
+  (445022, 127344, ',2,', ',China_Zhejiang,', '2019-05-30 16:51:30', '2019-10-10 00:00:00', 25400, 4100, 280, 45, 130, 68, NOW()),
+  (3785, 4417, ',14,', ',China_Zhejiang,', '2015-11-03 00:00:00', '2016-03-01 00:00:00', 22100, 3600, 250, 38, 115, 62, NOW()),
+  (507024, 108044, ',1,', ',China_Jiangsu,', '2019-02-21 10:17:12', '2019-11-15 00:00:00', 19800, 3200, 220, 32, 100, 55, NOW()),
+  (468192, 151279, ',5,', ',China_Zhejiang,', '2019-10-08 10:18:36', '2020-02-20 00:00:00', 17500, 2800, 195, 28, 90, 48, NOW()),
+  (446412, 108044, ',5,', ',Guangdong_Guangzhou,', '2019-02-21 10:17:12', '2019-12-01 00:00:00', 15200, 2500, 170, 24, 82, 42, NOW()),
+  (88124, 87081, ',16,', ',China_Zhejiang,', '2018-11-09 14:22:36', '2019-04-10 00:00:00', 13800, 2200, 150, 20, 75, 38, NOW()),
+  (92144, 345, ',15,', ',China_Shanghai,', '2014-09-30 00:00:00', '2015-02-15 00:00:00', 12500, 2000, 135, 18, 68, 35, NOW()),
+  (181654, 345, ',16,', ',China_Jiangsu,', '2014-09-30 00:00:00', '2015-03-20 00:00:00', 11200, 1800, 120, 15, 60, 30, NOW()),
+  (44421, 51451, ',6,', ',Guangdong_Shenzhen,', '2018-01-04 17:17:12', '2018-05-10 00:00:00', 10500, 1650, 108, 13, 55, 28, NOW()),
+  (445752, 345, ',15,', ',China_Jiangsu,', '2014-09-30 00:00:00', '2015-04-01 00:00:00', 10100, 1500, 95, 12, 50, 25, NOW()),
+  (255154, 151929, ',2,', ',China_Jiangsu,', '2019-10-12 17:09:42', '2020-06-01 00:00:00', 45000, 7500, 560, 92, 280, 160, NOW()),
+  (499854, 27821, ',1,', ',China_Jiangsu,', '2017-05-06 10:59:16', '2018-01-10 00:00:00', 32000, 5300, 350, 56, 155, 82, NOW()),
+  (3785, 4417, ',13,', ',China_Zhejiang,', '2015-11-03 00:00:00', '2016-06-15 00:00:00', 18600, 3000, 210, 30, 95, 50, NOW());
