@@ -1,0 +1,25 @@
+﻿RENDER_ID,RENDER_TYPE,RANDER_PAGE_NAME,RANDER_CONTENT,FOLDER_ID,VERSION_NO,APP_ID,ADD_TIME,ADDER_NO,ADDER_NAME,UPDATE_TIME,UPDATER_NO,UPDATER_NAME,STYLE_ID,TERMINAL_TYPE
+"340644","1","view_default.html","<div id=""${pageNodeId}"" class=""dynamic-component-container video-dynamic-container"" data-block-uuid=""videoDetail"" data-encodeId=""${videoId!}"" data-default-setting={}>
+	[@api method=""post"" url=""/phoenix2/composite/site/graphql/generateApiParam"" apiType=""common"" dataRange='[""totalRow"",""pageSize"",{""list"":[""encodeId"",""videoName"",""photoUrl"",""videoDesc"",""videoUrl"",""videoSource""]},""extraData{videoStructureData,videoOpenGraph}""]']
+		[@api method=""post"" version=""v2"" url=""/phoenix2/composite/graphql"" selectVideoId= ""${videoId!''}"" extraParam=""${extraParamJson!''}"" query='{
+			videoList(conditionDto: {page: 1, limit: 1,selectVideoType: ""3"", groupIdByPage: ""$selectVideoId$"", extraParamJson: ""$extraParam$""}) ${data.newDataRange}
+		}']
+			[#if data?? && data.videoList?? && data.videoList.list??&& (data.videoList.list?size > 0)]
+				[#list data.videoList.list as video]
+					[@develop_include appId=""29124"" styleId=""-1"" fileName=""template_content.html"" backendGuideReplace=""<!-- editor_replace_place -->"" /]
+				[/#list]
+			[#else]
+				<div class=""videodetail-no-data"">[@s.m ""phoenix_no_content"" /]</div>
+			[/#if]
+			<div data-nodrag class=""save_remove_html"">
+				[@develop_include appId=""29124"" styleId=""-1"" fileName=""extend_content.html""][/@develop_include]
+				[@develop_include appId=""29124"" styleId=""-1"" fileName=""extend_style.html""][/@develop_include]
+			</div>
+			[#if data?? && data.videoList?? && data.videoList.extraData?? && data.videoList.extraData.videoStructureData??]
+			<script type=""application/ld+json"">
+                ${data.videoList.extraData.videoStructureData!"""" }
+            </script>  
+			[/#if]
+		[/@api]
+	[/@api]
+</div>","-1","20250710192928","29124","2024-03-01 11:08:53","7310394","王成强","2026-05-20 10:07:43","10311554","陈蓉琪","-1","0"

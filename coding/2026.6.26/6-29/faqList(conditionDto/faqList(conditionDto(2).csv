@@ -1,0 +1,256 @@
+﻿RENDER_ID,RENDER_TYPE,RANDER_PAGE_NAME,RANDER_CONTENT,FOLDER_ID,VERSION_NO,APP_ID,ADD_TIME,ADDER_NO,ADDER_NAME,UPDATE_TIME,UPDATER_NO,UPDATER_NAME,STYLE_ID,TERMINAL_TYPE
+"268584","1","view_default.html","<div class=""backstage-blocksEditor-wrap wra block_77449"" data-block-uuid=""faqList""  data-gjs-type=""developer-node-component""  data-block-type=""phoenix_blocks_faqList"" data-default-setting={}>
+      [@api method=""post"" url=""/phoenix2/composite/graphql"" page=""${pageNum!'1'}"" limit=""${pageSize!'10'}"" version=""v2"" faqQueryType=""${dataType!'0'}"" searchFaqCateIds=""${dataGroupId!''}"" searchFaqIds=""${dataIds!''}"" loadMethod=""${loadMethod!''}"" cateId=""${faqGroupId!'-1'}"" orderBy=""${orderBy!'0'}"" expandIds=""${expandIds!''}""  layoutStyle=""${layoutStyle!''}"" jumpMethod=""${jumpMethod!''}""
+            query='{ faqList(conditionDto: {page: $page$, limit: $limit$, faqCateIdByPage: ""$cateId$"", faqQueryType: ""$faqQueryType$"", searchFaqIds: ""$searchFaqIds$"", searchFaqCateIds: ""$searchFaqCateIds$""}) {
+                    totalRow
+                    pageSize
+                    pageNumber
+                    list {
+                    faqId
+                    faqTitle
+                    faqContent
+                }
+                }
+                } ']
+      <div class=""block-listTemp-container-replace"">
+          <ul class=""faq-box"">
+            [#if data?? && data.faqList?? && data.faqList.list?? && (data.faqList.list?size > 0)]
+                [#list data.faqList.list as list]
+                    <li>
+                        <div class=""title"">Q:&nbsp;${list.faqTitle!''}</div>
+                        <div class=""content"">A:&nbsp;${list.faqContent!''}</div>
+                    </li>
+                [/#list]
+            [#else]
+                <div class=""templist-no-data"">[@s.m ""phoenix_no_content"" /]</div>
+            [/#if]
+          </ul>
+          <input type=""hidden"" name=""totalRow"" value=""${data.faqList.totalRow!'0'}""> 
+          <input type=""hidden"" name=""pageNumber"" value=""${data.faqList.pageNumber!'1'}"">
+          <input type=""hidden"" name=""pageSize"" value=""${data.faqList.pageSize!'10'}"">
+      </div>
+      
+  
+[/@api]
+  
+</div>","-1","","29794","2024-04-03 15:49:06","7737834","李田杰","2024-04-03 16:04:06","7737834","李田杰","-1","0"
+"268814","1","view_default.html","<div class=""backstage-blocksEditor-wrap wra block_29814"" data-block-uuid=""faqList""  data-gjs-type=""developer-node-component""  data-block-type=""phoenix_blocks_faqList"" data-default-setting={}>
+      [@api method=""post"" url=""/phoenix2/composite/graphql"" page=""${pageNum!'1'}"" limit=""${pageSize!'10'}"" version=""v2"" faqQueryType=""${dataType!'0'}"" searchFaqCateIds=""${dataGroupId!''}"" searchFaqIds=""${dataIds!''}"" loadMethod=""${loadMethod!''}"" cateId=""${faqGroupId!'-1'}"" orderBy=""${orderBy!'0'}"" expandIds=""${expandIds!''}""  layoutStyle=""${layoutStyle!''}"" jumpMethod=""${jumpMethod!''}""
+            query='{ faqList(conditionDto: {page: $page$, limit: $limit$, faqCateIdByPage: ""$cateId$"", faqQueryType: ""$faqQueryType$"", searchFaqIds: ""$searchFaqIds$"", searchFaqCateIds: ""$searchFaqCateIds$""}) {
+                    totalRow
+                    pageSize
+                    pageNumber
+                    list {
+                    faqId
+                    faqTitle
+                    faqContent
+                }
+                }
+                } ']
+      <div class=""block-listTemp-container-replace"">
+            [#if data?? && data.faqList?? && data.faqList.list?? && (data.faqList.list?size > 0)]
+                [#list data.faqList.list as list]
+                <div tabindex=""0"" class=""collapse collapse-plus border border-base-300 bg-white mb-3"">
+                    <input type=""checkbox"" class=""peer"" hidden> 
+                    <div class=""collapse-title text-xl font-medium peer-checked:text-primary"">
+                    <p>${list.faqTitle!''}</p>
+                    </div>
+                    <div class=""collapse-content peer-checked:bg-base-100""> 
+                    <p>${list.faqContent!''}</p>
+                    </div>
+                </div>
+                [/#list]
+            [#else]
+                <div class=""templist-no-data"">[@s.m ""phoenix_no_content"" /]</div>
+            [/#if]
+          <input type=""hidden"" name=""totalRow"" value=""${data.faqList.totalRow!'0'}""> 
+          <input type=""hidden"" name=""pageNumber"" value=""${data.faqList.pageNumber!'1'}"">
+          <input type=""hidden"" name=""pageSize"" value=""${data.faqList.pageSize!'10'}"">
+      </div>
+      
+[/@api]
+  
+</div>","-1","","29814","2024-04-03 16:42:47","7737834","李田杰","2024-04-08 13:44:08","7737834","李田杰","-1","0"
+"340734","1","view_default.html","<div class=""backstage-blocksEditor-wrap wra block_77449"" data-block-uuid=""faqList"" data-dynamic-toolbar=""1"" data-dynamic-type=""faqList""  data-gjs-type=""developer-node-component""  data-block-type=""phoenix_blocks_faqList"" data-default-setting={}>
+    [#if componentSetting?? && componentSetting != """"]
+        [#assign componentSettingJSON=componentSetting?eval /]
+        [#if componentSettingJSON?? && componentSettingJSON.dynamicFontTab??]
+            [#list componentSettingJSON.dynamicFontTab as item]
+                [#list item.saveData as saveDataItem]
+                    [#if saveDataItem.styleKey?? && saveDataItem.styleKey == 'currentFontStyleClass']
+                        [#if item.value?? && item.value == 'faqTitleFont']
+                            [#assign htmlClass_faqTitleFont = saveDataItem.defaultFont /]                            
+                        [/#if]
+                        [#if item.value?? && item.value == 'faqContentFont']
+                            [#assign htmlClass_faqContentFont = saveDataItem.defaultFont /]                            
+                        [/#if]
+                    [/#if]
+                    [#if saveDataItem.styleKey?? && saveDataItem.styleKey == 'currentFontName']
+                        [#assign fontMap = {
+                            'H1': 'h1',
+                            'H2': 'h2',
+                            'H3': 'h3',
+                            'H4': 'h4',
+                            'H5': 'h5',
+                            'H6': 'h6',
+                            'DIV': 'div',
+                            'P': 'p',
+                            'P1': 'p',
+                            'P2': 'p',
+                            'P3': 'p'
+                        } /]
+                        [#if item.value?? && item.value == 'faqTitleFont']           
+                            [#assign htmlTarget_faqTitleFont = fontMap[saveDataItem.defaultFont?upper_case]! 'div' /]
+                        [/#if]
+                    [/#if]
+                [/#list]
+            [/#list]
+            
+        [/#if]
+    [/#if]
+    [@api method=""post"" url=""/phoenix2/composite/graphql"" page=""${pageNum!'1'}"" limit=""${pageSize!'10'}"" version=""v2"" faqQueryType=""${dataType!'0'}"" searchFaqCateIds=""${dataGroupId!''}"" searchFaqIds=""${dataIds!''}"" loadMethod=""${loadMethod!''}"" cateId=""${faqGroupId!'-1'}"" orderBy=""${orderBy!'0'}"" expandIds=""${expandIds!''}""  layoutStyle=""${layoutStyle!''}"" jumpMethod=""${jumpMethod!''}""
+            query='{ faqList(conditionDto: {page: $page$, limit: $limit$, faqCateIdByPage: ""$cateId$"", faqQueryType: ""$faqQueryType$"", searchFaqIds: ""$searchFaqIds$"", searchFaqCateIds: ""$searchFaqCateIds$""}) {
+                    totalRow
+                    pageSize
+                    pageNumber
+                    list {
+                    faqId
+                    faqTitle
+                    faqContent
+                }
+                }
+                } ']
+      <div class=""block-listTemp-container-replace"">
+          <ul class=""faq-box"">
+            [#if data?? && data.faqList?? && data.faqList.list?? && (data.faqList.list?size > 0)]
+                [#list data.faqList.list as list]
+                    <li>
+                        <${htmlTarget_faqTitleFont!'div'} class=""title ${htmlClass_faqTitleFont!'heading5'}"">Q:&nbsp;${list.faqTitle!''}</${htmlTarget_faqTitleFont!'div'}>
+                        <div class=""content ${htmlClass_faqContentFont!'paragraph1'}"">
+                            <div style=""min-width: 20px;"">A:&nbsp;</div>
+                            <div class=""faqContent"">${list.faqContent!''}</div>
+                        </div>
+                    </li>
+                [/#list]
+            [#else]
+                <div class=""templist-no-data"">[@s.m ""phoenix_no_content"" /]</div>
+            [/#if]
+          </ul>
+          <input type=""hidden"" name=""totalRow"" value=""${data.faqList.totalRow!'0'}""> 
+          <input type=""hidden"" name=""pageNumber"" value=""${data.faqList.pageNumber!'1'}"">
+          <input type=""hidden"" name=""pageSize"" value=""${data.faqList.pageSize!'10'}"">
+      </div>
+      
+      [#if !loadMethod?? || loadMethod == '0']
+          <div class=""listTemp-site-pagination-77449 [#if data.faqList.pageSize?? && data.faqList.totalRow?? && (data.faqList.totalRow < data.faqList.pageSize || data.faqList.totalRow == data.faqList.pageSize)]hide[/#if]"">
+              <div class=""listTemp-laypage-normal"" id='listTemp-laypage-normal'></div>
+          </div>
+      [/#if]
+    <script>
+          $(function(){
+              window._block_namespaces_['block_77449'].init({'relationId':'${relationId}','relationType':'${relationType}','pageId':'${pageId}','nodeId':'faqList_${nodeId!""""}', 'appId': '${appId!}', 'appIsDev': '${appIsDev!""0""}','appVersion':'${appVersion}'});
+          });
+      </script>
+[/@api]
+  
+</div>","-1","","39564","2025-08-19 16:04:27","7374124","demo-李智","2025-08-20 14:38:04","7374124","demo-李智","-1","0"
+"365678","1","view_default.html","<div class=""backstage-blocksEditor-wrap wra block_77449"" data-block-uuid=""faqList"" data-dynamic-toolbar=""1"" data-dynamic-type=""faqList""  data-gjs-type=""developer-node-component""  data-block-type=""phoenix_blocks_faqList"" data-default-setting={}>
+    [@new_editor_resource resourceType=""css""]
+        /assets/blockEditor/styles/tiptap_richText/tiptap_richText.css
+    [/@new_editor_resource]
+    [@new_editor_resource resourceType=""js""]
+        /assets/blockEditor/script/tiptap_richText/tiptap_richText.js
+    [/@new_editor_resource]
+    [#if componentSetting?? && componentSetting != """"]
+        [#assign componentSettingJSON=componentSetting?eval /]
+        [#if componentSettingJSON?? && componentSettingJSON.dynamicFontTab??]
+            [#list componentSettingJSON.dynamicFontTab as item]
+                [#list item.saveData as saveDataItem]
+                    [#if saveDataItem.styleKey?? && saveDataItem.styleKey == 'currentFontStyleClass']
+                        [#if item.value?? && item.value == 'faqTitleFont']
+                            [#assign htmlClass_faqTitleFont = saveDataItem.defaultFont /]                            
+                        [/#if]
+                        [#if item.value?? && item.value == 'faqContentFont']
+                            [#assign htmlClass_faqContentFont = saveDataItem.defaultFont /]                            
+                        [/#if]
+                    [/#if]
+                    [#if saveDataItem.styleKey?? && saveDataItem.styleKey == 'currentFontName']
+                        [#assign fontMap = {
+                            'H1': 'h1',
+                            'H2': 'h2',
+                            'H3': 'h3',
+                            'H4': 'h4',
+                            'H5': 'h5',
+                            'H6': 'h6',
+                            'DIV': 'div',
+                            'P': 'p',
+                            'P1': 'p',
+                            'P2': 'p',
+                            'P3': 'p'
+                        } /]
+                        [#if item.value?? && item.value == 'faqTitleFont']           
+                            [#assign htmlTarget_faqTitleFont = fontMap[saveDataItem.defaultFont?upper_case]! 'div' /]
+                        [/#if]
+                    [/#if]
+                [/#list]
+            [/#list]
+            
+        [/#if]
+    [/#if]
+    [@api method=""post"" url=""/phoenix2/composite/graphql"" page=""${pageNum!'1'}"" limit=""${pageSize!'10'}"" version=""v2"" faqQueryType=""${dataType!'0'}"" searchFaqCateIds=""${dataGroupId!''}"" searchFaqIds=""${dataIds!''}"" loadMethod=""${loadMethod!''}"" cateId=""${faqGroupId!'-1'}"" orderBy=""${orderBy!'0'}"" expandIds=""${expandIds!''}""  layoutStyle=""${layoutStyle!''}"" jumpMethod=""${jumpMethod!''}"" extraParamJson=""${extraParamJson!''}""
+            query='{ 
+                faqList(conditionDto: {page: $page$, limit: $limit$, faqCateIdByPage: ""$cateId$"", faqQueryType: ""$faqQueryType$"", searchFaqIds: ""$searchFaqIds$"", searchFaqCateIds: ""$searchFaqCateIds$"", extraParamJson: ""$extraParamJson$"" }) {
+                    totalRow
+                    pageSize
+                    pageNumber
+                    list {
+                    faqId
+                    faqTitle
+                    faqContent
+                }
+                extraData {
+                    faqStructureData
+                }
+                }
+                } ']
+      <div class=""block-listTemp-container-replace"">
+          <ul class=""faq-box"">
+            [#if data?? && data.faqList?? && data.faqList.list?? && (data.faqList.list?size > 0)]
+                [#list data.faqList.list as list]
+                    <li>
+                        <${htmlTarget_faqTitleFont!'div'} class=""title ${htmlClass_faqTitleFont!'heading5'}"">Q:&nbsp;${list.faqTitle!''}</${htmlTarget_faqTitleFont!'div'}>
+                        <div class=""content"">
+                            <div style=""min-width: 20px;"" class=""${htmlClass_faqContentFont!'paragraph1'}"">A:&nbsp;</div>
+                            <div class=""faqContent ${htmlClass_faqContentFont!'paragraph1'}"""">${list.faqContent!''}</div>
+                        </div>
+                    </li>
+                [/#list]
+            [#else]
+                <div class=""templist-no-data"">[@s.m ""phoenix_no_content"" /]</div>
+            [/#if]
+          </ul>
+          <input type=""hidden"" name=""totalRow"" value=""${data.faqList.totalRow!'0'}""> 
+          <input type=""hidden"" name=""pageNumber"" value=""${data.faqList.pageNumber!'1'}"">
+          <input type=""hidden"" name=""pageSize"" value=""${data.faqList.pageSize!'10'}"">
+
+      </div>
+
+        [#if data?? && data.faqList?? && data.faqList.extraData?? && data.faqList.extraData.faqStructureData??]
+            <script type=""application/ld+json"">
+                ${data.faqList.extraData.faqStructureData!""""}
+            </script>
+        [/#if]
+      
+      [#if !loadMethod?? || loadMethod == '0']
+          <div class=""listTemp-site-pagination-77449 [#if data.faqList.pageSize?? && data.faqList.totalRow?? && (data.faqList.totalRow < data.faqList.pageSize || data.faqList.totalRow == data.faqList.pageSize)]hide[/#if]"">
+              <div class=""listTemp-laypage-normal"" id='listTemp-laypage-normal'></div>
+          </div>
+      [/#if]
+    <script>
+          $(function(){
+              window._block_namespaces_['block_77449'].init({'relationId':'${relationId}','relationType':'${relationType}','pageId':'${pageId}','nodeId':'faqList_${nodeId!""""}', 'appId': '${appId!}', 'appIsDev': '${appIsDev!""0""}','appVersion':'${appVersion}'});
+          });
+      </script>
+[/@api]
+  
+</div>","-1","20260528192111","28682","2024-01-29 13:14:50","7702684","张世康","2026-06-26 17:01:22","7310394","王成强","-1","0"

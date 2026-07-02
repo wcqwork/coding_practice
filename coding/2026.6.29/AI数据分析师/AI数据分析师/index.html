@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧数据 - 产品演示</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="icon logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </span>智慧数据
+    </div>
+    <div class="menu-item menu-item-top menu-item-ai" data-page="ai-analyst" data-breadcrumb="AI数据分析师">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M5 19l1 3 1-3 3-1-3-1-1-3-1 3-3 1 3 1z"/></svg></span>
+      AI数据分析师
+    </div>
+    <div class="menu-item menu-item-top active" data-page="overview" data-breadcrumb="概况总览">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
+      概况总览
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16V9M12 16V5M17 16v-6"/></svg></span>
+      流量分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="source-channel" data-breadcrumb="流量分析 / 来源渠道">来源渠道</div>
+      <div class="menu-item" data-page="geo-distribution" data-breadcrumb="流量分析 / 地域分布">地域分布</div>
+      <div class="menu-item" data-page="behavior-flow" data-breadcrumb="流量分析 / 行为流">行为流</div>
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+      网站分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="website-pages" data-breadcrumb="网站分析 / 网站页面">网站页面</div>
+      <div class="menu-item" data-page="website-interaction" data-breadcrumb="网站分析 / 网站互动">网站互动</div>
+      <div class="menu-item" data-page="landing-page" data-breadcrumb="网站分析 / 着陆页">着陆页</div>
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-6"/></svg></span>
+      转化分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="conversion-stats" data-breadcrumb="转化分析 / 转化统计">转化统计</div>
+      <div class="menu-item" data-page="sales-opportunity" data-breadcrumb="转化分析 / 销售机会">销售机会</div>
+      <div class="menu-item" data-page="inquiry-stats" data-breadcrumb="转化分析 / 询盘统计">询盘统计</div>
+      <div class="menu-item" data-page="transaction-orders" data-breadcrumb="转化分析 / 交易订单">交易订单</div>
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+      内容分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="products" data-breadcrumb="内容分析 / 产品">产品</div>
+      <div class="menu-item" data-page="articles" data-breadcrumb="内容分析 / 文章">文章</div>
+    </div>
+
+    <div class="menu-parent" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+      搜索分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children">
+      <div class="menu-item" data-page="google-search" data-breadcrumb="搜索分析 / 谷歌搜索">谷歌搜索</div>
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+      安全分析 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="hotlink-warning" data-breadcrumb="安全分析 / 盗链预警">盗链预警</div>
+    </div>
+
+    <div class="menu-parent open" onclick="toggleMenu(this)">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span>
+      系统管理 <span class="arrow">▶</span>
+    </div>
+    <div class="menu-children open">
+      <div class="menu-item" data-page="reports" data-breadcrumb="系统管理 / 运营报告">运营报告</div>
+      <div class="menu-item" data-page="system-settings" data-breadcrumb="系统管理 / 系统设置">系统设置</div>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-tip">温馨提示：智慧数据系统为我司自研产品，与 Google Analytics 等第三方统计工具相互独立；会话结束后约 30 分钟数据才会出现在系统中。</div>
+      <div class="topbar-right">
+        <select class="topbar-select"><option>南京焦点领动云计算技术有限公司</option></select>
+        <select class="topbar-select"><option>demo@leadong.com</option></select>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="breadcrumb" id="breadcrumb">概况总览</div>
+
+      <!-- 概况总览 -->
+      <div class="page active" id="page-overview">
+        <div class="ai-entry-banner card" id="ai-overview-entry">
+          <div class="ai-entry-banner-bg" aria-hidden="true">
+            <span class="ai-entry-orb ai-entry-orb--1"></span>
+            <span class="ai-entry-orb ai-entry-orb--2"></span>
+            <span class="ai-entry-grid"></span>
+          </div>
+          <div class="ai-entry-banner-inner">
+            <div class="ai-entry-logo-wrap">
+              <img src="moliai-logo.png" alt="MoliAI" class="moliai-logo moliai-logo-lg" width="44" height="44">
+              <span class="ai-entry-logo-glow" aria-hidden="true"></span>
+            </div>
+            <div class="ai-entry-banner-text">
+              <div class="ai-entry-title">AI数据分析师</div>
+              <div class="ai-entry-desc">发起分析指令，自动执行并生成看板与诊断</div>
+            </div>
+            <button type="button" class="btn-ai-entry" id="btn-overview-ai">进入分析 ›</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">数据总览 <span class="meta">开始统计时间 2020-06-08 17:55:05</span></div>
+          <div class="stat-card-row">
+            <div class="stat-card green">
+              <div class="label">累计浏览量 (PV)</div><div class="value">14,448,870</div>
+              <div class="sub"><span>累计访客量 (UV) 3,732,706</span><span>累计IP数 2,766,826</span></div>
+            </div>
+            <div class="stat-card teal">
+              <div class="label">产品总数</div><div class="value">0</div>
+              <div class="sub"><span>文章总数 3,758</span></div>
+            </div>
+            <div class="stat-card pink">
+              <div class="items">
+                <div class="item"><div class="label">累计转化</div><div class="v">103,340</div></div>
+                <div class="item"><div class="label">累计表单询盘</div><div class="v">26,645</div></div>
+                <div class="item"><div class="label">累计订单量</div><div class="v">235</div></div>
+                <div class="item"><div class="label">累计订单金额</div><div class="v">741,227.23</div></div>
+                <div class="item"><div class="label">总会员数</div><div class="v">65,447</div></div>
+                <div class="item"><div class="label">累计网站互动</div><div class="v">128,678</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <select><option>最近7天</option></select>
+          <input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10">
+          <label><input type="checkbox"> 对比</label>
+          <div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div>
+        </div>
+        <div class="card">
+          <div class="card-title">流量转化</div>
+          <div class="metric-row">
+            <div class="metric-item"><div class="m-label">PV</div><div class="m-value">50,750</div></div>
+            <div class="metric-item"><div class="m-label">UV</div><div class="m-value">13,642</div></div>
+            <div class="metric-item"><div class="m-label">IP</div><div class="m-value">11,013</div></div>
+            <div class="metric-item"><div class="m-label">网站互动</div><div class="m-value">185</div></div>
+            <div class="metric-item"><div class="m-label">销售机会</div><div class="m-value">124</div></div>
+            <div class="metric-item"><div class="m-label">订单量</div><div class="m-value">238</div></div>
+          </div>
+          <div class="chart-box" id="chart-traffic"></div>
+        </div>
+        <div class="chart-row">
+          <div class="card">
+            <div class="card-title">转化图</div>
+            <div class="funnel-row">
+              <div class="funnel-box"><div class="fb-label">渠道访客总数</div><div class="fb-value">14,759</div></div>
+              <div class="funnel-arrow">→<span class="pct">1.25%</span></div>
+              <div class="funnel-box"><div class="fb-label">网站互动</div><div class="fb-value">185</div></div>
+              <div class="funnel-arrow">→<span class="pct">195.68%</span></div>
+              <div class="funnel-box"><div class="fb-label">转化</div><div class="fb-value">362</div></div>
+            </div>
+            <div class="chart-box sm" id="chart-conversion-area"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">页面分析 <a href="#">查看全部页面 ›</a></div>
+            <table class="data-table">
+              <thead><tr><th>序号</th><th>访问页面</th><th>浏览量</th><th>访客量</th><th>平均停留</th><th>销售机会</th><th>订单量</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td class="link">/peixunyuyue.html</td><td>277</td><td>222</td><td>00:00:52</td><td>73</td><td>0</td></tr>
+                <tr><td>2</td><td class="link">/website.html</td><td>18313</td><td>8842</td><td>00:01:15</td><td>7</td><td>0</td></tr>
+                <tr><td>3</td><td class="link">/</td><td>13569</td><td>8540</td><td>00:00:56</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 来源渠道 -->
+      <div class="page" id="page-source-channel">
+        <div class="page-title">来源渠道</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"></div>
+        <div class="chart-row">
+          <div class="card"><div class="chart-box" id="chart-channel-bar"></div></div>
+          <div class="card"><div class="chart-box" id="chart-channel-pie"></div></div>
+        </div>
+        <div class="card" id="table-source-channel"></div>
+      </div>
+
+      <!-- 地域分布 -->
+      <div class="page" id="page-geo-distribution">
+        <div class="page-title">地域分布</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"></div>
+        <div class="tab-btns"><button class="tab-btn active">浏览量</button><button class="tab-btn">访客量</button><button class="tab-btn">销售机会</button><button class="tab-btn">订单量</button></div>
+        <div class="card"><div class="chart-box lg" id="chart-geo-map"></div></div>
+        <div class="card" id="table-geo"></div>
+      </div>
+
+      <!-- 行为流 -->
+      <div class="page" id="page-behavior-flow">
+        <div class="page-title">行为流</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"></div>
+        <div class="tab-btns"><button class="tab-btn active">来源渠道</button><button class="tab-btn">国家/地区</button><button class="tab-btn">来源域名</button></div>
+        <div class="card">
+          <div class="chart-box behavior-sankey" id="chart-behavior-sankey"></div>
+          <div class="sankey-toolbar"><button class="btn">⬇ 下载</button></div>
+        </div>
+        <div class="card" id="table-behavior"></div>
+      </div>
+
+      <!-- 网站页面 -->
+      <div class="page" id="page-website-pages">
+        <div class="page-title">网站页面</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="legend-tip">
+          <span><span class="icon-diamond">◆</span> 钻石页面：产生订单的页面</span>
+          <span><span class="icon-gold">●</span> 黄金页面：产生销售机会的页面</span>
+          <span><span class="icon-gray">○</span> 普通页面</span>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-label">本站页面总数</div><div class="kpi-value">6711</div></div>
+          <div class="kpi-item"><div class="kpi-label">钻石页面数</div><div class="kpi-value">1</div></div>
+          <div class="kpi-item"><div class="kpi-label">黄金页面数</div><div class="kpi-value">896</div></div>
+        </div>
+        <div class="card"><div class="chart-box sm" id="chart-pages-trend"></div></div>
+        <div class="card">
+          <div class="table-toolbar"><span>页面搜索：<input class="search-input" placeholder="请输入内容"></span></div>
+          <div id="table-pages"></div>
+        </div>
+      </div>
+
+      <!-- 网站互动 -->
+      <div class="page" id="page-website-interaction">
+        <div class="page-title">网站互动</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-label">提交表单数</div><div class="kpi-value kpi-value-sm">106</div></div>
+          <div class="kpi-item"><div class="kpi-label">发起咨询数</div><div class="kpi-value kpi-value-sm">27</div></div>
+          <div class="kpi-item"><div class="kpi-label">提交注册数</div><div class="kpi-value kpi-value-sm">0</div></div>
+          <div class="kpi-item"><div class="kpi-label">社交关注数</div><div class="kpi-value kpi-value-sm">1</div></div>
+          <div class="kpi-item"><div class="kpi-label">社交分享数</div><div class="kpi-value kpi-value-sm">50</div></div>
+          <div class="kpi-item"><div class="kpi-label">发起邮件数</div><div class="kpi-value kpi-value-sm">1</div></div>
+        </div>
+        <div class="card"><div class="chart-box" id="chart-interaction"></div></div>
+        <div class="card" id="table-interaction"></div>
+      </div>
+
+      <!-- 着陆页 -->
+      <div class="page" id="page-landing-page">
+        <div class="page-title">着陆页</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-label">会话数</div><div class="kpi-value">19790</div></div>
+          <div class="kpi-item"><div class="kpi-label">每次会话浏览页数</div><div class="kpi-value">2.56</div></div>
+          <div class="kpi-item"><div class="kpi-label">平均页面停留时间</div><div class="kpi-value kpi-value-sm">00:00:59</div></div>
+          <div class="kpi-item"><div class="kpi-label">销售机会</div><div class="kpi-value">90</div></div>
+          <div class="kpi-item"><div class="kpi-label">订单量</div><div class="kpi-value">0</div></div>
+        </div>
+        <div class="card"><div class="chart-box" id="chart-landing"></div></div>
+        <div class="card" id="table-landing"></div>
+      </div>
+
+      <!-- 转化统计 -->
+      <div class="page" id="page-conversion-stats">
+        <div class="page-title">转化统计</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="card">
+          <div class="filter-bar" style="margin-bottom:12px;border:none;padding:0;background:transparent">
+            <span>来源渠道：<select><option>全部</option></select></span>
+            <span>国家/地区：<select><option>选择全部</option></select></span>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><div class="kpi-label">转化</div><div class="kpi-value">124</div></div>
+            <div class="kpi-item"><div class="kpi-label">转化率</div><div class="kpi-value">0.91%</div></div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-box" id="chart-conv-trend"></div>
+            <div>
+              <div class="chart-box sm" id="chart-conv-funnel"></div>
+              <div class="meta" style="text-align:center;margin-top:8px">互动率 1.36% · 转化率 67.03%</div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-row-3">
+          <div class="card"><div class="card-title">转化方式占比</div><div class="chart-box sm" id="chart-conv-method"></div></div>
+          <div class="card"><div class="card-title">来源渠道占比</div><div class="chart-box sm" id="chart-conv-channel"></div></div>
+          <div class="card"><div class="card-title">国家/地区占比</div><div class="chart-box sm" id="chart-conv-geo"></div></div>
+        </div>
+      </div>
+
+      <!-- 销售机会 -->
+      <div class="page" id="page-sales-opportunity">
+        <div class="page-title">销售机会</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-label">表单询盘数</div><div class="kpi-value">96</div></div>
+          <div class="kpi-item"><div class="kpi-label">发起咨询数</div><div class="kpi-value">27</div></div>
+          <div class="kpi-item"><div class="kpi-label">会员注册数</div><div class="kpi-value">0</div></div>
+          <div class="kpi-item"><div class="kpi-label">发起邮件数</div><div class="kpi-value">1</div></div>
+        </div>
+        <div class="card"><div class="chart-box" id="chart-sales"></div></div>
+        <div class="card" id="table-sales"></div>
+      </div>
+
+      <!-- 询盘统计 -->
+      <div class="page" id="page-inquiry-stats">
+        <div class="page-title">询盘统计 <span class="page-title-actions"><button class="btn">询盘详情</button> <button class="btn">询盘管理</button></span></div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="card">
+          <div class="kpi-item"><div class="kpi-label">网站表单询盘 ⓘ</div><div class="kpi-value">96</div></div>
+          <div class="chart-box" id="chart-inquiry"></div>
+        </div>
+        <div class="card" id="table-inquiry"></div>
+      </div>
+
+      <!-- 交易订单 -->
+      <div class="page" id="page-transaction-orders">
+        <div class="page-title">交易订单</div>
+        <div class="page-sub">数据开始统计日期 2020-05-08 00:00:00</div>
+        <div class="stat-card-row orders">
+          <div class="stat-card blue"><div class="value">741,227.23</div><div class="label">总订单金额</div><div class="sub"><span>已支付 724,402.83</span><span>未支付 16,824.40</span></div></div>
+          <div class="stat-card green"><div class="value">235</div><div class="label">总订单数</div><div class="sub"><span>已支付 214</span><span>未支付 21</span></div></div>
+          <div class="stat-card orange"><div class="value">65,447</div><div class="label">总会员数</div><div class="sub"><span>已购买 0</span><span>未购买 65,447</span></div></div>
+        </div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="card"><div class="chart-box" id="chart-orders"></div></div>
+        <div class="card" id="table-orders"></div>
+      </div>
+
+      <!-- 产品 -->
+      <div class="page" id="page-products">
+        <div class="page-title">产品</div>
+        <div class="filter-bar"><select><option>去年</option></select><input type="date" value="2025-01-01"> ~ <input type="date" value="2025-12-31"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="kpi-row">
+          <div class="kpi-item"><div class="kpi-label">产品浏览量 ⓘ</div><div class="kpi-value">8</div></div>
+          <div class="kpi-item"><div class="kpi-label">产品询盘量 ⓘ</div><div class="kpi-value">0</div></div>
+          <div class="kpi-item"><div class="kpi-label">产品订单量 ⓘ</div><div class="kpi-value">0</div></div>
+        </div>
+        <div class="card"><div class="chart-box" id="chart-product"></div></div>
+        <div class="card" id="table-products"></div>
+      </div>
+
+      <!-- 文章 -->
+      <div class="page" id="page-articles">
+        <div class="page-title">文章</div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="kpi-item kpi-block"><div class="kpi-label">文章浏览量 ⓘ</div><div class="kpi-value">1832</div></div>
+        <div class="card"><div class="chart-box" id="chart-article"></div></div>
+        <div class="card" id="table-articles"></div>
+      </div>
+
+      <!-- 谷歌搜索 -->
+      <div class="page" id="page-google-search">
+        <div class="page-title">谷歌搜索</div>
+        <div class="card empty-state">
+          <p class="icon">🔍</p>
+          <p>谷歌搜索分析模块</p>
+          <p class="desc">展示网站在 Google 搜索中的表现数据（演示占位页）</p>
+        </div>
+      </div>
+
+      <!-- 盗链预警 -->
+      <div class="page" id="page-hotlink-warning">
+        <div class="page-title">盗链预警</div>
+        <div class="summary-4">
+          <div class="card"><div class="txt">发现盗链网站域名</div><div class="num">4483</div></div>
+          <div class="card"><div class="txt">封堵盗链网站域名</div><div class="num">4483</div></div>
+          <div class="card"><div class="txt">盗链最多的网站</div><div class="num domain">sharpboots.com</div></div>
+          <div class="card"><div class="txt">被盗最多的网站</div><div class="num domain">www.leadong.com</div></div>
+        </div>
+        <div class="filter-bar"><select><option>最近7天</option></select><input type="date" value="2026-06-04"> ~ <input type="date" value="2026-06-10"><div class="btn-group"><button class="active">按日</button><button>按周</button><button>按月</button></div></div>
+        <div class="chart-row">
+          <div class="card"><div class="card-title">盗链趋势</div><div class="chart-box sm" id="chart-hotlink"></div></div>
+          <div class="card">
+            <div class="tabs"><div class="tab active">盗链网站排名</div><div class="tab">被盗网站排名</div></div>
+            <table class="data-table"><thead><tr><th>盗链网站</th><th>盗链次数</th></tr></thead>
+            <tbody id="hotlink-rank"></tbody></table>
+          </div>
+        </div>
+        <div class="card" id="table-hotlink"></div>
+      </div>
+
+      <!-- 会话详情 -->
+      <div class="page" id="page-session-detail">
+        <div class="page-title page-title-back">
+          <button type="button" class="back-btn" onclick="goBackFromSession()" aria-label="返回">←</button>
+          会话详情
+        </div>
+        <div class="detail-info-row">
+          <div class="card detail-info-card">
+            <div class="card-title">设备信息</div>
+            <dl class="info-list" id="session-device-info"></dl>
+          </div>
+          <div class="card detail-info-card">
+            <div class="card-title">访客信息</div>
+            <dl class="info-list" id="session-visitor-info"></dl>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">会话路径</div>
+          <div id="session-path-table"></div>
+        </div>
+      </div>
+
+      <!-- 系统设置 -->
+      <div class="page" id="page-system-settings">
+        <div class="tabs" id="settings-tabs">
+          <div class="tab active" data-settings-tab="channel-rules">自定义来源渠道</div>
+        </div>
+        <div id="settings-panel-channel-rules">
+          <div class="channel-rules-header">
+            <div>
+              <p class="channel-rules-desc">管理多套来源渠道归因方案；底层原始日志不变，规则仅作为查询层映射滤镜。系统默认方案不可编辑删除，自定义方案最多 5 套。</p>
+            </div>
+            <div class="channel-rules-actions">
+              <button class="btn btn-primary" id="btn-new-rule-set" type="button">新建方案</button>
+            </div>
+          </div>
+          <div class="rule-set-bar card">
+            <label class="rule-set-label">归因方案</label>
+            <div class="rule-set-dropdown" id="rule-set-dropdown">
+              <button type="button" class="rule-set-trigger" id="rule-set-trigger">
+                <span id="rule-set-trigger-label">系统默认方案</span>
+                <span class="arrow">▾</span>
+              </button>
+              <div class="rule-set-panel" id="rule-set-panel" hidden></div>
+            </div>
+            <span class="rule-set-desc" id="rule-set-desc"></span>
+          </div>
+          <div class="channel-rules-notice">
+            <strong>V2.0 生效范围：</strong>方案保存后仅对<strong>之后产生的新流量</strong>生效，历史数据保留原归因标签。
+          </div>
+          <div class="channel-rules-layout">
+            <div class="card channel-rules-main">
+              <div class="card-title channel-rules-toolbar">
+                <span>规则优先级 <span class="meta">组间「且」· 组内「或」· 自上而下命中即停</span></span>
+                <button class="btn btn-primary btn-sm" id="btn-add-channel-rule" type="button">新建规则</button>
+              </div>
+              <ul class="channel-rule-list" id="channel-rule-list"></ul>
+              <div class="channel-rule-fallback" id="channel-rule-fallback"></div>
+            </div>
+            <div class="card channel-rules-preview">
+              <div class="card-title">规则沙盒预览</div>
+              <p class="preview-hint">保存前可先测试链接，确认归因结果是否符合预期。</p>
+              <div class="form-item">
+                <label>测试着陆页 URL</label>
+                <input type="text" class="form-input" id="sandbox-test-url" placeholder="https://www.example.com/?utm_source=offline&utm_medium=qr_code&utm_campaign=canton_fair">
+              </div>
+              <div class="form-item">
+                <label>测试 Referrer（选填）</label>
+                <input type="text" class="form-input" id="sandbox-test-referrer" placeholder="https://www.google.com/">
+              </div>
+              <button class="btn btn-primary" id="btn-sandbox-test" type="button">测试规则</button>
+              <div class="sandbox-result" id="sandbox-result">
+                <span class="sandbox-result-placeholder">输入测试链接后点击「测试规则」查看归因结果</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 运营报告 -->
+      <div class="page" id="page-reports">
+        <div class="tabs">
+          <div class="tab active" onclick="switchReportTab(0)">定期报告</div>
+          <div class="tab" onclick="switchReportTab(1)">自定义报告</div>
+        </div>
+        <div id="report-regular">
+          <div class="card">
+            <table class="data-table">
+              <thead><tr><th>报告名称</th><th>报告内容</th><th>定期邮件</th><th>操作</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>网站数据统计报告</td>
+                  <td style="font-size:12px;line-height:1.8">概况总览(3)、数据分析(6)、网站分析(4)、转化分析(5)</td>
+                  <td style="font-size:12px;line-height:1.8">
+                    报告类型：周报告、月报告、季报告<br>
+                    接收邮箱：songchunyan@leadong.com<br>
+                    上次发送：2026年06月08日<br>
+                    预计发送：2026年06月15日
+                  </td>
+                  <td>
+                    <button class="btn-link" onclick="showModal('modal-report-settings')">设置</button> |
+                    <button class="btn-link">邮件历史</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="report-custom" style="display:none">
+          <div style="margin-bottom:16px"><button class="btn btn-primary" onclick="showModal('modal-add-report')">添加报告</button></div>
+          <div class="card" id="table-custom-reports"></div>
+        </div>
+      </div>
+
+      <!-- AI数据分析师 · 分析工作台 -->
+      <div class="page" id="page-ai-analyst">
+        <div class="ai-workspace card">
+          <header class="ai-workspace-head">
+            <div class="ai-workspace-brand">
+              <img src="moliai-logo.png" alt="MoliAI" class="moliai-logo" width="36" height="36">
+              <div>
+                <h1 class="ai-workspace-title">AI数据分析师</h1>
+                <p class="ai-workspace-tag">发起分析指令 · 自动执行 · 看板 + 诊断报告</p>
+              </div>
+            </div>
+            <div class="ai-workspace-head-actions">
+              <button type="button" class="btn-ai-new-chat" id="btn-ai-new-chat" hidden>开启新对话</button>
+              <button type="button" class="btn-ai-history-entry" id="btn-ai-history-open" aria-haspopup="dialog">
+                分析记录
+                <span class="ai-history-badge" id="ai-history-badge" hidden>0</span>
+              </button>
+            </div>
+          </header>
+          <div class="ai-workspace-body">
+            <div class="ai-workspace-main">
+              <section class="ai-task-section" aria-label="任务执行">
+                <div class="ai-task-section-head">
+                  <h2 class="ai-task-section-title">任务执行</h2>
+                  <span class="ai-task-section-hint">每次发起分析将在此展示处理进度与结果</span>
+                </div>
+                <div class="ai-task-stream" id="ai-task-stream" role="log" aria-live="polite"></div>
+                <div class="ai-scene-picker-panel" id="ai-scene-picker-panel"></div>
+              </section>
+            </div>
+          </div>
+          <div class="ai-composer-dock" id="ai-composer-dock">
+            <div class="ai-composer-dock-inner" id="ai-composer-input-panel">
+              <span class="ai-composer-border-glow" aria-hidden="true"></span>
+              <div class="ai-composer-ai-badge" aria-hidden="true">
+                <img src="moliai-logo.png" alt="" width="22" height="22">
+                <span class="ai-composer-ai-badge-ring"></span>
+              </div>
+              <div class="ai-free-ask-input-wrap ai-composer-input-wrap">
+                <input type="text" class="ai-composer-input" id="ai-free-question" placeholder="输入分析需求，如：近7日来源渠道分析…" autocomplete="off" aria-expanded="false" aria-controls="ai-free-ask-suggest" aria-autocomplete="list">
+                <p class="ai-composer-input-hint" id="ai-composer-input-hint" hidden role="alert"></p>
+                <div class="ai-free-ask-suggest ai-composer-suggest" id="ai-free-ask-suggest" role="listbox" hidden>
+                  <div class="ai-free-ask-suggest-label">推荐场景</div>
+                  <ul class="ai-free-ask-suggest-list ai-free-ask-suggest-list--scenes" id="ai-free-ask-suggest-list"></ul>
+                  <div class="ai-free-ask-suggest-label ai-free-ask-suggest-label--sub">推荐分析需求</div>
+                  <ul class="ai-free-ask-suggest-list" id="ai-free-ask-suggest-presets"></ul>
+                </div>
+              </div>
+              <button type="button" class="btn-ai-report ai-composer-send" id="btn-ai-free-submit">开始分析</button>
+            </div>
+            <div id="ai-composer-running-panel" hidden aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自由对话 · 多轮会话 -->
+      <div class="page" id="page-ai-free-chat">
+        <div id="ai-free-chat-root"></div>
+      </div>
+
+      <!-- 场景分析报告页 Report View -->
+      <div class="page" id="page-ai-scene-detail">
+        <div id="ai-scene-detail-root"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 报告设置弹窗 -->
+<div class="modal-mask" id="modal-report-settings">
+  <div class="modal">
+    <div class="modal-header">报告设置 <button class="modal-close" data-modal="modal-report-settings">×</button></div>
+    <div class="modal-body">
+      <div class="modal-side">
+        <div class="modal-side-item active" onclick="switchModalTab('modal-report-settings',0)">报告内容</div>
+        <div class="modal-side-item" onclick="switchModalTab('modal-report-settings',1)">定期邮件</div>
+      </div>
+      <div class="modal-content">
+        <div class="modal-tab-content">
+          <p style="margin-bottom:12px;color:#666">选择需要在报告中显示的内容</p>
+          <label style="margin-right:16px"><input type="checkbox" checked> 全选</label>
+          <label><input type="checkbox"> 仅显示已选项目</label>
+          <ul class="tree-check" style="margin-top:16px">
+            <li><label><input type="checkbox" checked> 概况总览</label>
+              <ul class="children">
+                <li><label><input type="checkbox" checked> 数据总览</label></li>
+                <li><label><input type="checkbox" checked> 流量趋势图</label></li>
+                <li><label><input type="checkbox" checked> 流量转化图</label></li>
+              </ul>
+            </li>
+            <li><label><input type="checkbox" checked> 流量分析</label>
+              <ul class="children">
+                <li><label><input type="checkbox" checked> 来源渠道统计图</label></li>
+                <li><label><input type="checkbox" checked> 来源渠道</label></li>
+                <li><label><input type="checkbox" checked> 地域分布统计图</label></li>
+                <li><label><input type="checkbox" checked> 国家/地区 (前20)</label></li>
+              </ul>
+            </li>
+            <li><label><input type="checkbox" checked> 网站分析</label></li>
+          </ul>
+        </div>
+        <div class="modal-tab-content" style="display:none">
+          <div class="switch-row"><div class="switch"></div><span>开启定期邮件</span></div>
+          <p style="font-size:12px;color:#999;margin-bottom:16px">开启后，系统会按照您的设置，定期为您发送网站数据统计报告</p>
+          <div class="form-item"><label>报告类型</label>
+            <label style="display:block;margin:8px 0"><input type="checkbox" checked> 周报告 — 每周发送一次上周数据统计报告</label>
+            <label style="display:block;margin:8px 0"><input type="checkbox" checked> 月报告 — 每月发送一次上月数据统计报告</label>
+            <label style="display:block;margin:8px 0"><input type="checkbox" checked> 季度报告 — 每季度首月发送一次上季度数据统计报告</label>
+          </div>
+          <div class="form-item"><label class="required">接收邮箱</label><span class="tag">songchunyan@leadong.com ×</span></div>
+          <div class="form-item"><label>抄送邮箱</label><span class="tag">yangxianghui@leadong.com ×</span></div>
+          <p class="form-hint">*接收邮箱只允许填一个；抄送邮箱最多添加5个，多个邮箱请用逗号隔开！</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn modal-cancel" data-modal="modal-report-settings">取消</button>
+      <button class="btn btn-primary modal-cancel" data-modal="modal-report-settings">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 添加报告弹窗 -->
+<div class="modal-mask" id="modal-add-report">
+  <div class="modal">
+    <div class="modal-header">添加报告 <button class="modal-close" data-modal="modal-add-report">×</button></div>
+    <div class="modal-body" style="flex-direction:column">
+      <div class="modal-content" style="flex:none">
+        <p style="margin-bottom:12px;color:#666">选择需要在报告中显示的内容</p>
+        <label style="margin-right:16px"><input type="checkbox" checked> 全选</label>
+        <label><input type="checkbox"> 仅显示已选项目</label>
+        <ul class="tree-check" style="margin-top:16px;max-height:200px;overflow-y:auto">
+          <li><label><input type="checkbox" checked> 概况总览</label>
+            <ul class="children"><li><label><input type="checkbox" checked> 数据总览</label></li><li><label><input type="checkbox" checked> 流量趋势图</label></li></ul>
+          </li>
+          <li><label><input type="checkbox" checked> 流量分析</label>
+            <ul class="children"><li><label><input type="checkbox" checked> 来源渠道</label></li><li><label><input type="checkbox" checked> 地域分布</label></li></ul>
+          </li>
+        </ul>
+        <p style="margin:20px 0 8px;color:#666">设置数据统计时段</p>
+        <input type="text" value="2026-06-04 至 2026-06-10" style="width:100%;padding:8px;border:1px solid #d9d9d9;border-radius:4px">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn">添加点评</button>
+      <button class="btn btn-primary modal-cancel" data-modal="modal-add-report">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 新建/编辑方案弹窗 -->
+<div class="modal-mask" id="modal-rule-set">
+  <div class="modal modal-sm">
+    <div class="modal-header"><span id="modal-rule-set-title">新建来源渠道方案</span><button class="modal-close" data-modal="modal-rule-set" type="button">×</button></div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content">
+        <div class="form-item"><label class="required">方案名称</label><input type="text" class="form-input" id="rule-set-name" placeholder="例如：广交会专项归因"></div>
+        <div class="form-item"><label>方案描述</label><input type="text" class="form-input" id="rule-set-description" placeholder="简要说明适用场景"></div>
+        <div class="form-item" id="rule-set-copy-wrap"><label>复制自</label>
+          <select class="form-input" id="rule-set-copy-from"></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn modal-cancel" data-modal="modal-rule-set" type="button">取消</button>
+      <button class="btn btn-primary" id="btn-save-rule-set" type="button">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 新建/编辑渠道规则弹窗 -->
+<div class="modal-mask" id="modal-channel-rule">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <span id="modal-channel-rule-title">新建归因规则</span>
+      <button class="modal-close" data-modal="modal-channel-rule" type="button">×</button>
+    </div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content">
+        <div class="rule-form-section">
+          <div class="rule-form-section-title">步骤 1：规则命名</div>
+          <div class="form-row">
+            <div class="form-item">
+              <label class="required">自定义名称</label>
+              <input type="text" class="form-input" id="rule-name" placeholder="例如：线下展会-二维码">
+            </div>
+            <div class="form-item">
+              <label>简单描述</label>
+              <input type="text" class="form-input" id="rule-description" placeholder="例如：识别宣传册二维码带来的线下展会流量">
+            </div>
+          </div>
+        </div>
+        <div class="rule-form-section">
+          <div class="rule-form-section-title">步骤 2：匹配条件（IF…）</div>
+          <p class="condition-level-hint">第一级条件组之间为<strong>且</strong>关系；组内第二级条件之间为<strong>或</strong>关系。</p>
+          <div id="rule-condition-groups"></div>
+          <button class="btn btn-ghost" id="btn-add-condition-group" type="button">+ 添加条件组（且）</button>
+        </div>
+        <div class="rule-form-warning" id="rule-gclid-warning" style="display:none">
+          ⚠️ 检测到条件可能覆盖 Google Ads 核心扣费参数（gclid），可能导致广告转化数据丢失，请谨慎操作！
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn modal-cancel" data-modal="modal-channel-rule" type="button">取消</button>
+      <button class="btn btn-primary" id="btn-save-channel-rule" type="button">保存规则</button>
+    </div>
+  </div>
+</div>
+
+<!-- 保存成功提示弹窗 -->
+<div class="modal-mask" id="modal-channel-save-notice">
+  <div class="modal modal-sm">
+    <div class="modal-header">规则已提交 <button class="modal-close" data-modal="modal-channel-save-notice" type="button">×</button></div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content">
+        <p>您的新规则已保存。根据 V2.0 策略，该规则将<strong>仅对之后产生的新流量</strong>生效，历史数据保留原归因结果。</p>
+        <p class="save-notice-sub">大盘在处理完成前将继续展示当前规则下的数据；如需对比最新分类，建议将报表起始时间设为今日之后。</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary modal-cancel" data-modal="modal-channel-save-notice" type="button">知道了</button>
+    </div>
+  </div>
+</div>
+
+<!-- 启用归因方案确认 -->
+<div class="modal-mask" id="modal-enable-rule-set">
+  <div class="modal modal-sm">
+    <div class="modal-header">切换启用方案 <button class="modal-close" data-modal="modal-enable-rule-set" type="button">×</button></div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content">
+        <p id="enable-rule-set-text">确定启用该方案吗？</p>
+        <p class="save-notice-sub">切换后，<strong>后续新产生的流量</strong>将按新方案进行渠道归因；<strong>历史数据不会重新处理</strong>，仍保留切换前的归因结果。</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn modal-cancel" data-modal="modal-enable-rule-set" type="button">取消</button>
+      <button class="btn btn-primary" id="btn-confirm-enable-rule-set" type="button">确认启用</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-ai-scene-date">
+  <div class="modal modal-sm ai-scene-date-modal">
+    <div class="modal-header">
+      <span id="ai-scene-date-modal-title">选择分析时段</span>
+      <button class="modal-close" data-modal="modal-ai-scene-date" type="button">×</button>
+    </div>
+    <div class="modal-body modal-body-stack ai-scene-date-modal-body">
+      <div class="modal-content ai-scene-date-modal-content">
+        <p class="ai-scene-date-modal-desc">请选择本次分析的数据时段，确认后进入场景详情。</p>
+        <div class="ai-date-preset-row">
+          <span class="ai-date-preset-label">快捷选择</span>
+          <div class="ai-date-preset-btns">
+            <button type="button" class="ai-date-preset-btn" data-preset="近7日">近7日</button>
+            <button type="button" class="ai-date-preset-btn" data-preset="近30日">近30日</button>
+            <button type="button" class="ai-date-preset-btn" data-preset="上周">上周</button>
+            <button type="button" class="ai-date-preset-btn" data-preset="本月">本月</button>
+            <button type="button" class="ai-date-preset-btn" data-preset="上月">上月</button>
+            <button type="button" class="ai-date-preset-btn" data-preset="上季度">上季度</button>
+          </div>
+        </div>
+        <div class="ai-scene-date-modal-picker">
+          <label class="ai-scene-date-field">
+            <span>开始日期</span>
+            <input type="date" value="2026-06-04" class="ai-date-input" id="ai-scene-date-start">
+          </label>
+          <label class="ai-scene-date-field">
+            <span>结束日期</span>
+            <input type="date" value="2026-06-10" class="ai-date-input" id="ai-scene-date-end">
+          </label>
+        </div>
+        <p class="ai-scene-date-hint" id="ai-scene-date-hint"></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn modal-cancel" data-modal="modal-ai-scene-date" type="button">取消</button>
+      <button class="btn btn-primary" id="btn-ai-scene-date-confirm" type="button">开始分析</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-ai-report-history">
+  <div class="modal ai-history-modal">
+    <div class="modal-header ai-history-modal-header">
+      <div class="ai-history-modal-title-wrap">
+        <span class="ai-history-modal-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="18" height="18"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        </span>
+        <span>分析记录</span>
+      </div>
+      <button class="modal-close" data-modal="modal-ai-report-history" type="button">×</button>
+    </div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content">
+        <div class="ai-history-table-wrap" id="ai-report-history-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-ai-question-detail">
+  <div class="modal modal-sm">
+    <div class="modal-header">分析诉求详情 <button class="modal-close" data-modal="modal-ai-question-detail" type="button">×</button></div>
+    <div class="modal-body modal-body-stack">
+      <div class="modal-content" id="ai-question-detail-body"></div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-badge-bar" id="demo-badge-bar">
+  <button type="button" class="demo-spec-btn" id="btn-ai-spec-drawer" aria-controls="ai-spec-drawer">功能逻辑说明</button>
+</div>
+
+<div class="ai-drawer-mask" id="ai-spec-drawer-mask" hidden aria-hidden="true"></div>
+<aside class="ai-drawer ai-spec-drawer" id="ai-spec-drawer" aria-hidden="true" aria-labelledby="ai-spec-drawer-title">
+  <div class="ai-spec-drawer-resizer" id="ai-spec-drawer-resizer" role="separator" aria-orientation="vertical" aria-label="拖动调整抽屉宽度" tabindex="0"></div>
+  <div class="ai-drawer-header">
+    <div>
+      <div class="ai-drawer-title" id="ai-spec-drawer-title">AI数据分析师 · 功能逻辑说明</div>
+      <div class="ai-drawer-sub">产品需求说明 · 供技术评审与开发参考</div>
+    </div>
+    <button type="button" class="ai-drawer-close" id="btn-ai-spec-drawer-close" aria-label="关闭">×</button>
+  </div>
+  <div class="ai-spec-layout">
+    <nav class="ai-spec-nav" id="ai-spec-nav" aria-label="功能说明目录">
+      <a class="ai-spec-nav-item active" href="#spec-scope">功能范围与总流程</a>
+      <a class="ai-spec-nav-item" href="#spec-entry">入口与页面</a>
+      <a class="ai-spec-nav-item" href="#spec-scenes">分析场景与配置</a>
+      <a class="ai-spec-nav-item" href="#spec-trigger">触发方式与交互</a>
+      <a class="ai-spec-nav-item" href="#spec-intent">意图识别与四分支校验</a>
+      <a class="ai-spec-nav-item" href="#spec-agent">Agent 调度与执行时序</a>
+      <a class="ai-spec-nav-item" href="#spec-data">数据接口取数与粒度</a>
+      <a class="ai-spec-nav-item" href="#spec-report">图表与报告生成</a>
+      <a class="ai-spec-nav-item" href="#spec-task">任务卡状态机与文案</a>
+      <a class="ai-spec-nav-item" href="#spec-record">分析记录与报告详情</a>
+      <a class="ai-spec-nav-item" href="#spec-context">上下文</a>
+      <a class="ai-spec-nav-item" href="#spec-cache">缓存与计费</a>
+      <a class="ai-spec-nav-item" href="#spec-permission">权限校验</a>
+      <a class="ai-spec-nav-item" href="#spec-error">异常与兜底</a>
+      <a class="ai-spec-nav-item" href="#spec-extend">可配置与拓展</a>
+    </nav>
+    <div class="ai-spec-doc" id="ai-spec-doc">
+      <section class="ai-spec-section" id="spec-scope">
+        <h3>功能范围与总流程</h3>
+        <p>「<strong>AI数据分析师</strong>」是嵌入智慧数据后台的独立分析能力，交互形态为<strong>分析工作台</strong>（非聊天气泡）：底部悬浮输入框发起分析、主区域展示任务执行流、产出<strong>数据看板 + AI 诊断报告</strong>。<strong>该功能为独立模块，本次仅将入口嵌入智慧数据；系统架构上须与智慧数据解耦，不排除后续独立部署或接入其他系统。</strong>本说明仅覆盖功能实现逻辑，供技术开发参考。</p>
+        <p class="ai-spec-lead">端到端主流程（输入 → 输出）：</p>
+        <p style="font-size:13px;margin-bottom:8px"><b>权限校验前置：</b>用户<strong>进入功能前</strong>即完成智慧数据 + MoliAI 权限校验；<strong>无权限则不展示功能入口、无法进入</strong>。以下主流程假定用户已具备入口权限。</p>
+        <div class="ai-spec-mermaid mermaid">
+flowchart TD
+  P[进入功能前：智慧数据 + MoliAI 权限校验] -->|无权限| P1[不展示入口 / 无法进入]
+  P -->|有权限| A[用户发起：预设场景 或 自由输入]
+  A --> B[点数预检（MoliAI）]
+  B -->|额度不足| B1[拦截：引导充值，不扣点]
+  B -->|通过| C[中枢调度：意图识别 + 业务参数提取]
+  C --> D{四分支校验}
+  D -->|参数不足| D1[待补充任务卡：追问时段]
+  D -->|意图不明| D2[待补充任务卡：展示预设场景]
+  D -->|能力不满足| D3[待补充任务卡：固定拒答 + 展示已支持场景]
+  D -->|完美匹配| E[Planner：选数据接口 + 判定粒度 + 编排]
+  E --> F[预扣点数]
+  F --> G[调用数据接口取数（并行/串行下钻）]
+  G --> H[AI 多维洞察：直出报告 HTML 含 Chart.js 图表]
+  H --> I[报告落库 + 计费确认；失败则退点]
+  I --> J[任务完成：写入分析记录]
+  J --> K[报告详情页：沙箱渲染看板 + AI 诊断]
+        </div>
+        <p>关键产出物：① 任务执行流（实时进度）；② 数据看板（模块 A）；③ AI 深度诊断（模块 B）；④ 分析记录（历史）。计费、缓存、权限贯穿全流程。</p>
+        <div class="ai-spec-doclink">
+          <span>📎</span>
+          <span><b>提示词、接口字段、场景分析逻辑等具体配置内容</b>不在本说明中展开，统一见配置文档：<a href="https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNXRy5LpYMTUOWPlX1?scode=ADEAhgd4AAgKqrmlzrAHUAbAYSAL8&tab=0838nt" target="_blank" rel="noopener">中控调度 / Agent / 接口 / 场景逻辑 配置文档（企业微信文档）</a></span>
+        </div>
+      </section>
+
+      <section class="ai-spec-section" id="spec-entry">
+        <h3>入口与页面</h3>
+        <table class="ai-spec-table">
+          <thead><tr><th>页面 / 模块</th><th>职责与关键逻辑</th></tr></thead>
+          <tbody>
+            <tr><td>入口 · 侧边栏</td><td>高亮「AI数据分析师」菜单项，点击进入分析工作台</td></tr>
+            <tr><td>入口 · 概况总览横幅</td><td>概况页顶部 MoliAI 横幅卡片，一键「进入分析」</td></tr>
+            <tr><td>分析工作台</td><td>无任务时展示欢迎场景区；有任务时隐藏欢迎区、顶部展示「正在为您执行分析任务」与当前步骤；底部为悬浮输入框</td></tr>
+            <tr><td>分析记录弹窗</td><td>表格式历史列表，字段：任务名称、状态、分析日期、提交账号；操作：查看报告、导出 PDF、重新生成（按状态区分，见 spec-record）</td></tr>
+            <tr><td>报告详情页</td><td>模块 A 数据看板 + 模块 B AI 深度诊断（均为 AI 生成 HTML 沙箱渲染）；系统层展示分析诉求摘要、缓存标识、导出 PDF（文件名 = 场景名_起止日期）、赞/踩、返回工作台</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="ai-spec-section" id="spec-scenes">
+        <h3>分析场景与配置</h3>
+        <p>场景以<strong>分类目录</strong>组织（宏观大盘类 / 渠道与营销类 / 转化与线索类 / 潜客雷达类等）。每个场景含：名称、简介、图标、关联系统标签、时段类型（自选/固定）。</p>
+        <p class="ai-spec-lead">本期已上线 3 个场景：</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>场景</th><th>分析内容</th><th>时段</th></tr></thead>
+          <tbody>
+            <tr><td>综合流量分析</td><td>自选时段内流量 / 互动 / 询盘全链路复盘</td><td>用户自选</td></tr>
+            <tr><td>来源渠道分析</td><td>各渠道流量、互动率与询盘转化对比，识别优质渠道与虚荣流量</td><td>用户自选</td></tr>
+            <tr><td>询盘转化分析</td><td>表单询盘趋势、高峰日、来源渠道与着陆页贡献拆解</td><td>用户自选</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>每个场景显式声明：<strong>必填业务参数</strong>（当前均为「分析时段」）、<strong>所需数据接口</strong>、<strong>推荐图表与分析逻辑</strong>（具体配置见配置文档）。</li>
+          <li>场景在三处快捷触达：① <strong>欢迎区场景卡片</strong>（无任务时展示）；② <strong>输入框获焦时的推荐场景横条</strong>（图标 + 名称）；③ <strong>对话结果中的推荐场景</strong>——当意图不明或能力不满足时，回复卡片下方展示可点选的推荐场景，点击即按该场景继续。</li>
+        </ul>
+      </section>
+
+      <section class="ai-spec-section" id="spec-trigger">
+        <h3>触发方式与交互</h3>
+        <p><b>「一份报告 = 一次对话」原则：</b>一次对话只产出一份报告。系统识别到明确意图并<strong>开始生成报告后，即锁定输入框、隐藏输入框、不再接受新的自由输入</strong>（仅展示执行等待动效）；若任务<strong>生成失败</strong>，允许对该任务重新生成。需要做另一份分析时，<strong>新开一次对话</strong>（全新开始、不携带上一份的上下文）。</p>
+        <p class="ai-spec-lead">方式一 · 预设场景快捷分析</p>
+        <div class="ai-spec-mermaid mermaid">
+flowchart TD
+  A[点击场景卡片] --> B[弹出日期选择弹窗]
+  B --> C[选择快捷时段 或 手动起止日期]
+  C --> D{该场景+时段是否已有有效缓存?}
+  D -->|是| E[弹窗提示已有缓存，确认后读取缓存直接展示]
+  D -->|否| F[弹窗提示首次分析将扣点，确认后发起任务]
+  F --> G[任务区展示执行进度]
+  E --> H[进入报告详情页]
+  G --> I[任务完成 · 可展开执行过程]
+  I --> J[查看完整看板与报告]
+  J --> H
+        </div>
+        <ul>
+          <li>日期快捷项：<strong>近7日 / 近30日 / 上周 / 本月 / 上月 / 上季度</strong>，及手动起止日期。</li>
+          <li>日期弹窗底部按是否命中缓存动态提示：命中→「该时段已有分析缓存，进入后将直接展示（起 ~ 止）」；未命中→「该时段首次分析将扣点（起 ~ 止）」。</li>
+        </ul>
+        <p class="ai-spec-lead">方式二 · 自由输入</p>
+        <div class="ai-spec-mermaid mermaid">
+flowchart TD
+  A[输入框获焦] --> B[上方弹出：推荐场景横条 + 推荐分析需求文案]
+  A2[提交分析] --> C{当前对话是否已在生成/已出报告?}
+  C -->|是| C1[输入框已锁定并隐藏，不再接受新输入]
+  C -->|否| E[中枢调度：意图识别 + 参数提取]
+  E --> F{四分支校验}
+  F -->|参数不足| F1[待补充：追问缺失参数]
+  F -->|意图不明| F2[待补充：展示预设场景]
+  F -->|能力不满足| F3[待补充：固定拒答 + 推荐场景]
+  F -->|完美匹配| G[锁定输入框 → 创建执行任务 → 生成报告]
+  G --> H{生成是否成功?}
+  H -->|成功| I[报告完成 · 本次对话结束]
+  H -->|失败| J[可对该任务重新生成]
+        </div>
+        <ul>
+          <li>待补充阶段（缺参数/缺意图/能力不满足）仍属同一次对话，输入框可用、可继续补全；一旦命中意图开始生成即锁定并隐藏输入框。</li>
+          <li>生成失败或报告完成后，输入框隐藏，仅提供「重新生成」或「开启新对话」。</li>
+          <li><strong>输入框限制（未执行任务前不扣点，需防 token 浪费）：</strong>单次最大 <strong>200 字符</strong>、每分钟最多 <strong>10 次</strong>发送（均可配置）。超限提示文案：
+            <ul>
+              <li>超过字符上限：「输入内容过长，单次最多 {max_chars} 个字符，请精简后重试。」（本期 <code>max_chars=200</code>）——<strong>禁止发送，不自动截取输入内容</strong>，仅提示用户精简。</li>
+              <li>超过频率上限：「发送过于频繁，每分钟最多 {max_per_minute} 次，请稍后再试。」（本期 <code>max_per_minute=10</code>）</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="ai-spec-section" id="spec-intent">
+        <h3>意图识别与四分支校验</h3>
+        <p>中枢调度根据用户指令 + 当前对话上下文，输出<strong>结构化结果</strong>：意图、业务参数、<strong>状态标识</strong>、缺失项清单。业务参数提取是<strong>全局、与意图无关</strong>的（如「最近30天」始终落到时段参数）；完整性校验在命中场景后，用该场景的<strong>必填业务参数</strong>对照。</p>
+        <p class="ai-spec-lead">技术判断依据：按返回的「状态标识」路由分支</p>
+        <p>前端/后端<strong>无需做语义二次判断</strong>，直接读中枢返回的状态标识决定走哪条分支（状态枚举与判定规则见配置文档）：</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>分支</th><th>返回状态</th><th>判定依据（中枢返回）</th><th>系统回复文案（示例）</th><th>计费</th></tr></thead>
+          <tbody>
+            <tr><td>参数不足</td><td>缺参数</td><td>命中场景，但该场景必填参数缺失，<code>missing_fields</code> 列出待补项（如 <code>time_range</code>）</td><td>固定格式：「已识别您想进行「<i>{scene_name}</i>」，还缺少 <i>{missing_field_labels}</i> 信息，请在下方快捷选择，或在底部输入框补充完整需求（如：<i>{quick_example}</i> <i>{scene_name}</i>）。」<br>动态参数：<code>scene_name</code> 场景名；<code>missing_field_labels</code> 缺失项中文名（顿号连接，如「分析时段」）；<code>quick_example</code> 快捷示例（如「近7日」）</td><td>不扣</td></tr>
+            <tr><td>意图不明</td><td>缺意图</td><td>提取到参数但<strong>未命中任何场景</strong></td><td>固定文案：「未能匹配到可执行的分析场景，无法绘制看板。」+ 下方展示可点选推荐场景</td><td>不扣</td></tr>
+            <tr><td>能力不满足</td><td>超出能力</td><td>诉求明确但<strong>落在已接入数据能力之外</strong></td><td>固定文案：「未能匹配到可执行的分析场景，无法绘制看板。」+ 下方展示可点选推荐场景</td><td>不扣</td></tr>
+            <tr><td>完美匹配</td><td>就绪</td><td>命中场景且必填参数齐全</td><td>固定格式：「已为您发起「<i>{task_label}</i>」，正在生成报告…」<br>动态参数：<code>task_label</code> = 场景名 + 时段描述（如「近30天来源渠道分析」）</td><td>预扣</td></tr>
+          </tbody>
+        </table>
+        <p>回复文案与可点选场景由前端按上述格式渲染（场景名、缺失项随返回值动态填充）；完整话术模板见配置文档。</p>
+        <p class="ai-spec-lead">同一次对话内的参数累积（判断流转示例）</p>
+        <ul>
+          <li>用户先输入「帮我查最近30天的数据」→ 中枢返回：状态=<strong>缺意图</strong>、参数={时段=30天}（已暂存）→ 走「意图不明」分支，展示推荐场景。</li>
+          <li>用户在同一对话补一句「来源渠道情况」→ 中枢结合已暂存参数返回：状态=<strong>就绪</strong>、意图=来源渠道分析、参数={时段=30天} → 直接发起，无需重问时段。</li>
+        </ul>
+        <div class="ai-spec-doclink">
+          <span>📎</span>
+          <span>状态枚举与路由规则、中控调度提示词、参数字典、场景命中规则、各分支完整回复话术见 <a href="https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNXRy5LpYMTUOWPlX1?scode=ADEAhgd4AAgKqrmlzrAHUAbAYSAL8&tab=0838nt" target="_blank" rel="noopener">配置文档</a>。</span>
+        </div>
+      </section>
+
+      <section class="ai-spec-section" id="spec-agent">
+        <h3>Agent 调度与执行时序</h3>
+        <p>后端技术时序与前端进度对应（主进度环节：<strong>分析意图 → 获取数据 → 绘制图表 → 数据分析 → 生成优化建议 → 完成</strong>，其中「获取数据」含按接口推进的二级进度）。中间状态通过 <strong>SSE</strong> 实时推送，任务卡同步更新 Loading / 步骤。<strong>每次对话相互独立、从零开始，不携带历史对话或上一份报告的任何上下文。</strong></p>
+        <div class="ai-spec-mermaid mermaid">
+sequenceDiagram
+    autonumber
+    actor User as 用户
+    participant UI as 前端工作台
+    participant Agent as Agent 调度中枢
+    participant Memory as 当前对话上下文
+    participant LLM as 大模型
+    participant API as 业务数据接口
+
+    User->>UI: 发起分析（场景/自由输入）
+    UI->>UI: 生成任务卡，展示「分析意图」
+    UI->>Agent: 用户指令 + 会话标识
+    Agent->>Memory: 读取当前对话上下文（最多最近10轮，无跨对话/跨报告内容）
+    Memory-->>Agent: 返回当前对话上下文
+    Agent->>LLM: 意图识别 + 参数提取（中控调度）
+    LLM-->>Agent: 意图 / 参数 / 状态标识
+
+    alt 缺参数 / 缺意图
+        Agent-->>UI: 追问/展示推荐场景，任务卡「待补充」(同对话可继续补全)
+    else 超出能力
+        Agent-->>UI: 固定拒答文案 + 推荐场景，任务卡「待补充」
+    else 就绪（完美匹配）
+        Agent->>UI: 锁定输入框，进入生成
+        Agent->>Agent: Planner 选接口 + 判定查询粒度 + 编排（并行/串行）
+        loop 每个数据接口
+            Agent->>UI: SSE 二级进度「正在{api_title}」
+            Agent->>API: 调用整合数据接口（必要时串行下钻会话详情）
+            API-->>Agent: 业务数据（含当期/对比期）
+            Agent->>UI: SSE 二级进度「已{api_title}」
+        end
+        alt 接口失败/超时
+            Agent-->>UI: 任务卡「生成失败」+「服务暂不可用，请稍后再试」；已预扣则退点；可重新生成
+        else 取数成功
+            Agent->>UI: SSE「绘制图表 / 数据分析 / 生成优化建议」
+            Agent->>LLM: 数据 + 场景策略 + 图表规范 → 直出报告 HTML
+            LLM-->>Agent: 报告 HTML（含 Chart.js）+ 概览
+            Agent-->>UI: SSE「完成」，落库并写入分析记录
+            UI-->>User: 沙箱渲染报告（看板 + 诊断）；本次对话结束
+        end
+    end
+        </div>
+        <p class="ai-spec-lead">Planner（任务规划）说明</p>
+        <ul>
+          <li>Planner 与意图识别同属<strong>调度中枢</strong>，工程上可<strong>合并为一次大模型调用</strong>完成。它的职责是：依据命中的场景配置，<strong>确定要调用哪些数据接口、按时段自动判定查询粒度、安排接口的并行/串行（下钻）执行顺序</strong>。</li>
+          <li><strong>预设场景</strong>的所需接口已在场景配置中写明，Planner 按配置<strong>确定性执行</strong>（选接口、判定粒度、编排并行/串行）。<strong>本期暂不支持</strong>自由输入的复杂诉求动态规划，后续版本扩展。</li>
+          <li>执行中任务卡内 AI 头像有动效；AI 分析阶段文案：「AI数据分析师 正在分析数据并撰写报告…」。</li>
+        </ul>
+      </section>
+
+      <section class="ai-spec-section" id="spec-data">
+        <h3>数据接口取数与粒度</h3>
+        <p>数据查询<strong>直接调用各业务系统整合后的数据接口</strong>（非 PV/UV/IP/会话各自单独接口）。每个接口带<strong>标题、能力描述</strong>。接口标题统一命名为「查询/获取……数据」格式（如「查询来源渠道数据」）。执行时界面按接口推进进程文案：<strong>调用中显示「正在{接口标题}」，返回后显示「已{接口标题}」</strong>（示例：「正在查询来源渠道数据」→「已查询来源渠道数据」）。</p>
+        <p class="ai-spec-lead">编排：并行 + 串行（链式下钻）</p>
+        <ul>
+          <li><strong>并行：</strong>互不依赖的接口由<strong>调度中枢</strong>同时发起以降延迟（如渠道分布与互动转化同时取）。</li>
+          <li><strong>串行/下钻：</strong>由<strong>调度中枢按场景配置的执行链路</strong>驱动，<strong>非大模型临场决定调哪个接口</strong>。场景配置中预先声明链路（如：接口 A → 参数映射规则 → 接口 B）。中枢执行流程：① 调用前置接口 A；② 从 A 的返回中按映射规则提取字段（如高转化会话 ID）；③ 将提取值填入后置接口 B 的入参；④ 调用接口 B；⑤ 合并结果交给报告生成。大模型仅参与意图识别与最终报告撰写，<strong>不直接调用业务数据接口</strong>。</li>
+        </ul>
+        <p class="ai-spec-lead">查询粒度自动判定（按时段跨度，系统判定、不消耗大模型）</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>时段跨度（天）</th><th>粒度</th><th>示例</th></tr></thead>
+          <tbody>
+            <tr><td>≤ 14 天</td><td>按日</td><td>近 7 天 → 7 个日数据点</td></tr>
+            <tr><td>15 ~ 90 天</td><td>按周</td><td>近 90 天 → 约 13 个周数据点</td></tr>
+            <tr><td>91 ~ 730 天</td><td>按月</td><td>近 730 天 → 约 24 个月数据点</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px">阈值（14 / 90 / 730 天）可配置。<strong>单次分析最大跨度为 730 天（2 年）</strong>；用户可选择任意历史起止日期，但起止间隔不得超过 730 天。</p>
+        <div class="ai-spec-io">
+          <p style="margin:0 0 4px"><b>输入：</b>站点标识 + 鉴权信息、时段、对比方式（默认环比）、<b>维度</b>、自动判定的粒度。</p>
+          <p style="margin:0 0 4px"><b>「维度」含义：</b>指数据的<strong>拆分口径</strong>，即按什么把指标拆开看，例如按渠道、按国家/地区、按着陆页、按转化类型等；每个接口支持哪些维度由接口自身定义（见配置文档）。</p>
+          <p style="margin:0"><b>输出：</b>统一含成功标识；趋势/对比类同时返回<strong>当期值</strong>与<strong>对比期值</strong>。</p>
+          <p style="margin:6px 0 0"><b>「变化率由中枢计算」规则：</b>涨跌幅（环比/同比）由调度中枢用接口返回的当期值与对比期值，按固定公式 <code>(当期 − 对比期) / 对比期</code> 统一计算后写入数据，再交给大模型；<strong>大模型只能引用该计算结果，禁止自行编造或推算对比基数与百分比</strong>，从而保证口径一致、可核对。</p>
+        </div>
+        <div class="ai-spec-doclink">
+          <span>📎</span>
+          <span>各接口标题/描述/进程文案、入参出参字段、下钻链路定义见 <a href="https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNXRy5LpYMTUOWPlX1?scode=ADEAhgd4AAgKqrmlzrAHUAbAYSAL8&tab=0838nt" target="_blank" rel="noopener">配置文档</a>。</span>
+        </div>
+      </section>
+
+      <section class="ai-spec-section" id="spec-report">
+        <h3>图表与报告生成</h3>
+        <p class="ai-spec-lead">方案：AI 用 Chart.js 直出报告 HTML，产品沙箱渲染。</p>
+        <p>不再「预设图表库 → AI 选类型 → 前端组装」。改为 <strong>AI 结合数据类型自行用 Chart.js 绘制图表、产出图表 HTML/JS</strong>，与文字结论拼成<strong>整份报告 HTML</strong>；产品仅在<strong>隔离沙箱（iframe，内置 Chart.js、禁止外部脚本/网络）</strong>中渲染。</p>
+        <div class="ai-spec-mermaid mermaid">
+flowchart LR
+  A[接口返回数据] --> B[按场景与粒度聚合]
+  B --> C[AI 多维洞察]
+  C --> D[选型并用 Chart.js 绘制图表 HTML]
+  C --> E[撰写三段式诊断]
+  D --> F[拼成整份报告 HTML]
+  E --> F
+  F --> G[HTML 安全校验后落库]
+  G --> H[详情页沙箱渲染：模块A看板 + 模块B诊断]
+        </div>
+        <p class="ai-spec-lead">HTML 安全校验内容（落库前）</p>
+        <ul>
+          <li><strong>标签/属性白名单：</strong>仅允许排版与图表所需标签，过滤 <code>iframe</code>、<code>object</code>、<code>on*</code> 事件属性、<code>javascript:</code> 等危险内容，防 XSS。</li>
+          <li><strong>脚本范围限制：</strong>只允许调用产品内置的 Chart.js 进行绘图，<strong>禁止外部脚本、网络请求与跨域资源</strong>。</li>
+          <li><strong>结构与完整性：</strong>校验 HTML 可正常解析、图表初始化代码与数据齐全；不通过则判为生成失败并退点。</li>
+        </ul>
+        <p class="ai-spec-lead">报告页两模块（职责分离）</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>模块</th><th>内容</th><th>原则</th></tr></thead>
+          <tbody>
+            <tr><td>模块 A · 数据看板</td><td>指标卡、Chart.js 图表、原始数据表</td><td>呈现可核对的客观数据</td></tr>
+            <tr><td>模块 B · AI 深度诊断</td><td>数据分析、异常说明、优化建议（短/中/长期）</td><td>基于看板数据给洞察，不替代原始数据</td></tr>
+          </tbody>
+        </table>
+        <p class="ai-spec-lead">AI 报告撰写约束</p>
+        <ul>
+          <li>严禁编造数据/图表；变化率必须基于接口返回的对比周期；图表选型结合数据类型（趋势用折线、对比用柱、占比用饼、明细用表格、要点用列表）。</li>
+          <li>不打质量评分；不使用 P0/P1/P2 等优先级标签；不凭空推测未出现在数据中的结论；核心洞察写报告、明细数字放看板。</li>
+        </ul>
+        <div class="ai-spec-doclink">
+          <span>📎</span>
+          <span>各场景图表组合、报告结构与图表生成规范的具体提示词见 <a href="https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNXRy5LpYMTUOWPlX1?scode=ADEAhgd4AAgKqrmlzrAHUAbAYSAL8&tab=0838nt" target="_blank" rel="noopener">配置文档</a>。</span>
+        </div>
+      </section>
+
+      <section class="ai-spec-section" id="spec-task">
+        <h3>任务卡状态机与文案</h3>
+        <p>每次发起分析在任务区生成一张任务卡，状态随执行流转：</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>状态</th><th>界面文案</th><th>触发</th><th>可操作</th></tr></thead>
+          <tbody>
+            <tr><td>生成中</td><td>「生成中」+ 执行进度 + AI 头像动效</td><td>校验通过、正在取数/分析</td><td>等待；可展开执行过程</td></tr>
+            <tr><td>待补充</td><td>「待补充」+ 缺项提示 + 快捷选项/可点选场景</td><td><strong>未识别意图</strong>，或<strong>已识别意图但必填参数不全</strong>（含能力不满足、意图不明）</td><td>选时段或点选场景以补全</td></tr>
+            <tr><td>已完成</td><td>「已完成」+ 查看完整看板与报告入口</td><td>报告生成成功并落库</td><td>查看报告、导出 PDF、重新生成（见分析记录说明）</td></tr>
+            <tr><td>生成失败</td><td>「生成失败」+ 失败/兜底说明</td><td><strong>仅</strong>在已识别明确意图并开始执行任务后，因数据接口失败、AI 生成失败、网络/系统等原因未执行完成</td><td>重新生成</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>主进度环节：分析意图 → 获取数据 → 绘制图表 → 数据分析 → 生成优化建议 → 完成；当前步高亮，完成步打勾。</li>
+          <li><strong>「获取数据」含二级进度：</strong>该步内按实际调用的接口逐条展示子进度——「正在{接口标题}」/「已{接口标题}」（不同任务调用接口数量不同，子进度条数随之变化）。</li>
+          <li>执行进度与提示展示在<strong>任务卡片内</strong>；任务执行期间<strong>隐藏底部输入框</strong>，改为展示「任务执行中」的等待动画；执行期间隐藏欢迎场景区。</li>
+          <li><strong>生成失败</strong>或<strong>已完成</strong>后同样隐藏输入框，仅保留任务卡内操作（重新生成 / 查看报告 / 开启新对话）。</li>
+          <li>失败兜底文案：「服务暂不可用，请稍后再试。」</li>
+        </ul>
+        <p class="ai-spec-lead">执行过程各环节的「进行中 / 已完成」判定</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>环节</th><th>开始（进行中）</th><th>结束（已完成 ✓）</th></tr></thead>
+          <tbody>
+            <tr><td>分析意图</td><td>中枢返回「就绪」、任务进入生成流程</td><td>Planner 完成接口选取与粒度判定</td></tr>
+            <tr><td>获取数据</td><td>进入本环节；每个接口发起调用时，二级进度显示「正在{接口标题}」</td><td>该接口返回成功 → 二级进度「已{接口标题}」；<strong>全部所需接口均返回成功</strong>后本环节完成</td></tr>
+            <tr><td>绘制图表</td><td>取数完成，中枢发起<strong>单次</strong>大模型报告生成调用</td><td>见下方「报告生成子阶段」说明</td></tr>
+            <tr><td>数据分析</td><td>同上（逻辑子阶段，非独立调用）</td><td>同上</td></tr>
+            <tr><td>生成优化建议</td><td>同上（逻辑子阶段，非独立调用）</td><td>同上</td></tr>
+            <tr><td>完成</td><td>报告 HTML 通过安全校验</td><td>落库成功并推送前端「完成」事件</td></tr>
+          </tbody>
+        </table>
+        <p class="ai-spec-lead">报告生成子阶段（绘制图表 / 数据分析 / 生成优化建议）的进度反馈</p>
+        <p>三者在工程上为<strong>同一次大模型调用</strong>：取数完成后，中枢将数据 + 场景策略 + 图表规范<strong>一次性组装进提示词</strong>，大模型<strong>一次输出整份报告 HTML</strong>（含 Chart.js 图表与诊断文案）。前端展示的三个步骤是<strong>逻辑进度</strong>，由中枢通过 SSE 推送 <code>report_phase</code> 事件驱动，而非三次独立调用：</p>
+        <ul>
+          <li><strong>推荐方式：</strong>大模型<strong>流式输出</strong>时，按提示词约定的阶段标记切换（如输出中出现约定分隔符 / 章节标记 <code>phase:chart</code>、<code>phase:analysis</code>、<code>phase:suggestion</code>），中枢解析后向前端推送对应步骤状态。</li>
+          <li><strong>兜底方式（无法可靠分段时）：</strong>大模型开始处理时，<strong>绘制图表、数据分析、生成优化建议三子步同时置为「进行中」</strong>；整次调用成功返回后，<strong>三子步同时置为「已完成」</strong>，再进入「完成」环节（Demo 原型采用此方式）。</li>
+        </ul>
+        <p style="font-size:12px">任一步骤发生不可恢复错误 → 任务置「生成失败」，已预扣则退点。</p>
+      </section>
+
+      <section class="ai-spec-section" id="spec-record">
+        <h3>分析记录与报告详情</h3>
+        <ul>
+          <li><strong>分析记录弹窗（历史）：</strong>表格字段 = 任务名称（场景 + 时段）、状态（已完成 / 生成中 / 生成失败）、分析日期、提交账号。</li>
+          <li><strong>操作列规则：</strong>
+            <ul>
+              <li><strong>生成失败：</strong>展示「重新生成」。点击后<strong>返回工作台对话窗口</strong>，带入原任务参数（场景 + 时段 + 分析诉求），重新走完整报告生成流程（预扣点；成功则<strong>更新该条记录</strong>状态为已完成）。</li>
+              <li><strong>生成中：</strong>仅「查看进度」。</li>
+              <li><strong>已完成：</strong>「查看报告」「导出 PDF」「重新生成」。点击「重新生成」后<strong>返回工作台对话窗口</strong>，带入原任务参数，忽略已有缓存重新取数并 AI 生成（预扣点）；成功后<strong>新增一条</strong>分析记录并覆盖写入新缓存。</li>
+            </ul>
+          </li>
+          <li><strong>落库时机：</strong>在<strong>获取到明确任务、开始生成时即落库</strong>一条分析记录（状态=生成中），并随执行结果更新为「已完成」或「生成失败」。</li>
+          <li><strong>重新生成落库：</strong>对「已完成」报告再次点击「重新生成」时，<strong>新增一条</strong>分析记录（状态=生成中），不覆盖原已完成记录；生成成功后原记录保留、新记录标记为已完成。</li>
+          <li><strong>报告详情页：</strong>模块 A 看板 + 模块 B 诊断（AI 生成 HTML）；顶部操作 = 导出 PDF、<strong>赞 / 踩</strong>、返回工作台。</li>
+          <li><strong>分析诉求展示（系统层，非 AI HTML 内）：</strong>报告页顶部默认展示一行摘要（CSS 单行省略，超出以「…」截断）；<strong>仅当文本超出一行可视宽度时</strong>显示「详情」按钮，弹窗按时间展示每轮用户输入原文与时间戳。未超出一行则不显示「详情」。预设场景快捷进入则展示场景 + 时段确认文案。</li>
+          <li><strong>缓存标识（系统层）：</strong>展示在模块 A / B 之外（与 AI 生成内容隔离）；命中缓存时显示「首次生成已缓存」及说明文案。</li>
+        </ul>
+      </section>
+
+      <section class="ai-spec-section" id="spec-context">
+        <h3>上下文</h3>
+        <p><strong>每次对话独立、从零开始</strong>：一次对话只产出一份报告，<strong>不跨对话、不跨报告携带任何上下文</strong>；需要新分析请新开一次对话。上下文仅服务<strong>当前这一次对话</strong>，避免无限增长：</p>
+        <table class="ai-spec-table">
+          <thead><tr><th>层级</th><th>内容</th><th>用途 / 时效</th></tr></thead>
+          <tbody>
+            <tr><td>消息上下文</td><td>当前对话<strong>最近 10 轮</strong>（系统回复一次记为一轮）；单条用户消息与累计上下文均有<strong>最大字符数上限</strong>（可配置，<strong>本期暂定 10,000 字符</strong>，防止未扣费阶段超长输入消耗 token）</td><td>理解同一对话内的多轮补全；超限截断最早轮次</td></tr>
+            <tr><td>任务上下文</td><td>同一对话内累积「意图 + 已得参数」并记录缺项</td><td>参数 / 意图补全；<strong>仅限本次对话会话内有效</strong>，对话结束即清空（不设独立超时）</td></tr>
+            <tr><td>站点上下文（行业背景）</td><td>站点行业、主营、市场语言</td><td><strong>本期暂不支持</strong>（保留设计）</td></tr>
+          </tbody>
+        </table>
+        <p>说明：意图明确并开始生成报告后输入框即锁定；本次对话结束后再发起分析为<strong>新对话</strong>，不继承上次意图、时段或报告内容。</p>
+      </section>
+
+      <section class="ai-spec-section" id="spec-cache">
+        <h3>缓存与计费</h3>
+        <div class="ai-spec-doclink" style="background:var(--bg-subtle);border-left-color:var(--text-tertiary)">
+          <span>💡</span>
+          <span><b>全局计费说明：</b>所有扣点的<strong>具体点数均为待定</strong>，且需支持<strong>可配置</strong>（按次/按场景）。本说明中出现的点数仅为示意，最终以配置为准。</span>
+        </div>
+        <div class="ai-spec-mermaid mermaid">
+flowchart TD
+  A[请求某场景某时段分析] --> B{是否命中有效缓存?}
+  B -->|有效| C[直接展示缓存结果，不扣点、不走AI生成]
+  B -->|失效或无| D[预扣点 → 取数 → AI 直出报告]
+  D --> E{生成成功?}
+  E -->|是| F[写入缓存 + 计费确认]
+  E -->|否| G[退点，余额恢复]
+  F --> H[展示结果]
+        </div>
+        <ul>
+          <li><strong>计费规则：</strong>按次扣点（非按 token）；开始取数时<strong>预扣</strong>（点数待定·可配置），生成成功即最终消费，<strong>失败退点</strong>（无「冻结」概念）。</li>
+          <li><strong>不扣点情形：</strong>参数追问、意图不明引导、能力边界拒答、命中有效缓存。</li>
+          <li><strong>缓存粒度：</strong>同一账号 + 同一场景 + 同一时段视为一次分析；首次生成扣点并写入缓存。</li>
+          <li><strong>缓存有效期由「AI数据分析师」功能自身决定</strong>（非 MoliAI，<strong>可配置</strong>；<strong>本期按一年有效期</strong>）：<strong>缓存有效</strong>→ 直接读取、跳过 AI 生成、不扣点；<strong>缓存失效</strong>→ 重新走 AI 生成并由 MoliAI 扣点。</li>
+          <li>界面需区分「首次生成」与「读取缓存」。</li>
+        </ul>
+      </section>
+
+      <section class="ai-spec-section" id="spec-permission">
+        <h3>权限校验</h3>
+        <p>可用性由<strong>智慧数据</strong>与<strong>MoliAI</strong>两套权限<strong>共同决定</strong>，须同时满足。<strong>入口权限在发起分析之前校验</strong>——无权限用户看不到功能入口。</p>
+        <div class="ai-spec-mermaid mermaid">
+flowchart TD
+  A[访问 AI数据分析师] --> B{有智慧数据访问权限?}
+  B -->|否| C[不可进入/提示无权限]
+  B -->|是| D{有 MoliAI 使用权限?}
+  D -->|否| E[可浏览场景说明，不可生成/查看 AI 分析]
+  D -->|是| F{MoliAI 余额充足?}
+  F -->|否| G[提示额度不足，引导充值]
+  F -->|是| H[可正常生成与查看]
+        </div>
+        <table class="ai-spec-table">
+          <thead><tr><th>权限来源</th><th>控制范围</th></tr></thead>
+          <tbody>
+            <tr><td>智慧数据</td><td>入口可见性、站点数据读取范围、场景与账号数据范围（仅可访问本站点数据，防越权）</td></tr>
+            <tr><td>MoliAI</td><td><strong>仅负责点数扣除与余额校验</strong>（是否额度充足、预扣/退点/确认消费）</td></tr>
+          </tbody>
+        </table>
+        <p>两套系统分别校验，前端在<strong>发起前</strong>给出权限/额度不足提示，避免进入流程后才失败。</p>
+      </section>
+
+      <section class="ai-spec-section" id="spec-error">
+        <h3>异常与兜底</h3>
+        <table class="ai-spec-table">
+          <thead><tr><th>异常</th><th>处理</th><th>计费</th></tr></thead>
+          <tbody>
+            <tr><td>未开通 / 额度不足</td><td>预检拦截，引导开通/充值，不进入取数</td><td>不扣</td></tr>
+            <tr><td>参数不足 / 意图不明</td><td>待补充任务卡，引导补全（保留已得信息）</td><td>不扣</td></tr>
+            <tr><td>能力不满足</td><td>待补充任务卡 + 固定拒答文案 + 展示推荐场景</td><td>不扣</td></tr>
+            <tr><td>数据接口失败 / 超时</td><td>重试后仍失败 → 任务「生成失败」+ 兜底文案「服务暂不可用，请稍后再试」；支持重新生成</td><td>已预扣则退点</td></tr>
+            <tr><td>模型失败</td><td>提示稍后重试 / 兜底说明</td><td>无法成报告则退点</td></tr>
+            <tr><td>数据为空</td><td>不出图，输出文字说明 / 冷启动建议</td><td>按配置（建议不扣）</td></tr>
+            <tr><td>SSE 中断</td><td>断线重连补发事件，或直接拉取已完成报告</td><td>不影响</td></tr>
+            <tr><td>重复提交</td><td>生成中已锁定输入框；同任务幂等不重复扣点</td><td>不重复扣</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="ai-spec-section" id="spec-extend">
+        <h3>可配置与拓展</h3>
+        <p>需支持<strong>运营可配置、产品可拓展</strong>，避免每增一个场景或接口都要发版改码。</p>
+        <ul>
+          <li><strong>场景管理：</strong>分类、名称/描述、上线状态、关联系统标签、时段类型、必填参数、所需接口、推荐图表与分析逻辑。</li>
+          <li><strong>数据接口：</strong>接口标题/描述/进程文案、入参出参字段、下钻链路、并行/串行编排规则；后期可接入其他业务系统数据查询能力。</li>
+          <li><strong>自由输入：</strong>推荐场景横条、推荐分析需求文案、不支持维度的兜底说明；输入框字符上限与发送频率限制。</li>
+          <li><strong>任务展示：</strong>进度环节文案、各状态标签与提示文案。</li>
+          <li><strong>日期快捷项：</strong>近7日/近30日/上周等预设与粒度判定阈值可调。</li>
+          <li><strong>计费策略：</strong>单次/按场景扣点（点数待定·可配）由 MoliAI 侧配置。</li>
+          <li><strong>缓存有效期：</strong>由「AI数据分析师」功能自身配置（<strong>本期一年</strong>；决定何时跳过 AI 生成、何时重新生成扣点）。</li>
+        </ul>
+        <div class="ai-spec-mermaid mermaid">
+flowchart LR
+  subgraph 场景拓展
+    S1[新增场景] --> S2[配置指标范围与必填参数]
+    S2 --> S3[配置所需接口与图表/分析逻辑]
+  end
+  subgraph 接口拓展
+    C1[接入新整合数据接口] --> C2[登记标题/描述/进程文案与字段]
+    C2 --> C3[纳入场景所需接口清单]
+  end
+  subgraph 系统拓展
+    X1[接入访客雷达等新系统] --> X2[场景打标与数据打通]
+    X2 --> X3[权限体系联合校验]
+  end
+        </div>
+        <div class="ai-spec-doclink">
+          <span>📎</span>
+          <span>新增场景/接口的具体提示词、字段与分析逻辑模板见 <a href="https://doc.weixin.qq.com/sheet/e3_ACIACgbkAL8CNXRy5LpYMTUOWPlX1?scode=ADEAhgd4AAgKqrmlzrAHUAbAYSAL8&tab=0838nt" target="_blank" rel="noopener">配置文档</a>。</span>
+        </div>
+      </section>
+
+      <p class="ai-spec-footer">说明文档版本：V4.0 · 供技术开发参考 · 对应 Demo 分析工作台原型</p>
+    </div>
+  </div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

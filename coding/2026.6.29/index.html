@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; padding: 16px; margin: 0; color: #333; line-height: 1.6; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+img { max-width: 100%; height: auto; break-inside: avoid; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; break-inside: auto; }
+tr { break-inside: avoid; }
+th, td { border: 1px solid #e8e8e8; padding: 8px 12px; text-align: left; }
+th { background: #f5f7fa; font-weight: 600; }
+canvas { max-width: 100%; break-inside: avoid; }
+.ai-sections { display: flex; flex-direction: column; gap: 24px; }
+.ai-section { border: none; border-radius: 8px; padding: 20px; }
+.ai-section--rich { padding: 0 0 20px; border-bottom: 1px solid #f0f0f0; }
+.ai-section--rich:last-child { border-bottom: none; padding-bottom: 0; }
+.ai-section-head { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.ai-section-icon { font-size: 18px; }
+.ai-section-body { font-size: 14px; color: #333; line-height: 1.7; }
+.ai-section-body p { margin: 0 0 10px; }
+.ai-section-body p:last-child { margin-bottom: 0; }
+.ai-report-doc-lead { font-size: 15px; font-weight: 500; margin-bottom: 16px; }
+.ai-report-doc-outro { margin-top: 16px; padding-top: 12px; border-top: 1px solid #f0f0f0; color: #666; }
+.ai-report-part { margin-bottom: 16px; }
+.ai-report-part-title { font-size: 14px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; }
+.ai-report-category { margin-bottom: 14px; }
+.ai-report-category-title { font-size: 14px; font-weight: 600; color: #1a1a2e; margin: 0 0 6px; }
+.ai-suggestion-list { margin: 0; padding-left: 20px; }
+.ai-suggestion-list li { margin-bottom: 6px; line-height: 1.6; }
+.ai-fact-item { margin-bottom: 14px; padding: 12px; background: #fafbfc; border-radius: 6px; border: 1px solid #f0f0f0; }
+.ai-fact-head { font-size: 14px; margin-bottom: 6px; }
+.ai-fact-item p { margin: 0 0 6px; font-size: 13px; color: #555; }
+.ai-fact-metric { font-size: 12px; color: #888; margin-top: 4px; }
+.ai-insight-narrative p { margin: 0 0 12px; }
+.ai-insight-narrative p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="ai-sections ai-sections--rich">
+
+  <div class="ai-section ai-section--rich">
+    <div class="ai-section-head"><span class="ai-section-icon summary">📊</span>数据分析</div>
+    <div class="ai-section-body">
+      <div class="ai-report-doc">
+        <p class="ai-report-doc-lead"><strong>网站运营周度数据分析报告</strong>（2026-06-04 ~ 2026-06-10）</p>
+
+        <div class="ai-report-part">
+          <h4 class="ai-report-part-title">第一部分：网站流量及访客质量分析</h4>
+          <p>所选时段网站访客 <strong>13,642</strong> 人（环比 +5.8%），页面浏览量 <strong>50,750</strong> 次（环比 +14.8%），累计会话 <strong>19,790</strong> 次，独立 IP <strong>11,013</strong> 个。</p>
+          <p>人均 PV 从 3.43 升至 <strong>3.72</strong>，PV 增速约为 UV 的 2.5 倍。这说明该时段增长更多来自<strong>存量访客反复浏览</strong>，新客获取增速相对温和，访客质量呈现「深浏览」特征。</p>
+        </div>
+
+        <div class="ai-report-part">
+          <h4 class="ai-report-part-title">第二部分：网站互动与转化数据分析</h4>
+          <p>网站互动 <strong>185</strong> 次（环比 +14.2%），互动率约 <strong>0.93%</strong>；销售机会 <strong>124</strong> 条（环比 +14.8%），表单询盘 <strong>96</strong> 条（环比 +9.1%），全站转化率约 <strong>0.49%</strong>。</p>
+          <p><strong>06-09</strong> 出现周内尖峰：当日 PV 11,200、询盘 58 条，占全周询盘 <strong>60.4%</strong>。流量集中于 <strong>/website.html</strong>（PV 18,313，转化率 0.08%），而转化集中于 <strong>/peixunyuyue.html</strong>（PV 仅 277，转化率 <strong>32.88%</strong>，销售机会 73 条），呈现典型的「流量页 vs 转化页」分离。</p>
+          <p>互动结构：表单提交 106 次、发起咨询 27 次、社交分享 50 次。主渠道 <strong>直接访问</strong> 贡献 12,287 会话（约占 62.1%），自然搜索与付费渠道本周无有效记录。</p>
+        </div>
+
+        <div class="ai-report-part">
+          <h4 class="ai-report-part-title">第三部分：总结与展望</h4>
+          <p>本周网站在流量规模、互动频次与销售机会上均保持<strong>温和增长</strong>，06-09 尖峰日带动了全周询盘指标。当前增长的主要驱动力是直访回访与高转化单页，而非多渠道协同或全站均衡转化。</p>
+          <p>下一阶段建议聚焦三条主线：① 复盘尖峰日有效动作并尝试固化为周常运营；② 将 /website.html、/ 等高流量页面向 /peixunyuyue.html 等转化页系统导流；③ 恢复自然搜索/付费渠道的数据可观测性，为后续投放与 SEO 评估提供依据。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-section ai-section--rich">
+    <div class="ai-section-head"><span class="ai-section-icon issue">⚠️</span>异常诊断</div>
+    <div class="ai-section-body">
+      <div class="ai-fact-item">
+        <div class="ai-fact-head"><strong>06-09 询盘尖峰</strong></div>
+        <p>该日询盘 <strong>58</strong> 条，占全周 96 条的 <strong>60.4%</strong>；当日 PV 11,200、UV 2,800，均为周内最高。</p>
+        <div class="ai-fact-metric">非尖峰日日均询盘约 <strong>6.3</strong> 条</div>
+      </div>
+      <div class="ai-fact-item">
+        <div class="ai-fact-head"><strong>流量页与转化页割裂</strong></div>
+        <p><strong>/website.html</strong> 贡献主要 PV（18,313）但转化率仅 0.08%；<strong>/peixunyuyue.html</strong> 贡献 73 条销售机会，占绝对主导。</p>
+        <div class="ai-fact-metric">高流量未有效导向留资路径</div>
+      </div>
+      <div class="ai-fact-item">
+        <div class="ai-fact-head"><strong>渠道结构单一</strong></div>
+        <p>有效记录渠道仅 <strong>2</strong> 个（共监测 8 个），直接访问 占会话约 62.1%。</p>
+        <div class="ai-fact-metric">自然搜索、付费搜索、付费社交等渠道 UV 为 0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-section ai-section--rich">
+    <div class="ai-section-head"><span class="ai-section-icon tip">💡</span>优化建议</div>
+    <div class="ai-section-body">
+      <div class="ai-report-doc">
+        <p class="ai-report-doc-lead">本周流量增长尚未充分转化为全站均衡的业务产出。以下建议参考运营报告模板，按优先级维度整理，旨在将高流量转化为实际询盘与销售机会。</p>
+
+        <div class="ai-report-category">
+          <h4 class="ai-report-category-title">一、核心转化与着陆页优化</h4>
+          <ul class="ai-suggestion-list">
+            <li>针对核心转化路径，优化 <strong>/peixunyuyue.html</strong> 着陆页设计，确保用户能迅速找到留资入口并简化提交流程</li>
+            <li>在 <strong>/website.html</strong> 及首页 / 增加培训预约、方案咨询等强 CTA，向 /peixunyuyue.html 系统导流</li>
+            <li>对 /peixunyuyue.html 与 /website.html 的转化流程开展 A/B 测试，验证不同 CTA 位置与表单字段组合的效果</li>
+          </ul>
+        </div>
+
+        <div class="ai-report-category">
+          <h4 class="ai-report-category-title">二、内容策略与关键词优化</h4>
+          <ul class="ai-suggestion-list">
+            <li>复盘 06-09 尖峰日关联的推广内容与着陆页配置，将有效做法沉淀为可复用的周常运营素材</li>
+            <li>围绕高转化页面主题（培训预约、授权码等）补充配套文章与案例内容，延长访客停留与深度浏览</li>
+            <li>检查自然搜索与付费渠道落地页的 UTM 标记与内容匹配度，确保渠道流量可被准确归因</li>
+          </ul>
+        </div>
+
+        <div class="ai-report-category">
+          <h4 class="ai-report-category-title">三、用户体验与技术基础</h4>
+          <ul class="ai-suggestion-list">
+            <li>优化高 PV 页面（/website.html、/）首屏信息层级，缩短用户到达留资路径的步数</li>
+            <li>检查全站移动端表单提交体验，确保高峰日流量不因页面加载或表单异常而流失</li>
+            <li>在关键页面增加在线咨询入口，与表单询盘形成互补，丰富线索获取方式</li>
+          </ul>
+        </div>
+
+        <div class="ai-report-category">
+          <h4 class="ai-report-category-title">四、数据监测与迭代优化</h4>
+          <ul class="ai-suggestion-list">
+            <li>建立周度核心指标看板（PV/UV、互动率、询盘数、渠道分布），持续跟踪环比变化</li>
+            <li>为自然搜索、付费搜索、付费社交等渠道补齐 UTM 全链路监测，恢复渠道级可观测性</li>
+            <li>对 06-09 新增询盘建立跟进台账，记录来源、着陆页与首次联系时间，为后续转化分析提供样本</li>
+          </ul>
+        </div>
+
+        <p class="ai-report-doc-outro">执行上述建议有助于将本周的流量增长更均衡地转化为询盘与销售机会。建议以两周为周期复盘指标变化，持续迭代优化策略。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

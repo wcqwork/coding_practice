@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>客户服务 - 天石源</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes iconScale2 {
+    0% {
+        transform: scale(0.375);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.index-box-4 {
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.index-box-4 .box-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.index-box-4 .info {
+    width: 46.6%;
+    padding-top: 60px;
+}
+
+.index-title-box h3 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #222;
+}
+
+.index-title-box .line {
+    width: 40px;
+    height: 5px;
+    background-image: linear-gradient(-90deg, #00589f 0%, #00589f 100%);
+    margin-top: 30px;
+}
+
+.index-box-4 .title {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.8;
+    margin: 50px auto 60px;
+    text-align: justify;
+    color: #555;
+}
+
+.index-box-4 .data ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.index-box-4 .data li {
+    text-align: left;
+    width: 33.3%;
+    float: left;
+}
+
+.index-box-4 .data .num {
+    font-size: 50px;
+    font-family: 'DIN', 'Futura', Arial, sans-serif;
+    line-height: 53px;
+    height: 70px;
+    background-image: -webkit-linear-gradient(#00589f, #00589f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.index-box-4 .data i {
+    display: inline-block;
+    font-style: normal;
+    font-family: Arial;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 40px;
+    background-image: -webkit-linear-gradient(#00589f, #00589f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    vertical-align: top;
+    top: -2px;
+    left: 6px;
+}
+
+.index-box-4 .data p {
+    margin-top: 10px;
+    line-height: 24px;
+    font-size: 16px;
+    color: #666;
+}
+
+.index-box-4 .pic {
+    width: 69%;
+    position: relative;
+    height: 100%;
+}
+
+.index-box-4 .pic img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.index-box-4 .pic ul {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.index-box-4 .pic li {
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.index-box-4 .pic li:before,
+.index-box-4 .pic li:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.index-box-4 .pic li:before {
+    z-index: 0;
+    animation: iconScale2 1.8s linear infinite;
+    background-color: rgba(6, 105, 178, 0.4);
+}
+
+.index-box-4 .pic li:after {
+    background-image: linear-gradient(-90deg, #00589f 0%, #00589f 100%);
+    z-index: 1;
+    transform: scale(0.375);
+}
+
+.index-box-4 .pic li:first-child {
+    left: 17%;
+    top: 28%;
+    display: none;
+}
+
+.index-box-4 .pic li:nth-child(2) {
+    left: 54%;
+    top: 70.5%;
+}
+
+.index-box-4 .pic li:nth-child(3) {
+    right: 37%;
+    top: 6.5%;
+}
+
+.index-box-4 .pic li:nth-child(4) {
+    left: 29%;
+    bottom: 19.5%;
+}
+
+.index-box-4 .pic li:nth-child(5) {
+    right: 19%;
+    bottom: 71%;
+}
+
+.index-box-4 .pic li:nth-child(6) {
+    right: 30%;
+    bottom: 65%;
+}
+
+.index-box-4 .pic li:nth-child(7) {
+    left: 16%;
+    bottom: 58%;
+}
+
+.index-box-4 .pic li:nth-child(8) {
+    right: 38%;
+    bottom: 56%;
+}
+
+.index-box-4 .pic li:nth-child(9) {
+    right: 46%;
+    bottom: 53%;
+}
+
+.index-box-4 .pic li:nth-child(10) {
+    left: 25%;
+    bottom: 12.5%;
+}
+</style>
+</head>
+<body>
+
+<div class="index-box-4">
+    <div class="box-container">
+        <div class="info">
+            <div class="index-title-box">
+                <h3>客户服务</h3>
+                <div class="line"></div>
+            </div>
+            <div class="title">
+                天石源深耕市场，在中国市场设立6大办事处，60名销售工程师全天候贴近市场，近距离服务客户；在国际市场有1个巴西子公司，5大办事处，10个营销大区负责人，100人国际化团队时刻为客户提供技术交流和售后支持。
+            </div>
+            <div class="data">
+                <ul>
+                    <li>
+                        <div class="num">
+                            <span>60</span><i>+</i>
+                        </div>
+                        <p>国内销售工程师</p>
+                    </li>
+                    <li>
+                        <div class="num">
+                            <span>100</span><i>+</i>
+                        </div>
+                        <p>国际化团队</p>
+                    </li>
+                    <li>
+                        <div class="num">
+                            <span>7*24</span><i>h</i>
+                        </div>
+                        <p>提供服务</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pic">
+            <img src="dt88.png" onerror="this.src='https://www.fztsy.com/img/dt88.png'" alt="全球服务网络">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

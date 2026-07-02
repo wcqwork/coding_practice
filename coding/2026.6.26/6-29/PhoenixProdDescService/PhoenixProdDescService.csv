@@ -1,0 +1,607 @@
+﻿RENDER_ID,RENDER_TYPE,RANDER_PAGE_NAME,RANDER_CONTENT,FOLDER_ID,VERSION_NO,APP_ID,ADD_TIME,ADDER_NO,ADDER_NAME,UPDATE_TIME,UPDATER_NO,UPDATER_NAME,STYLE_ID,TERMINAL_TYPE
+"51304","1","view_default.html","<div class=""prodCategoty-with-submenu"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""ePUpAfKBVJot"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" data-auto_uuid=c62926a0-6974-4aad-870c-ffa4d66b3f47>[@table_select serviceName=""phoenixGroupService"" selectGroupType=""0"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+        <div class=""sitewidget-prodCatalog prodCatalogStyle0 "">
+            <div class=""sitewidget-bd "">
+                <ul class=""with-submenu slight-submenu-wrap proWrapper"">
+
+                    [#if table_data?? && table_data?size > 0]
+                    [#list table_data as group]
+                    [#if prod_group_ids?index_of('{""prodGroupId_'+group.prodGroupId+'"":""1""}') != -1]
+                    <li class=""prodli"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+                        <a title=""${group.groupName!''}"" href=""${group.groupUrl!'javascript:void(0)'}"">${group.groupName!''}</a>
+                        [#if group.hasSub??] [#-- 二级菜单 --]
+                            <ul>
+                                [#list group.subGroups as subGroup]
+                                [#if prod_group_ids?index_of('{""prodGroupId_'+subGroup.prodGroupId+'"":""1""}') != -1]
+                                <li class=""prodli"">
+                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${subGroup.prodGroupId!''}"" dataOrign=""1""]
+                                    <a class=""img"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                    [/@table_select]
+                                    <a class=""text"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}"">${subGroup.groupName!?html}</a>
+                                    <!-- 三级 -->
+                                    [#if subGroup.hasSub??]
+                                    <ul>
+                                        [#list subGroup.subGroups as thirdGroup]
+                                        <li class=""prodli"">
+                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${thirdGroup.prodGroupId!''}"" dataOrign=""1""]
+                                            <a class=""img"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                            [/@table_select]
+                                            <a class=""text"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}"">${thirdGroup.groupName!?html}</a>
+                                            [#if subGroup.hasSub??]
+                                            <ul>
+                                                [#list thirdGroup.subGroups as forthGroup]
+                                                <li class=""prodli"">
+                                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${forthGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                    <a class=""img"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                    [/@table_select]
+                                                    <a class=""text"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}"">${forthGroup.groupName!?html}</a>
+                                                    [#if forthGroup.hasSub??]
+                                                    <ul>
+                                                        [#list forthGroup.subGroups as lastGroup]
+                                                        <li class=""prodli"">
+                                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${lastGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                            <a class=""img"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                            [/@table_select]
+                                                            <a class=""text"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}"">${lastGroup.groupName!?html}</a>
+                                                        </li>
+                                                        [/#list]
+                                                    </ul>
+                                                    [/#if]
+                                                </li>
+                                                [/#list]
+                                            </ul>
+                                            [/#if]
+                                        </li>
+                                        [/#list]
+
+                                    </ul>
+                                    [/#if]
+                                </li>
+                                [/#if]
+                                [/#list]
+                            </ul>
+                        [/#if]
+                    </li>
+                    [/#if]
+                    [/#list]
+                    <li class=""proLast one"">
+                        <span>More Categories<i class=""fa fa-angle-down""></i></span>
+                    </li>
+                    <li class=""proLast two"">
+                        <span>Less Categories<i class=""fa fa-angle-up""></i></span>
+                    </li>
+                    [#else]
+                    [@web_backend]
+                    [@phoenix_directive_i18n code=""component_cont_txt_prodCatalog"" es=""false"" txt=""<p>请进入“内容”》“产品管理”》“添加产品分类”，进行产品分类数据的添加，添加好的产品分类会自动展示出来。</p>""/]
+                    [/@web_backend]
+                    [/#if]
+                </ul>
+            </div>
+        </div>
+        <div class=""wra""></div>
+        [/@table_select]
+    </div>
+</div>","-1","20200828111930","14374","2020-08-28 11:16:02","391501","胡开成","2020-08-28 11:19:02","391501","胡开成","-1","0"
+"51314","1","view_default.html","<div class=""prodCategoty-with-submenu"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""ePUpAfKBVJot"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" >[@table_select serviceName=""phoenixGroupService"" selectGroupType=""0"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+        <div class=""sitewidget-prodCatalog prodCatalogStyle0 "">
+            <div class=""sitewidget-bd "">
+                <ul class=""with-submenu slight-submenu-wrap proWrapper"">
+
+                    [#if table_data?? && table_data?size > 0]
+                    [#list table_data as group]
+                    [#if prod_group_ids?index_of('{""prodGroupId_'+group.prodGroupId+'"":""1""}') != -1]
+                    <li class=""prodli"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+                        <a title=""${group.groupName!''}"" href=""${group.groupUrl!'javascript:void(0)'}"">${group.groupName!''}</a>
+                        [#if group.hasSub??] [#-- 二级菜单 --]
+                            <ul>
+                                [#list group.subGroups as subGroup]
+                                [#if prod_group_ids?index_of('{""prodGroupId_'+subGroup.prodGroupId+'"":""1""}') != -1]
+                                <li class=""prodli"">
+                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${subGroup.prodGroupId!''}"" dataOrign=""1""]
+                                    <a class=""img"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                    [/@table_select]
+                                    <a class=""text"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}"">${subGroup.groupName!?html}</a>
+                                    <!-- 三级 -->
+                                    [#if subGroup.hasSub??]
+                                    <ul>
+                                        [#list subGroup.subGroups as thirdGroup]
+                                        <li class=""prodli"">
+                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${thirdGroup.prodGroupId!''}"" dataOrign=""1""]
+                                            <a class=""img"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                            [/@table_select]
+                                            <a class=""text"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}"">${thirdGroup.groupName!?html}</a>
+                                            [#if subGroup.hasSub??]
+                                            <ul>
+                                                [#list thirdGroup.subGroups as forthGroup]
+                                                <li class=""prodli"">
+                                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${forthGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                    <a class=""img"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                    [/@table_select]
+                                                    <a class=""text"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}"">${forthGroup.groupName!?html}</a>
+                                                    [#if forthGroup.hasSub??]
+                                                    <ul>
+                                                        [#list forthGroup.subGroups as lastGroup]
+                                                        <li class=""prodli"">
+                                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${lastGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                            <a class=""img"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                            [/@table_select]
+                                                            <a class=""text"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}"">${lastGroup.groupName!?html}</a>
+                                                        </li>
+                                                        [/#list]
+                                                    </ul>
+                                                    [/#if]
+                                                </li>
+                                                [/#list]
+                                            </ul>
+                                            [/#if]
+                                        </li>
+                                        [/#list]
+
+                                    </ul>
+                                    [/#if]
+                                </li>
+                                [/#if]
+                                [/#list]
+                            </ul>
+                        [/#if]
+                    </li>
+                    [/#if]
+                    [/#list]
+                    <li class=""proLast one"">
+                        <span>More Categories<i class=""fa fa-angle-down""></i></span>
+                    </li>
+                    <li class=""proLast two"">
+                        <span>Less Categories<i class=""fa fa-angle-up""></i></span>
+                    </li>
+                    [#else]
+                    [@web_backend]
+                    [@phoenix_directive_i18n code=""component_cont_txt_prodCatalog"" es=""false"" txt=""<p>请进入“内容”》“产品管理”》“添加产品分类”，进行产品分类数据的添加，添加好的产品分类会自动展示出来。</p>""/]
+                    [/@web_backend]
+                    [/#if]
+                </ul>
+            </div>
+        </div>
+        <div class=""wra""></div>
+        [/@table_select]
+    </div>
+</div>","-1","20200828112105","14374","2020-08-28 11:16:02","391501","胡开成","2020-08-28 11:20:45","391501","胡开成","-1","0"
+"51324","1","view_default.html","<div class=""prodCategoty-with-submenu"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""ePUpAfKBVJot"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" >[@table_select serviceName=""phoenixGroupService"" selectGroupType=""0"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+        <div class=""sitewidget-bd "">
+                <ul class=""with-submenu"">
+                    [#if table_data?? && table_data?size > 0]
+                    [#list table_data as group]
+                    [#if prod_group_ids?index_of('{""prodGroupId_'+group.prodGroupId+'"":""1""}') != -1]
+                    <li class=""prodliNew"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+                        <a title=""${group.groupName!''}"" href=""${group.groupUrl!'javascript:void(0)'}"">${group.groupName!''}</a>
+                        [#if group.hasSub??] [#-- 二级菜单 --]
+                            <ul>
+                                [#list group.subGroups as subGroup]
+                                [#if prod_group_ids?index_of('{""prodGroupId_'+subGroup.prodGroupId+'"":""1""}') != -1]
+                                <li class=""prodliNew"">
+                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${subGroup.prodGroupId!''}"" dataOrign=""1""]
+                                    <a class=""img"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                    [/@table_select]
+                                    <a class=""text"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}"">${subGroup.groupName!?html}</a>
+                                    <!-- 三级 -->
+                                    [#if subGroup.hasSub??]
+                                    <ul>
+                                        [#list subGroup.subGroups as thirdGroup]
+                                        <li class=""prodliNew"">
+                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${thirdGroup.prodGroupId!''}"" dataOrign=""1""]
+                                            <a class=""img"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                            [/@table_select]
+                                            <a class=""text"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}"">${thirdGroup.groupName!?html}</a>
+                                            [#if subGroup.hasSub??]
+                                            <ul>
+                                                [#list thirdGroup.subGroups as forthGroup]
+                                                <li class=""prodliNew"">
+                                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${forthGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                    <a class=""img"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                    [/@table_select]
+                                                    <a class=""text"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}"">${forthGroup.groupName!?html}</a>
+                                                    [#if forthGroup.hasSub??]
+                                                    <ul>
+                                                        [#list forthGroup.subGroups as lastGroup]
+                                                        <li class=""prodliNew"">
+                                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${lastGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                            <a class=""img"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                            [/@table_select]
+                                                            <a class=""text"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}"">${lastGroup.groupName!?html}</a>
+                                                        </li>
+                                                        [/#list]
+                                                    </ul>
+                                                    [/#if]
+                                                </li>
+                                                [/#list]
+                                            </ul>
+                                            [/#if]
+                                        </li>
+                                        [/#list]
+
+                                    </ul>
+                                    [/#if]
+                                </li>
+                                [/#if]
+                                [/#list]
+                            </ul>
+                        [/#if]
+                    </li>
+                    [/#if]
+                    [/#list]
+                    [#else]
+                    [@web_backend]
+                    [@phoenix_directive_i18n code=""component_cont_txt_prodCatalog"" es=""false"" txt=""<p>请进入“内容”》“产品管理”》“添加产品分类”，进行产品分类数据的添加，添加好的产品分类会自动展示出来。</p>""/]
+                    [/@web_backend]
+                    [/#if]
+                </ul>
+            </div>
+        [/@table_select]
+    </div>
+</div>","-1","20200828112811","14374","2020-08-28 11:16:02","391501","胡开成","2020-08-28 11:27:51","391501","胡开成","-1","0"
+"51334","1","view_default.html","<div class=""prodCategoty-with-submenu"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""ePUpAfKBVJot"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" >[@table_select serviceName=""phoenixGroupService"" selectGroupType=""0"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+        <div class=""sitewidget-bd "">
+                <ul class=""with-submenu"">
+                    [#if table_data?? && table_data?size > 0]
+                    [#list table_data as group]
+                    [#if prod_group_ids?index_of('{""prodGroupId_'+group.prodGroupId+'"":""1""}') != -1]
+                    <li class=""prodliNew"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+                        <a title=""${group.groupName!''}"" href=""${group.groupUrl!'javascript:void(0)'}"">${group.groupName!''}</a>
+                        [#if group.hasSub??] [#-- 二级菜单 --]
+                            <ul>
+                                [#list group.subGroups as subGroup]
+                                [#if prod_group_ids?index_of('{""prodGroupId_'+subGroup.prodGroupId+'"":""1""}') != -1]
+                                <li class=""prodliNew"">
+                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${subGroup.prodGroupId!''}"" dataOrign=""1""]
+                                    <a class=""img"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                    [/@table_select]
+                                    <a class=""text"" href=""${subGroup.groupUrl}"" title=""${subGroup.groupName!?html}"">${subGroup.groupName!?html}</a>
+                                    <!-- 三级 -->
+                                    [#if subGroup.hasSub??]
+                                    <ul>
+                                        [#list subGroup.subGroups as thirdGroup]
+                                        <li class=""prodliNew"">
+                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${thirdGroup.prodGroupId!''}"" dataOrign=""1""]
+                                            <a class=""img"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                            [/@table_select]
+                                            <a class=""text"" href=""${thirdGroup.groupUrl}"" title=""${thirdGroup.groupName!?html}"">${thirdGroup.groupName!?html}</a>
+                                            [#if subGroup.hasSub??]
+                                            <ul>
+                                                [#list thirdGroup.subGroups as forthGroup]
+                                                <li class=""prodliNew"">
+                                                    [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${forthGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                    <a class=""img"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                    [/@table_select]
+                                                    <a class=""text"" href=""${forthGroup.groupUrl}"" title=""${forthGroup.groupName!?html}"">${forthGroup.groupName!?html}</a>
+                                                    [#if forthGroup.hasSub??]
+                                                    <ul>
+                                                        [#list forthGroup.subGroups as lastGroup]
+                                                        <li class=""prodliNew"">
+                                                            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${lastGroup.prodGroupId!''}"" dataOrign=""1""]
+                                                            <a class=""img"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                                                            [/@table_select]
+                                                            <a class=""text"" href=""${lastGroup.groupUrl}"" title=""${lastGroup.groupName!?html}"">${lastGroup.groupName!?html}</a>
+                                                        </li>
+                                                        [/#list]
+                                                    </ul>
+                                                    [/#if]
+                                                </li>
+                                                [/#list]
+                                            </ul>
+                                            [/#if]
+                                        </li>
+                                        [/#list]
+
+                                    </ul>
+                                    [/#if]
+                                </li>
+                                [/#if]
+                                [/#list]
+                            </ul>
+                        [/#if]
+                    </li>
+                    [/#if]
+                    [/#list]
+                    [#else]
+                    [@web_backend]
+                    [@phoenix_directive_i18n code=""component_cont_txt_prodCatalog"" es=""false"" txt=""<p>请进入“内容”》“产品管理”》“添加产品分类”，进行产品分类数据的添加，添加好的产品分类会自动展示出来。</p>""/]
+                    [/@web_backend]
+                    [/#if]
+                </ul>
+            </div>
+        [/@table_select]
+    </div>
+</div>","-1","20200828112934","14374","2020-08-28 11:16:02","391501","胡开成","2020-08-28 11:27:51","391501","胡开成","-1","0"
+"52954","1","view_default.html","<div class=""prodCategoty-container"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""JrAfKpUfKqPB"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" data-auto_uuid=32d61634-bbf3-47d1-82aa-92e35d851315>[@table_select serviceName=""phoenixGroupService"" selectGroupType=""tabList"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+	[#if table_data?? && table_data?size > 0]
+    <div class=""hidden-scrollBar"">
+			<div class=""outer-vertical-nav"">
+				<ul class=""r-tabs-nav fix"">
+					[#list table_data as group]
+						<li class=""r-tabs-tab[#if group_index==0] first[#elseif group_index==table_data?size-1] last[/#if]"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+							<a href=""javascript:void(0);"" class=""r-tabs-anchor"">${group.groupName!''}</a>
+						</li>
+					[/#list]
+					<li class=""move-slider hide""></li>
+				</ul>
+			</div>
+		</div>
+        <div class=""tab-container container-ScrollBar"">
+			[#list table_data as group]
+			<div class=""tab-container-inner"">
+				<div class=""r-tabs-accordion-title"">
+					<a class=""r-tabs-anchor""  href=""javascript:;"">${group.groupName!?html}</a>
+				</div>
+				[@table_select serviceName=""phoenixProductService"" prodPhotoSize=""2"" showFlag=""1"" selectProdType=""0"" pageSize=""${prodNum!5}"" selectProdIds="""" groupId=""${group.prodGroupId!''}"" selectGroupId="""" searchValue="""" pageNum=""1"" ]
+
+					<div class=""r-tabs-panel article-cate-box"">
+						[#if products??]
+							<ul class=""sitewidget-prodTabList-cont fix"">
+								[#list products as product]
+									<li>
+											<div class=""prodTabList-wrapper"">
+												<div class=""tabList-wrapper-inner"">
+		
+														<div class=""prodTabList-cell"">
+															<a href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">
+																<img src=""${product.photoUrl460!}"" alt=""${product.prodName!''}"" />
+															</a>
+														</div>
+												</div>
+												<a class=""breakWord"" href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">${product.prodName!''}</a>
+                                                <div class=""prodBrief"">${product.prodBrief!''}</div>
+											</div>
+										
+									</li>
+								[/#list]
+								
+							</ul>
+						[/#if]
+					</div>
+				[/@table_select]
+			</div>
+			[/#list]
+		</div>
+    [/#if]
+    [/@table_select]</div>                                                                 
+</div>","-1","20200917161117","14854","2020-09-17 16:10:21","391501","胡开成","2020-09-17 16:10:30","391501","胡开成","-1","0"
+"54744","1","view_default.html","<div class=""prodCategoty-container"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""JrAfKpUfKqPB"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" data-auto_uuid=32d61634-bbf3-47d1-82aa-92e35d851315>[@table_select serviceName=""phoenixGroupService"" selectGroupType=""tabList"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+	[#if table_data?? && table_data?size > 0]
+    <div class=""hidden-scrollBar"">
+			<div class=""outer-vertical-nav"">
+				<ul class=""r-tabs-nav fix"">
+					[#list table_data as group]
+					[#-- 产品分类描述    摆放位子自己定--#]
+					${group.groupDescription}
+					[#--END--#]
+						<li class=""r-tabs-tab[#if group_index==0] first[#elseif group_index==table_data?size-1] last[/#if]"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+							<a href=""javascript:void(0);"" class=""r-tabs-anchor"">${group.groupName!''}</a>
+						</li>
+					[/#list]
+					<li class=""move-slider hide""></li>
+				</ul>
+			</div>
+		</div>
+        <div class=""tab-container container-ScrollBar"">
+			[#list table_data as group]
+			<div class=""tab-container-inner"">
+				<div class=""r-tabs-accordion-title"">
+					<a class=""r-tabs-anchor""  href=""javascript:;"">${group.groupName!?html}</a>
+				</div>
+				[@table_select serviceName=""phoenixProductService"" prodPhotoSize=""2"" showFlag=""1"" selectProdType=""0"" pageSize=""${prodNum!5}"" selectProdIds="""" groupId=""${group.prodGroupId!''}"" selectGroupId="""" searchValue="""" pageNum=""1"" ]
+
+					<div class=""r-tabs-panel article-cate-box"">
+						[#if products??]
+							<ul class=""sitewidget-prodTabList-cont fix"">
+								[#list products as product]
+									<li>
+											<div class=""prodTabList-wrapper"">
+												<div class=""tabList-wrapper-inner"">
+		
+														<div class=""prodTabList-cell"">
+															<a href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">
+																<img src=""${product.photoUrl460!}"" alt=""${product.prodName!''}"" />
+															</a>
+														</div>
+												</div>
+												<a class=""breakWord"" href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">${product.prodName!''}</a>
+                                                <div class=""prodBrief"">${product.prodBrief!''}</div>
+											</div>
+										
+									</li>
+								[/#list]
+								
+							</ul>
+						[/#if]
+					</div>
+				[/@table_select]
+			</div>
+			[/#list]
+		</div>
+    [/#if]
+    [/@table_select]</div>                                                                 
+</div>","-1","20201014164759","14854","2020-09-17 16:10:21","391501","胡开成","2020-10-14 16:47:33","391501","胡开成","-1","0"
+"89454","1","view_default.html","<div class=""prodCategoty-container"">
+    <div class=""backstage-blocksEditor-wrap site-category"" data-wrap-type=""1"" data-relate-appId=""JrAfKpUfKqPB"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" data-auto_uuid=32d61634-bbf3-47d1-82aa-92e35d851315>[@table_select serviceName=""phoenixGroupService"" selectGroupType=""tabList"" selectCateIds=""${prod_group_ids!''}"" showStyle=""1"" ]
+	[#if table_data?? && table_data?size > 0]
+    <div class=""hidden-scrollBar"">
+			<div class=""outer-vertical-nav"">
+				<ul class=""r-tabs-nav fix"">
+					[#list table_data as group]
+					
+					${group.groupDescription}
+					
+						<li class=""r-tabs-tab[#if group_index==0] first[#elseif group_index==table_data?size-1] last[/#if]"">
+                        [@table_select serviceName=""PhoenixProdDescService"" pageType=""${pageType!'1'}"" transGroupId=""${group.prodGroupId!''}"" dataOrign=""1""]
+                        <a class=""img"" href=""${group.groupUrl}"" title=""${group.groupName!?html}""><img class=""catepic"" src=""${groupPhotoUrl480!''}""></a>
+                        [/@table_select]
+							<a href=""javascript:void(0);"" class=""r-tabs-anchor"">${group.groupName!''}</a>
+						</li>
+					[/#list]
+					<li class=""move-slider hide""></li>
+				</ul>
+			</div>
+		</div>
+        <div class=""tab-container container-ScrollBar"">
+			[#list table_data as group]
+			<div class=""tab-container-inner"">
+				<div class=""r-tabs-accordion-title"">
+					<a class=""r-tabs-anchor""  href=""javascript:;"">${group.groupName!?html}</a>
+				</div>
+				[@table_select serviceName=""phoenixProductService"" prodPhotoSize=""2"" showFlag=""1"" selectProdType=""0"" pageSize=""${prodNum!5}"" selectProdIds="""" groupId=""${group.prodGroupId!''}"" selectGroupId="""" searchValue="""" pageNum=""1"" ]
+
+					<div class=""r-tabs-panel article-cate-box"">
+						[#if products??]
+							<ul class=""sitewidget-prodTabList-cont fix"">
+								[#list products as product]
+									<li>
+											<div class=""prodTabList-wrapper"">
+												<div class=""tabList-wrapper-inner"">
+		
+														<div class=""prodTabList-cell"">
+															<a href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">
+																<img src=""${product.photoUrl460!}"" alt=""${product.prodName!''}"" />
+															</a>
+														</div>
+												</div>
+												<a class=""breakWord"" href=""${product.prodUrl!'javascript:void(0)'}"" title=""${product.prodName!''}"">${product.prodName!''}</a>
+                                                <div class=""prodBrief"">${product.prodBrief!''}</div>
+											</div>
+										
+									</li>
+								[/#list]
+								
+							</ul>
+						[/#if]
+					</div>
+				[/@table_select]
+			</div>
+			[/#list]
+		</div>
+    [/#if]
+    [/@table_select]</div>                                                                 
+</div>","-1","20210425155205","14854","2020-09-17 16:10:21","391501","胡开成","2021-04-25 15:51:45","391501","胡开成","-1","0"
+"319858","1","view_default.html","[#-- ===== 区块雏形: block40698 产品分类+产品列表+产品详情 ===== --]
+
+[#-- 1. 配色变量 --]
+[#assign color0 = '#1A5CE2']
+[#if componentBlock.blockStyleClass??]
+    [#if componentBlock.blockStyleClass.colorVal0??]
+        [#assign color0 = componentBlock.blockStyleClass.colorVal0 /]
+    [/#if]
+[/#if]
+
+[#-- 2. 动态CSS注入 --]
+[@web_style collect=""true"" pm_script=""${settingId!}"" jumpTo=""${settingId!}""]
+#siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .cat-nav .cat-item.active span { color: ${(color0?replace(""-1"", """"))!}; border-color: ${(color0?replace(""-1"", """"))!} }
+#siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .detail-section .btn-basket { background: ${(color0?replace(""-1"", """"))!} }
+#siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .detail-section .btn-cart { background: ${(color0?replace(""-1"", """"))!} }
+#siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .desc-tab.active { border-bottom-color: ${(color0?replace(""-1"", """"))!} }
+@media screen and (max-width: 768px) { #siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .prod-list-body { min-width: 520px } }
+@media screen and (max-width: 412px) { #siteblocks-setting-wrap-${componentBlock.settingId!} .blockCon40698 .prod-list-body { min-width: 500px } }
+[/@web_style]
+
+
+
+[#-- 4. RTL支持 --]
+[@web_language lanCodes='3|45|42|32|29']
+<style>
+    .blockCon40698 .main-layout,
+    .blockCon40698 .cat-nav,
+    .blockCon40698 .prod-list,
+    .blockCon40698 .detail-section { direction: rtl; }
+</style>
+[/@web_language]
+
+[#-- 4. 后台编辑器标记 --]
+[@web_backend]<i data-blocksetting-color=""{'background-color':'colorVal-0-${color0!}'}""></i>[/@web_backend]
+
+[#-- 5. 容器宽度（默认全屏） --]
+
+[#-- ===== 主体HTML ===== --]
+<div class=""location_blockCon40698_pack ${componentBlock.containerOpenState!''}"" data-container-openstate=""false"">
+    <div id=""location_${settingId!}"">
+        <div class=""blockCon40698"" id=""blockCon40698"">
+            <input type=""hidden"" name=""color-matching-0"" data-blocksetting-color=""{'color':'colorVal-0-${color0!}'}"">
+            <input type=""hidden"" class=""i18n-loading-text"" value='[@s.m ""lTAfUKptfbJd_loading"" /]'>
+            <input type=""hidden"" class=""currency-symbol-val"" value=""[@phoenix_currency paramName='currencySymbol' /]"">
+
+            [#-- ===== 商城权限判断 ===== --]
+            [#assign assign_isSupportPay4ProdList=false]
+            [@web_auth_backend authName=""func_pay"" outPutBool=""1""]
+                [#assign assign_isSupportPay4ProdList = result!false]
+            [/@web_auth_backend]
+
+            [#-- ===== 分类图片: 先获取（必须在phoenixProductService之前） ===== --]
+            [#assign currentCatImg = '' /]
+            [@table_select serviceName=""PhoenixProdDescService"" pageType=""${'1'}"" transGroupId=""${productGroupId!productGroupIds!''}"" dataOrign=""1""]
+                [#if groupPhotoUrl480?? && groupPhotoUrl480 != '']
+                    [#assign currentCatImg = groupPhotoUrl480 /]
+                [#elseif groupPhotoUrl?? && groupPhotoUrl != '']
+                    [#assign currentCatImg = groupPhotoUrl /]
+                [/#if]
+            [/@table_select]
+
+            [#-- ===== 自定义字段: phoenixCustomerFieldService wrapper is REQUIRED for fieldValue ===== --]
+            [#assign allFieldSort = '[']
+            [#assign hasField = false]
+            [@table_select serviceName=""phoenixCustomerFieldService"" widgetType=""0""]
+                [#if fields??]
+                    [#list fields as f]
+                        [#if f.fieldType?? && (f.fieldType?string == '0' || f.fieldType?string == '8')]
+                            [#if hasField][#assign allFieldSort = allFieldSort + ','][/#if]
+                            [#assign allFieldSort = allFieldSort + '{""fieldId"":""' + f.fieldId?c + '"",""checkFlag"":""1""}']
+                            [#assign hasField = true]
+                        [/#if]
+                    [/#list]
+                [/#if]
+            [/@table_select]
+            [#assign allFieldSort = allFieldSort + ']']
+
+            <div class=""main-layout"">
+                <div class=""left-content"">
+
+            [#-- ===== 产品列表模板包裹层 ===== --]
+            <div class=""backstage-blocksEditor-wrap wra"" data-wrap-type=""1"" data-relate-appId=""aEUfpAKtfmrn"" data-storage=""1"" data-blocksEditor-type=""phoenix_blocks_gallery"" data-auto_uuid=a1b2c3d4-1053-0040-bloc-k10530040001>[@phoenix_layout_node nodeId='a1b2c3d4-1053-0040-bloc-k10530040001' appId='lTAfUKptfbJd' ajaxFlag='null' ajaxOptions='null' appIsDev='${componentBlock.appIsDev!}' settingId='${componentBlock.settingId!}' terminal='${terminal!""0""}' styleId='${app_attr_style_id!0}'/]</div>[#-- END left-content --]
+                <div class=""right-content"">
+                    <div class=""cat-image"">
+                        [#if currentCatImg?? && currentCatImg != '']
+                            <img class=""cat-photo lazyimg"" data-original=""${currentCatImg!}"" alt=""${groupName4WidgetTitle!?html}"" />
+                        [/#if]
+                    </div>
+                </div>
+            </div>[#-- END main-layout --]
+            <input type=""hidden"" name=""block40698"" value=""${totalCount!0}"" />
+            [#-- ===== JS初始化 ===== --]
+            [@web_javascript collect=""true"" pm_script=""${settingId!}"" jumpTo=""${settingId!}""]
+                $(function(){
+                    window._block_namespaces_['blockCon40698'].init({'settingId':'${settingId!}','nodeId':'${nodeId!}'});
+                });
+            [/@web_javascript]
+        </div>
+    </div>
+</div>
+</div>","-1","20260526135822","40698","2026-05-08 20:59:09","7480344","徐克","2026-05-26 13:45:47","7480344","徐克","-1","0"
